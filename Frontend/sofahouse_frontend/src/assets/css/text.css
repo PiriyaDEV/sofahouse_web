@@ -1,0 +1,39 @@
+/* Add Font */
+
+/* Avenir Font */
+@font-face {
+  font-family: "Avenir_Heavy";
+  src: url("../fonts/Avenir/Avenir-Heavy.ttf") format("truetype");
+}
+
+/* ตั้งค่าหน้า */
+body,
+html,
+input,
+select,
+label,
+textarea,
+button {
+  padding: 0;
+  margin: 0;
+  font-size: 8px;
+  font-family: "Avenir_Heavy";
+}
+body,
+html,
+input,
+select,
+label,
+textarea {
+  overflow-x: hidden;
+}
+body {
+  background-color: #f3f3f3;
+}
+textarea {
+  resize: none;
+}
+select,
+option {
+  background-color: transparent;
+}
