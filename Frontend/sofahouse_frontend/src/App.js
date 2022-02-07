@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import Navbar from "./components/element/Navbar";
 import Home from "./components/page/Home";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div>
       <Switch>
         <Route path="/">
+          <Navbar />
           <Home />
         </Route>
         {/* <Route path="/:id">

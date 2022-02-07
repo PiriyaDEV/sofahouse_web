@@ -6,6 +6,11 @@
   src: url("../fonts/Avenir/Avenir-Heavy.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Avenir_Medium";
+  src: url("../fonts/Avenir/Avenir-Medium.ttf") format("truetype");
+}
+
 /* ตั้งค่าหน้า */
 body,
 html,
@@ -19,6 +24,7 @@ button {
   font-size: 8px;
   font-family: "Avenir_Heavy";
 }
+
 body,
 html,
 input,
@@ -36,4 +42,19 @@ textarea {
 select,
 option {
   background-color: transparent;
+}
+
+/* Text Size */
+.sm-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 2.5em;
+  line-height: 27px;
+}
+
+.bg-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 3.75em;
+  line-height: 41px;
 }
