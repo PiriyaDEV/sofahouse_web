@@ -1,8 +1,27 @@
-#navbar{
-    background-color: black;
-    padding: 19px 0px 19px 0px;
+#navbar {
+  padding: 13px 0px 13px 0px;
+  background-color: #ffffff;
+}
+
+#navbar > .navbar-container {
+  justify-content: space-between !important;
+}
+
+#nav-menu {
+  gap: 60px;
+  align-items: flex-start !important;
+}
+
+#nav-menu > .bg-text {
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nav-active {
+  color: #c1bfbf;
+  border-bottom: 3px solid #2d435b;
 }
 
 #nav-logo {
-  width: 90px;
+  width: 70px;
 }

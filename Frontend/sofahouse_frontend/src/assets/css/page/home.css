@@ -1,0 +1,136 @@
+#home {
+  background-color: #fff5f3;
+  padding-top: 30px;
+}
+
+/* Main Section */
+
+#home-vinyl {
+  width: 260px;
+}
+
+#main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+#main-section > div:first-child {
+  text-align: center;
+}
+
+#main-section > div:nth-child(2) {
+  align-items: flex-start !important;
+}
+
+#mid-img > img {
+  /* width: 300px; */
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+  border-radius: 28px;
+}
+
+#mid-img {
+  position: relative;
+}
+
+#mid-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #ffffff, #ea7155);
+  opacity: 0.4;
+  border-radius: 28px;
+}
+
+#main-music-section {
+  margin-left: 20px;
+}
+
+#main-music {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.music-flex {
+  text-align: center;
+}
+
+.music-flex > img {
+  width: 125px;
+  border-radius: 28px;
+}
+
+.blue-clr {
+  width: 16px;
+  height: 16px;
+  margin: 15px 10px;
+  background-color: #2d435b;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#main-btn > button {
+  width: 100%;
+  padding: 10px 0px;
+  text-align: center;
+  border-radius: 39px;
+  background-color: #2d435b;
+  border: none;
+  color: #ffffff;
+}
+
+#main-btn {
+  position: relative;
+  cursor: pointer;
+}
+
+#main-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #2d435b, #9aa4b0, #2d435b);
+  opacity: 0.3;
+  border-radius: 39px;
+}
+
+/* Description Section */
+#desc-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#desc-logo {
+  width: 250px;
+  margin-top: 25px;
+}
+
+#desc-banner-section {
+  margin-top: 100px;
+}
+
+.desc-banner{
+    border: 1px solid #9aa4b0;
+    border
+}
+
+#banner-flex-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.banner-disc {
+  width: 170px;
+  border: 7px solid #ffffff;
+  border-radius: 50%;
+}

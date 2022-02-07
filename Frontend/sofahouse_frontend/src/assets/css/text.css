@@ -11,6 +11,12 @@
   src: url("../fonts/Avenir/Avenir-Medium.ttf") format("truetype");
 }
 
+/* Sukhumvit Font */
+@font-face {
+  font-family: "Sukhumvit_Bold";
+  src: url("../fonts/SukhumvitSet/SukhumvitSet-Bold.ttf") format("truetype");
+}
+
 /* ตั้งค่าหน้า */
 body,
 html,
@@ -22,7 +28,10 @@ button {
   padding: 0;
   margin: 0;
   font-size: 8px;
+  font-style: normal;
   font-family: "Avenir_Heavy";
+  overflow-x: hidden;
+  color: #2d435b;
 }
 
 body,
@@ -45,16 +54,47 @@ option {
 }
 
 /* Text Size */
+.avn-medium {
+  font-family: "Avenir_Medium" !important;
+}
+
+.avn-heavy {
+  font-family: "Avenir_Heavy" !important;
+}
+
+.skv-bold {
+  font-family: "Sukhumvit_Bold" !important;
+}
+
+.xm-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 1.5em;
+  /* line-height: 27px; */
+}
+
+.ssm-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 1.75em;
+  /* line-height: 27px; */
+}
+
 .sm-text {
   font-style: normal;
   margin: 0;
-  font-size: 2.5em;
-  line-height: 27px;
+  font-size: 2em;
+  /* line-height: 27px; */
 }
 
 .bg-text {
   font-style: normal;
   margin: 0;
-  font-size: 3.75em;
-  line-height: 41px;
+  font-size: 2.25em;
+  /* line-height: 41px; */
+}
+
+/* Color */
+.grey-text {
+  color: #c1bfbf !important;
 }

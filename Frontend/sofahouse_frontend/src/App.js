@@ -8,8 +8,24 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/">
-          <Navbar />
+        <Route exact path="/">
+          <Navbar path={"/"}/>
+          <Home />
+        </Route>
+        <Route path="/home">
+          <Navbar path={"home"} />
+          <Home />
+        </Route>
+        <Route path="/portfolio">
+          <Navbar path={"portfolio"} />
+          <Home />
+        </Route>
+        <Route path="/service">
+          <Navbar path={"service"} />
+          <Home />
+        </Route>
+        <Route path="/aboutus">
+          <Navbar path={"aboutus"} />
           <Home />
         </Route>
         {/* <Route path="/:id">
