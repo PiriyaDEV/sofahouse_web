@@ -17,6 +17,11 @@
   src: url("../fonts/SukhumvitSet/SukhumvitSet-Bold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Sukhumvit_Medium";
+  src: url("../fonts/SukhumvitSet/SukhumvitSet-Medium.ttf") format("truetype");
+}
+
 /* ตั้งค่าหน้า */
 body,
 html,
@@ -30,18 +35,9 @@ button {
   font-size: 8px;
   font-style: normal;
   font-family: "Avenir_Heavy";
-  overflow-x: hidden;
   color: #2d435b;
 }
 
-body,
-html,
-input,
-select,
-label,
-textarea {
-  overflow-x: hidden;
-}
 body {
   background-color: #f3f3f3;
 }
@@ -66,6 +62,10 @@ option {
   font-family: "Sukhumvit_Bold" !important;
 }
 
+.skv-medium {
+  font-family: "Sukhumvit_Medium" !important;
+}
+
 .xm-text {
   font-style: normal;
   margin: 0;
@@ -85,6 +85,13 @@ option {
   margin: 0;
   font-size: 2em;
   /* line-height: 27px; */
+}
+
+.md-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 2.15em;
+  /* line-height: 41px; */
 }
 
 .bg-text {
