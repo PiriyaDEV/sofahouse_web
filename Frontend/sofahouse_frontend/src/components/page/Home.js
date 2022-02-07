@@ -17,6 +17,9 @@ import desc3 from "../../assets/images/desc/desc3.png";
 import temp1 from "../../assets/images/temp/insecure.png";
 import temp2 from "../../assets/images/temp/lmb.png";
 
+//Js
+import PlayConsole from "../element/PlayConsole";
+
 export default function Home() {
   return (
     <div id="home" className="section">
@@ -62,6 +65,9 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Play Section */}
+        <PlayConsole />
+
         {/* Description Section */}
         <div id="desc-section">
           <p className="skv-bold bg-text">
@@ -74,13 +80,33 @@ export default function Home() {
           </div>
 
           <div id="desc-banner-section">
-            <div className="desc-banner"></div>
-            <div id="banner-flex-section">
-              <img className="banner-disc" src={desc1} alt="" />
-              <img className="banner-disc" src={desc2} alt="" />
-              <img className="banner-disc" src={desc3} alt="" />
+            <div id="desc-banner"></div>
+            <div id="desc-abs">
+              <div id="banner-flex-section">
+                <img className="banner-disc" src={desc1} alt="" />
+                <img className="banner-disc" src={desc2} alt="" />
+                <img className="banner-disc" src={desc3} alt="" />
+              </div>
             </div>
           </div>
+
+          <p className="skv-medium sm-text opa-text">
+            “เรา <span className="skv-bold">‘เข้าใจ’</span>{" "}
+            ว่าในการสร้างแบรนด์ของคุณนั้น จำเป็นต้องมีจุดประสงค์ รวมทั้ง Mood
+            and Tone ที่ชัดเจน <br />
+            และอีกหลายองค์ประกอบเพื่อตอบโจทย์การสื่อสารแบรนด์ของคุณอย่างมีคุณภาพ”
+          </p>
+
+          <div className="section">
+            <hr className="blue-line"></hr>
+          </div>
+
+          <p className="skv-bold bg-text">
+            ในทุกขั้นตอนการสร้างสรรค์เพลงของ SOFA HOUSE
+            เราจะช่วยพัฒนาและนำเสนอความโดดเด่น <br />
+            และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
+            เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
+          </p>
         </div>
       </div>
     </div>

@@ -111,16 +111,25 @@
 
 #desc-logo {
   width: 250px;
-  margin-top: 25px;
+  margin-top: 40px;
 }
 
 #desc-banner-section {
-  margin-top: 100px;
+  margin: 80px 0px 160px 0px;
+  position: relative;
 }
 
-.desc-banner{
-    border: 1px solid #9aa4b0;
-    border
+#desc-banner {
+  border: 1px solid #9aa4b0;
+  border-radius: 142px;
+  width: 100%;
+  height: 350px;
+}
+
+#desc-abs {
+  position: absolute;
+  bottom: -90px;
+  width: 100%;
 }
 
 #banner-flex-section {
@@ -133,4 +142,15 @@
   width: 170px;
   border: 7px solid #ffffff;
   border-radius: 50%;
+  background-color: white;
+}
+
+.opa-text{
+  opacity: 0.7;
+}
+
+.blue-line{
+  border: 1px solid #2d435b;
+  margin: 25px 0px;
+  width: 25%;
 }

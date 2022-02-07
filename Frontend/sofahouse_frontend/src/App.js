@@ -12,10 +12,6 @@ function App() {
           <Navbar path={"/"}/>
           <Home />
         </Route>
-        <Route path="/home">
-          <Navbar path={"home"} />
-          <Home />
-        </Route>
         <Route path="/portfolio">
           <Navbar path={"portfolio"} />
           <Home />
