@@ -2,6 +2,14 @@ const Music = require("../models/music.model");
 
 // add new music
 exports.add = async (req, res) => {
+  if (!req.body.hasOwnProperty("music")) {
+    // failed, information not found
+    return res.status(200).json({
+      success: false,
+      message: "Required information",
+    });
+  }
+
   const music = req.body.music;
 
   // check all information exists
@@ -11,7 +19,7 @@ exports.add = async (req, res) => {
     !music.hasOwnProperty("url") ||
     !music.hasOwnProperty("category")
   ) {
-    // response the result
+    // failed, information not found
     return res.status(200).json({
       success: false,
       message: "Required information",
@@ -39,11 +47,19 @@ exports.add = async (req, res) => {
 
 // update music by id
 exports.update = async (req, res) => {
+  if (!req.body.hasOwnProperty("music")) {
+    // failed, information not found
+    return res.status(200).json({
+      success: false,
+      message: "Required information",
+    });
+  }
+
   const music = req.body.music;
 
   // check music id exists
   if (!music.hasOwnProperty("id")) {
-    // response the result
+    // failed, information not found
     return res.status(200).json({
       success: false,
       message: "Required music id",
@@ -71,13 +87,21 @@ exports.update = async (req, res) => {
 
 // delete music by id
 exports.delete = async (req, res) => {
+  if (!req.body.hasOwnProperty("music")) {
+    // failed, information not found
+    return res.status(200).json({
+      success: false,
+      message: "Required information",
+    });
+  }
+  
   const music = req.body.music;
 
   music.status = false;
 
   // check music id exists
   if (!music.hasOwnProperty("id")) {
-    // response the result
+    // failed, information not found
     return res.status(200).json({
       success: false,
       message: "Required music id",

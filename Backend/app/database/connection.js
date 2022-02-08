@@ -15,7 +15,7 @@ const config = {
 // connect to database
 function handleConnection() {
   try {
-    // initialize pool connection
+    // initial pool connection
     let pool = mysql.createPool(config);
 
     logger.info(
@@ -25,6 +25,7 @@ function handleConnection() {
   } catch (error) {
     // if connection error
     logger.error(error);
+    throw error;
   }
 }
 

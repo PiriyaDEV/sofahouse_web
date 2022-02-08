@@ -17,6 +17,7 @@ exports.create = async (music) => {
   } catch (error) {
     // if query error
     logger.error(error);
+    throw new Error("Unexpected error");
   }
 };
 
@@ -34,14 +35,24 @@ exports.update = async (music) => {
   } catch (error) {
     // if query error
     logger.error(error);
+    throw new Error("Unexpected error");
   }
 };
 
 // get all musics
-exports.getMusics = async (result) => {
+exports.getMusics = async () => {
   try {
     const [result, fields] = await sql.query(
-      `SELECT id, title, artist, url, category FROM musics WHERE status = 1`
+      `SELECT
+        id,
+        title,
+        artist,
+        url,
+        category
+      FROM
+        musics
+      WHERE
+        status = 1`
     );
 
     logger.info(`Selected ${result.length} music(s)`);
@@ -49,5 +60,6 @@ exports.getMusics = async (result) => {
   } catch (error) {
     // if query error
     logger.error(error);
+    throw new Error("Unexpected error");
   }
 };

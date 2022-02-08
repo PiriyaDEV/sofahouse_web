@@ -8,13 +8,13 @@ const controller = require("../controllers/music.controller");
 // add new music
 router.post("/add", controller.add);
 
-// update music
+// update music by id
 router.put("/update", controller.update);
 
-// delete music
+// delete music by id
 router.put("/delete", controller.delete);
 
 // get all musics
-router.get("/allMusics", controller.getMusics);
+router.get("/all-musics", controller.getMusics);
 
 module.exports = router;
