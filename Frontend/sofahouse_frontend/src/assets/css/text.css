@@ -11,6 +11,11 @@
   src: url("../fonts/Avenir/Avenir-Medium.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Avenir_Book";
+  src: url("../fonts/Avenir/AvenirLTStd-Book.otf") format("opentype");
+}
+
 /* Sukhumvit Font */
 @font-face {
   font-family: "Sukhumvit_Bold";
@@ -58,6 +63,10 @@ option {
   font-family: "Avenir_Heavy" !important;
 }
 
+.avn-book {
+  font-family: "Avenir_Book" !important;
+}
+
 .skv-bold {
   font-family: "Sukhumvit_Bold" !important;
 }
@@ -69,39 +78,43 @@ option {
 .xm-text {
   font-style: normal;
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.75em;
   /* line-height: 27px; */
 }
 
 .ssm-text {
   font-style: normal;
   margin: 0;
-  font-size: 1.75em;
+  font-size: 2em;
   /* line-height: 27px; */
 }
 
 .sm-text {
   font-style: normal;
   margin: 0;
-  font-size: 2em;
+  font-size: 2.15em;
   /* line-height: 27px; */
 }
 
 .md-text {
   font-style: normal;
   margin: 0;
-  font-size: 2.15em;
+  font-size: 2.25em;
   /* line-height: 41px; */
 }
 
 .bg-text {
   font-style: normal;
   margin: 0;
-  font-size: 2.25em;
+  font-size: 2.5em;
   /* line-height: 41px; */
 }
 
 /* Color */
 .grey-text {
   color: #c1bfbf !important;
+}
+
+.darkgrey-text{
+  color: #707070 !important;
 }
