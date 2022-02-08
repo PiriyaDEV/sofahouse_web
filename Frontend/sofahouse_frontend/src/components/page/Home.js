@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
 import "../../assets/css/page/home.css";
 
 // Img
-import Vinyl from "../../assets/images/Vinyl.png";
+import vinylMc from "../../assets/images/vinyl-mc.png";
+import vinylPlay from "../../assets/images/vinyl-play.png";
+import vinylDisc from "../../assets/images/vinyl-disc.png";
+import headset from "../../assets/images/vinyl-hp.png";
 import centerTemp from "../../assets/images/temp/temp-mid.png";
 import longLogo from "../../assets/images/long-logo.png";
+import bbl from "../../assets/images/bbl.png";
+import bbr from "../../assets/images/bbr.png";
 
 import desc1 from "../../assets/images/desc/desc1.png";
 import desc2 from "../../assets/images/desc/desc2.png";
@@ -21,13 +26,27 @@ import temp2 from "../../assets/images/temp/lmb.png";
 import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
+  const [play, setPlay] = useState(true);
+
   return (
     <div id="home" className="section">
       <div className="page-container">
         {/* Main Section */}
         <div id="main-section">
           <div>
-            <img id="home-vinyl" src={Vinyl} alt="" />
+            <div id="home-vinyl-section">
+              <img className="home-vinyl vinyl-play" src={vinylPlay} alt="" />
+              <img
+                // className="home-vinyl vinyl-disc rotate"
+                className={`home-vinyl vinyl-disc ${
+                  play === true ? "rotate" : null
+                }`}
+                src={vinylDisc}
+                alt=""
+              />
+              <img className="home-vinyl headset" src={headset} alt="" />
+              <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
+            </div>
             <h1 className="bg-text">Baby, please</h1>
             <h1 className="sm-text avn-medium grey-text">Magesta</h1>
           </div>
@@ -64,10 +83,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         {/* Play Section */}
-        <PlayConsole />
-
+        <PlayConsole func={setPlay} />
         {/* Description Section */}
         <div id="desc-section">
           <p className="skv-bold bg-text">
@@ -107,6 +124,47 @@ export default function Home() {
             และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
             เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
           </p>
+        </div>
+        {/* Update Section */}
+        <div id="update-section">
+          <div>
+            <iframe
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=366483168240868"
+              title="sofaFB"
+              class="fb-iframe"
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe>
+          </div>
+          <div>
+            <h1 className="bg-text">OUR LASTEST UPDATES!</h1>
+            <div className="bubble-box">
+              <div className="update-box btr shadow">
+                <h1 className="bg-text">Lorem ipsum dolor sit amet,</h1>
+                <p className="xm-text avn-medium">
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                  ea
+                </p>
+              </div>
+              <img className="bbr" src={bbr} alt="" />
+            </div>
+            <div className="bubble-box">
+              <div className="update-box btl shadow">
+                <h1 className="bg-text">Lorem ipsum dolor sit amet,</h1>
+                <p className="xm-text avn-medium">
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                  ea
+                </p>
+              </div>
+              <img className="bbl" src={bbl} alt="" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

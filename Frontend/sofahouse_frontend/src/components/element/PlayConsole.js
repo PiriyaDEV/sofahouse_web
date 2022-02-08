@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect} from "react";
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
 
@@ -15,13 +15,37 @@ import next from "../../assets/images/play/next.png";
 import unmute from "../../assets/images/play/unmute.png";
 import mute from "../../assets/images/play/mute.png";
 
-export default function PlayConsole() {
+export default function PlayConsole(props) {
   const [muted, setMuted] = useState(true);
   const [play, setPlay] = useState(true);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
+  const [currentId, setId] = useState(1);
+  const List = [
+    {
+        "id": 1,
+        "title": "ท้องฟ้า",
+        "artist": "PAPER",
+        "url": "https://www.youtube.com/watch?v=5OtqLbG6T04",
+        "category": "Unknown"
+    },
+    {
+        "id": 2,
+        "title": "Memories",
+        "artist": "Maroom 5",
+        "url": "https://www.youtube.com/watch?v=SlPhMPnQ58k",
+        "category": "Unknown"
+    },
+    {
+        "id": 3,
+        "title": "Perfect",
+        "artist": "Ed Sheeran",
+        "url": "https://www.youtube.com/watch?v=LI11T-ChbnE",
+        "category": "Unknown"
+    }
+  ]
 
   const toggleMute = () => {
     setMuted(!muted);
@@ -29,6 +53,7 @@ export default function PlayConsole() {
 
   const togglePlay = () => {
     setPlay(!play);
+    props.func(!play);
   };
 
   const handleSeekMouseDown = (e) => {
@@ -54,9 +79,26 @@ export default function PlayConsole() {
     setDuration(duration);
   };
 
+  const handleEnded = () => {
+    setId(currentId+1)
+  }
+
+  const previousId = () => {
+    setId(currentId-1)
+  }
+
+  const nextId = () => {
+    setId(currentId+1)
+  }
+
+  const shuffleId = () => {
+    setId(currentId+1)
+  }
+
   return (
     <div>
-      <ReactPlayer
+      {List[currentId-1].url && (
+        <ReactPlayer
         playing={play}
         volume={0.1}
         width="0"
@@ -64,18 +106,19 @@ export default function PlayConsole() {
         muted={muted}
         onProgress={handleProgress}
         onDuration={handleDuration}
+        onEnded={handleEnded}
         ref={inputRange}
-        url="https://www.youtube.com/watch?v=6zhvi9RUtvo&list=RD6zhvi9RUtvo&start_radio=1"
-        key="https://www.youtube.com/watch?v=6zhvi9RUtvo&list=RD6zhvi9RUtvo&start_radio=1"
+        url={List[currentId-1].url}
       />
+      )}
       <div id="play-section">
         <div id="left-icon" className="section">
           <img className="pink-icon" src={leftPink} alt="" />
         </div>
         <div id="middle-console">
           <div className="section">
-            <img className="play-icon" src={shuffle} alt="" />
-            <img className="play-icon" src={back} alt="" />
+            <img className="play-icon" onClick={() => shuffleId()} src={shuffle} alt="" />
+            <img className="play-icon" onClick={() => previousId()} src={back} alt="" />
             {play === true ? (
               <img
                 onClick={() => togglePlay()}
@@ -91,7 +134,7 @@ export default function PlayConsole() {
                 alt=""
               />
             )}
-            <img className="play-icon" src={next} alt="" />
+            <img className="play-icon" onClick={() => nextId()} src={next} alt="" />
             {muted === false ? (
               <img
                 className="play-icon"
