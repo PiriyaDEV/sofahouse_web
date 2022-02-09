@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
+import musicService from "../../services/music.service";
 
 import "../../assets/css/components/playConsole.css";
 
@@ -16,6 +17,7 @@ import unmute from "../../assets/images/play/unmute.png";
 import mute from "../../assets/images/play/mute.png";
 
 export default function PlayConsole(props) {
+  const [List, setList] = useState();
   const [muted, setMuted] = useState(true);
   const [play, setPlay] = useState(true);
   const [played, setPlayed] = useState(0);
@@ -24,29 +26,14 @@ export default function PlayConsole(props) {
   const inputRange = useRef(null);
   const [currentId, setId] = useState(1);
   // const [toggleShuffle, setShuffle] = useState(false);
-  const [List,setList] = useState([
-    {
-        "id": 1,
-        "title": "ท้องฟ้า",
-        "artist": "PAPER",
-        "url": "https://www.youtube.com/watch?v=5OtqLbG6T04",
-        "category": "Unknown"
-    },
-    {
-        "id": 2,
-        "title": "Memories",
-        "artist": "Maroom 5",
-        "url": "https://www.youtube.com/watch?v=SlPhMPnQ58k",
-        "category": "Unknown"
-    },
-    {
-        "id": 3,
-        "title": "Perfect",
-        "artist": "Ed Sheeran",
-        "url": "https://www.youtube.com/watch?v=LI11T-ChbnE",
-        "category": "Unknown"
-    }
-  ])
+
+  const getMusic = async () => {
+    await musicService.getAllMusics().then((data) => setList(data.data));
+  };
+
+  useEffect(() => {
+    getMusic();
+  }, []);
 
   const toggleMute = () => {
     setMuted(!muted);
@@ -81,58 +68,78 @@ export default function PlayConsole(props) {
   };
 
   const handleEnded = () => {
-    if(currentId !== List.length) {
-      setId(currentId+1)
-    } else {
-      setId(1)
+    if(List) {
+      if (currentId !== List.length) {
+        setId(currentId + 1);
+      } else {
+        setId(1);
+      }
     }
-  }
+  };
 
   const previousId = () => {
-    if(currentId > 1) {
-      setId(currentId-1)
-    } else {
-      setId(List.length)
+    if(List) {
+      if (currentId > 1) {
+        setId(currentId - 1);
+      } else {
+        setId(List.length);
+      }
     }
-  }
+  };
 
   const nextId = () => {
-    if(currentId !== List.length) {
-      setId(currentId+1)
-    } else {
-      setId(1)
+    if(List) {
+      if (currentId !== List.length) {
+        setId(currentId + 1);
+      } else {
+        setId(1);
+      }
     }
-    
-  }
+  };
 
   const shuffleId = () => {
-    setList(List.sort((a, b) => 0.5 - Math.random()))
-  }
+    setList(List.sort((a, b) => 0.5 - Math.random()));
+  };
 
   return (
     <div>
-      {List[currentId-1].url && (
+      {List && (
         <ReactPlayer
-        playing={play}
-        volume={0.1}
-        width="0"
-        height="0"
-        muted={muted}
-        onProgress={handleProgress}
-        onDuration={handleDuration}
-        onEnded={handleEnded}
-        ref={inputRange}
-        url={List[currentId-1].url}
-      />
+          playing={play}
+          volume={0.1}
+          width="0"
+          height="0"
+          muted={muted}
+          onProgress={handleProgress}
+          onDuration={handleDuration}
+          onEnded={handleEnded}
+          ref={inputRange}
+          url={List[currentId - 1].url}
+        />
       )}
       <div id="play-section">
         <div id="left-icon" className="section">
-          <img className="pink-icon" onClick={() => previousId()} src={leftPink} alt="" />
+          <img
+            className="pink-icon"
+            onClick={() => previousId()}
+            src={leftPink}
+            alt=""
+          />
         </div>
         <div id="middle-console">
           <div className="section">
-            <img className="play-icon" onClick={() => shuffleId()} src={shuffle} alt="" />
-            <img className="play-icon" onClick={() => previousId()} src={back} alt="" />
+            <img
+              className="play-icon"
+              onClick={() => shuffleId()}
+              src={shuffle}
+              alt=""
+            />
+            <img
+              className="play-icon"
+              onClick={() => previousId()}
+              src={back}
+              alt=""
+            />
             {play === true ? (
               <img
                 onClick={() => togglePlay()}
@@ -148,7 +155,12 @@ export default function PlayConsole(props) {
                 alt=""
               />
             )}
-            <img className="play-icon" onClick={() => nextId()} src={next} alt="" />
+            <img
+              className="play-icon"
+              onClick={() => nextId()}
+              src={next}
+              alt=""
+            />
             {muted === false ? (
               <img
                 className="play-icon"
@@ -186,7 +198,12 @@ export default function PlayConsole(props) {
           </div>
         </div>
         <div id="right-icon" className="section">
-          <img className="pink-icon" onClick={() => nextId()} src={rightPink} alt="" />
+          <img
+            className="pink-icon"
+            onClick={() => nextId()}
+            src={rightPink}
+            alt=""
+          />
         </div>
       </div>
     </div>

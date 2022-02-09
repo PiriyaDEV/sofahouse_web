@@ -96,6 +96,11 @@ li {
   width: 220px !important;
 }
 
+.play-btn{
+  width: 15px;
+  cursor: pointer;
+}
+
 #port-vinyl {
   text-align: center;
 }

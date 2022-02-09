@@ -118,7 +118,7 @@ export default function Portfolio() {
           <div>
             {[...Array(5)].map((x, i) => (
               <div className="port-play-box" key={i}>
-                <img src={portPlay} alt="" />
+                <img className="play-btn" src={portPlay} alt="" />
                 <div>
                   <h1 className="xm-text">SONG NAME</h1>
                   <h1 className="xm2-text avn-medium grey-text">artist</h1>

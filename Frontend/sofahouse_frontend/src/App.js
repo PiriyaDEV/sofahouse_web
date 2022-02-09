@@ -8,6 +8,8 @@ import Portfolio from "./components/page/Portfolio";
 import Service from "./components/page/Service";
 import AboutUs from "./components/page/AboutUs";
 import Contact from "./components/element/Contact";
+import Login from "./components/page/Login";
+import Admin from "./components/page/Admin";
 
 function App() {
   return (
@@ -15,13 +17,13 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Navbar path={"/"} />
-          <Contact/>
+          <Contact />
           <Home />
           <Footer />
         </Route>
         <Route path="/portfolio">
           <Navbar path={"portfolio"} />
-          <Contact/>
+          <Contact />
           <Portfolio />
           <Footer />
         </Route>
@@ -34,6 +36,12 @@ function App() {
           <Navbar path={"aboutus"} />
           <AboutUs />
           <Footer />
+        </Route>
+        <Route path="/admin-login">
+          <Login />
+        </Route>
+        <Route path="/admin">
+          <Admin />
         </Route>
         {/* <Route path="/:id">
           <p>ไม่มี pathนี้</p>
