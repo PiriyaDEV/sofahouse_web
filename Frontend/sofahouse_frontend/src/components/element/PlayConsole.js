@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect} from "react";
+import React, { useState, useRef } from "react";
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
 
@@ -23,7 +23,8 @@ export default function PlayConsole(props) {
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
   const [currentId, setId] = useState(1);
-  const List = [
+  // const [toggleShuffle, setShuffle] = useState(false);
+  const [List,setList] = useState([
     {
         "id": 1,
         "title": "ท้องฟ้า",
@@ -45,7 +46,7 @@ export default function PlayConsole(props) {
         "url": "https://www.youtube.com/watch?v=LI11T-ChbnE",
         "category": "Unknown"
     }
-  ]
+  ])
 
   const toggleMute = () => {
     setMuted(!muted);
@@ -80,19 +81,32 @@ export default function PlayConsole(props) {
   };
 
   const handleEnded = () => {
-    setId(currentId+1)
+    if(currentId !== List.length) {
+      setId(currentId+1)
+    } else {
+      setId(1)
+    }
   }
 
   const previousId = () => {
-    setId(currentId-1)
+    if(currentId > 1) {
+      setId(currentId-1)
+    } else {
+      setId(List.length)
+    }
   }
 
   const nextId = () => {
-    setId(currentId+1)
+    if(currentId !== List.length) {
+      setId(currentId+1)
+    } else {
+      setId(1)
+    }
+    
   }
 
   const shuffleId = () => {
-    setId(currentId+1)
+    setList(List.sort((a, b) => 0.5 - Math.random()))
   }
 
   return (
@@ -113,7 +127,7 @@ export default function PlayConsole(props) {
       )}
       <div id="play-section">
         <div id="left-icon" className="section">
-          <img className="pink-icon" src={leftPink} alt="" />
+          <img className="pink-icon" onClick={() => previousId()} src={leftPink} alt="" />
         </div>
         <div id="middle-console">
           <div className="section">
@@ -172,7 +186,7 @@ export default function PlayConsole(props) {
           </div>
         </div>
         <div id="right-icon" className="section">
-          <img className="pink-icon" src={rightPink} alt="" />
+          <img className="pink-icon" onClick={() => nextId()} src={rightPink} alt="" />
         </div>
       </div>
     </div>

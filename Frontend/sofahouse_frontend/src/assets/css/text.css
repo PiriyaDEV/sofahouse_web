@@ -27,6 +27,11 @@
   src: url("../fonts/SukhumvitSet/SukhumvitSet-Medium.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Sukhumvit_Text";
+  src: url("../fonts/SukhumvitSet/SukhumvitSet-Text.ttf") format("truetype");
+}
+
 /* ตั้งค่าหน้า */
 body,
 html,
@@ -75,39 +80,61 @@ option {
   font-family: "Sukhumvit_Medium" !important;
 }
 
+.skv-text {
+  font-family: "Sukhumvit_Text" !important;
+}
+.xm2-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 1.5em;
+}
+
 .xm-text {
   font-style: normal;
   margin: 0;
   font-size: 1.75em;
-  /* line-height: 27px; */
 }
 
 .ssm-text {
   font-style: normal;
   margin: 0;
   font-size: 2em;
-  /* line-height: 27px; */
 }
 
 .sm-text {
   font-style: normal;
   margin: 0;
   font-size: 2.15em;
-  /* line-height: 27px; */
 }
 
 .md-text {
   font-style: normal;
   margin: 0;
   font-size: 2.25em;
-  /* line-height: 41px; */
 }
 
 .bg-text {
   font-style: normal;
   margin: 0;
   font-size: 2.5em;
-  /* line-height: 41px; */
+}
+
+.bg2-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 2.75em;
+}
+
+.bg3-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 3em;
+}
+
+.bg4-text {
+  font-style: normal;
+  margin: 0;
+  font-size: 3.25em;
 }
 
 /* Color */
@@ -115,6 +142,6 @@ option {
   color: #c1bfbf !important;
 }
 
-.darkgrey-text{
+.darkgrey-text {
   color: #707070 !important;
 }
