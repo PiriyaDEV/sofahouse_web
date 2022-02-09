@@ -40,8 +40,8 @@ exports.update = async (admin) => {
   }
 };
 
-// find admin by id/username
-exports.find = async (admin) => {
+// find admin by username
+exports.findByUsername = async (admin) => {
   try {
     const [result, fields] = await sql.query(
       `SELECT
@@ -52,8 +52,7 @@ exports.find = async (admin) => {
       FROM
         admins
       WHERE
-        id = '${admin.id}'
-        OR username = '${admin.username}'
+        username = '${admin.username}'
         AND status = 1`
     );
 
@@ -64,7 +63,7 @@ exports.find = async (admin) => {
     }
     // not found
     else {
-      logger.info(`Not found admin >>> id: ${admin.id || admin.username}`);
+      logger.info(`Not found admin >>> id: ${admin.username}`);
       return { isFound: false };
     }
   } catch (error) {

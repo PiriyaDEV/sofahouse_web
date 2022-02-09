@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Admin = require("../models/admin.model");
+const authConfig = require("../config/auth.config");
 
 // register new admin account
 exports.register = async (req, res) => {
@@ -54,7 +56,7 @@ exports.login = async (req, res) => {
 
   try {
     // find admin
-    const result = await Admin.find(admin);
+    const result = await Admin.findByUsername(admin);
 
     // check authentication
     if (
@@ -62,15 +64,28 @@ exports.login = async (req, res) => {
       !bcrypt.compareSync(admin.password, result.password)
     ) {
       // unauthenticated
-      return res.status(403).json({
+      return res.status(401).json({
         success: false,
         message: "Unauthenticated",
       });
     }
 
     // update last login time
-    admin.last_login = Date.now();
-    await Admin.update(admin);
+    const updateAdmin = {
+      id: result.id,
+      last_login: Date.now(),
+    };
+    await Admin.update(updateAdmin);
+
+    // generate access token
+    const token = jwt.sign(
+      {
+        id: result.id,
+        username: result.username,
+      },
+      authConfig.secretKey,
+      { expiresIn: "12h" }
+    );
 
     // response the result
     return res.status(200).json({
@@ -78,6 +93,7 @@ exports.login = async (req, res) => {
       message: "Logged-in successfully",
       id: result.id,
       username: result.username,
+      token: token,
     });
   } catch (error) {
     // return if error
