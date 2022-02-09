@@ -24,10 +24,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type: application/json
-app.use(bodyParser.json({ limit: "20mb" }));
+app.use(bodyParser.json({ limit: "10mb" }));
 
 // parse requests of content-type: application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true, limit: "20mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 // parse requests to router
 const router = require("./app/routes");
