@@ -30,7 +30,7 @@ export default new (class musicService {
 
   async deleteMusic(music) {
     return await http
-      .put("/music/delete", music, {
+      .delete("/music/delete", music, {
         headers: authHeader(),
       })
       .then((response) => {
@@ -43,7 +43,7 @@ export default new (class musicService {
 
   async getAllMusics() {
     return await http
-      .get("/music/all-musics")
+      .get("/music/all")
       .then((response) => {
         return response.data;
       })

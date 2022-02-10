@@ -172,6 +172,5 @@ export default function Home() {
 }
 
 let linkPath = (value) => {
-  let web = "http://localhost:3000/";
-  window.location = web + value;
+  window.location.href = value;
 };

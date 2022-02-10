@@ -76,9 +76,7 @@ export default function Login() {
               Login
             </button>
             {showInvalidMessage ? (
-              <h1 className="ssm-text invalid grey-text">
-                {invalidMessage}
-              </h1>
+              <h1 className="ssm-text invalid grey-text">{invalidMessage}</h1>
             ) : null}
           </div>
         </div>
@@ -88,6 +86,5 @@ export default function Login() {
 }
 
 let linkPath = (value) => {
-  let web = "http://localhost:3000/";
-  window.location = web + value;
+  window.location.href = value;
 };
