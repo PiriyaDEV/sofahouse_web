@@ -1,6 +1,8 @@
 import React from "react";
-import "../../assets/css/components/navbar.css";
 
+import "../../assets/css/components/navbar.css";
+import "../../assets/css/text.css";
+import "../../assets/css/page.css";
 import navLogo from "../../assets/images/nav-logo.png";
 
 export default function Navbar(props) {
@@ -8,11 +10,16 @@ export default function Navbar(props) {
     <div id="navbar" className="section">
       <div className="navbar-container">
         <div>
-          <img id="nav-logo" src={navLogo} alt="" />
+          <img
+            id="nav-logo"
+            src={navLogo}
+            alt=""
+            onClick={() => linkPath("/")}
+          />
         </div>
         <div id="nav-menu" className="section">
           <h1
-            onClick={() => linkPath("")}
+            onClick={() => linkPath("/")}
             className={`bg-text ${
               props.path === "/" ? "bg-text nav-active" : null
             }`}
@@ -36,7 +43,7 @@ export default function Navbar(props) {
             Service
           </h1>
           <h1
-            onClick={() => linkPath("aboutus")}
+            onClick={() => linkPath("about")}
             className={`bg-text ${
               props.path === "aboutus" ? "bg-text nav-active" : null
             }`}
@@ -50,6 +57,5 @@ export default function Navbar(props) {
 }
 
 let linkPath = (value) => {
-  let web = "http://localhost:3000/";
-  window.location = web + value;
+  window.location.href = value;
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux'
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -27,6 +28,7 @@ import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
   const [play, setPlay] = useState(true);
+  const musicSelect = useSelector(state => state.music.select)
 
   return (
     <div id="home" className="section">
@@ -47,8 +49,8 @@ export default function Home() {
               <img className="home-vinyl headset" src={headset} alt="" />
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="bg-text">Baby, please</h1>
-            <h1 className="sm-text avn-medium grey-text">Magesta</h1>
+            <h1 className="bg-text">{musicSelect.title}</h1>
+            <h1 className="sm-text avn-medium grey-text">{musicSelect.artist}</h1>
           </div>
 
           <div id="mid-img" className="section">
@@ -172,6 +174,5 @@ export default function Home() {
 }
 
 let linkPath = (value) => {
-  let web = "http://localhost:3000/";
-  window.location = web + value;
+  window.location.href = value;
 };

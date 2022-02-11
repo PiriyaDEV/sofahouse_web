@@ -245,3 +245,61 @@
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 3px;
 }
+
+@media screen and (max-width: 980px) {
+  .home-vinyl {
+    width: 200px;
+  }
+  .banner-disc {
+    width: 130px;
+  }
+  #desc-abs {
+    bottom: -70px;
+  }
+  #desc-banner {
+    border-radius: 80px;
+    height: 237px;
+  }
+  #update-section {
+    margin-bottom: 100px;
+  }
+  .music-flex > img {
+    width: 80px;
+  }
+  #middle-console > div:first-child {
+    gap: 50px !important;
+  }
+}
+
+@media screen and (max-width: 935px) {
+  #update-section > div:nth-child(2) > .bg-text {
+    margin-bottom: 25px;
+  }
+  #update-section {
+    gap: 20px;
+  }
+  .update-box {
+    padding: 15px 25px;
+    border-radius: 25px;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .home-vinyl {
+    width: 230px;
+  }
+  .music-flex > img {
+    width: 100px;
+  }
+  #mid-img {
+    height: 100%;
+  }
+  #main-music-section {
+    display: none;
+  }
+  #main-section {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}

@@ -1,0 +1,110 @@
+#service {
+  margin: 45px 0px;
+}
+
+#white-service {
+  background-color: #fff9f8;
+  padding: 200px 40px 30px 40px;
+  border-radius: 70px;
+  margin-top: 80px;
+  position: relative;
+}
+
+/* Main Section */
+
+#music-main-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  position: absolute;
+  z-index: 3;
+  top: -80px;
+}
+
+#music-main-section > div {
+  text-align: center;
+}
+
+#music-main-section > div > p {
+  margin-top: 10px;
+}
+
+.music-main-pics {
+  width: 180px;
+}
+
+/* Middle Section */
+
+#music-middle-section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+#production-section {
+  width: 100%;
+  background-image: linear-gradient(to right, #fef7f4, #faddd6);
+  border-radius: 30px;
+  padding: 15px 20px;
+}
+
+#production-btn-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.production-btn {
+  text-transform: uppercase;
+  background-color: #f9cec4;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 2px 15px;
+}
+
+.production-active {
+  background-color: #2d435b;
+  color: #ffffff;
+}
+
+#production-section > p {
+  margin-top: 25px;
+}
+
+.production-li {
+  list-style: inherit !important;
+  margin-left: 15px;
+}
+
+/* Service Type */
+#service-type-section {
+  margin: 150px 0px 50px 0px;
+}
+
+#service-type-section > h1 {
+  text-transform: uppercase;
+}
+
+.service-pics {
+  width: 150px;
+  position: absolute;
+  left: -110px;
+  top: 0px;
+}
+
+.service-box-section {
+  display: grid;
+  padding-top: 60px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.service-box {
+  position: relative;
+  background-color: #ffffff;
+  padding: 20px 0px 20px 50px;
+  margin-left: 100px;
+  border-radius: 15px;
+}
