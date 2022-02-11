@@ -43,7 +43,7 @@ export default function Navbar(props) {
             Service
           </h1>
           <h1
-            onClick={() => linkPath("aboutus")}
+            onClick={() => linkPath("about")}
             className={`bg-text ${
               props.path === "aboutus" ? "bg-text nav-active" : null
             }`}

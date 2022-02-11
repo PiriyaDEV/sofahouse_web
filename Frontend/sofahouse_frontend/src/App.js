@@ -52,7 +52,7 @@ function App() {
             <Footer />
           </div>
         </Route>
-        <Route path="/aboutus" id="app-aboutus">
+        <Route path="/about" id="app-aboutus">
           <Hamburger
             pageWrapId={"app-aboutus-content"}
             outerContainerId={"app-aboutus"}

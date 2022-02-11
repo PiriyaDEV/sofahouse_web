@@ -30,7 +30,7 @@ export default new (class musicService {
 
   async deleteMusic(music) {
     return await http
-      .delete("/music/delete", music, {
+      .put("/music/delete", music, {
         headers: authHeader(),
       })
       .then((response) => {

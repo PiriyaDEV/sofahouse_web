@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
-import musicService from "../../services/music.service";
+import { fetchMusic , nextMusic , previousMusic , shuffleMusic } from '../../redux'
 
 import "../../assets/css/components/playConsole.css";
 
@@ -17,23 +18,23 @@ import unmute from "../../assets/images/play/unmute.png";
 import mute from "../../assets/images/play/mute.png";
 
 export default function PlayConsole(props) {
-  const [List, setList] = useState();
+
+  const musicSelect = useSelector(state => state.music.select)
+  const musicList = useSelector(state => state.music.musics)
+  const dispatch = useDispatch()
+
   const [muted, setMuted] = useState(true);
   const [play, setPlay] = useState(true);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
-  const [currentId, setId] = useState(1);
-  // const [toggleShuffle, setShuffle] = useState(false);
 
-  const getMusic = async () => {
-    await musicService.getAllMusics().then((data) => setList(data.data));
-  };
 
   useEffect(() => {
-    getMusic();
+      dispatch(fetchMusic())
   }, []);
+
 
   const toggleMute = () => {
     setMuted(!muted);
@@ -68,42 +69,24 @@ export default function PlayConsole(props) {
   };
 
   const handleEnded = () => {
-    if(List) {
-      if (currentId !== List.length) {
-        setId(currentId + 1);
-      } else {
-        setId(1);
-      }
-    }
+    dispatch(nextMusic(musicSelect,musicList))
   };
 
   const previousId = () => {
-    if(List) {
-      if (currentId > 1) {
-        setId(currentId - 1);
-      } else {
-        setId(List.length);
-      }
-    }
+    dispatch(previousMusic(musicSelect,musicList))
   };
 
   const nextId = () => {
-    if(List) {
-      if (currentId !== List.length) {
-        setId(currentId + 1);
-      } else {
-        setId(1);
-      }
-    }
+    dispatch(nextMusic(musicSelect,musicList))
   };
 
   const shuffleId = () => {
-    setList(List.sort((a, b) => 0.5 - Math.random()));
+    dispatch(shuffleMusic(musicList))
   };
 
   return (
     <div>
-      {List && (
+      {musicSelect && (
         <ReactPlayer
           playing={play}
           volume={0.1}
@@ -114,7 +97,7 @@ export default function PlayConsole(props) {
           onDuration={handleDuration}
           onEnded={handleEnded}
           ref={inputRange}
-          url={List[currentId - 1].url}
+          url={musicSelect.url}
         />
       )}
       <div id="play-section">
