@@ -48,7 +48,8 @@ exports.getMusics = async () => {
         title,
         artist,
         url,
-        category
+        category,
+        created_at
       FROM
         musics
       WHERE

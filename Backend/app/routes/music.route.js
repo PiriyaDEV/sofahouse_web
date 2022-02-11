@@ -17,6 +17,6 @@ router.put("/update", auth, controller.update);
 router.put("/delete", auth, controller.delete);
 
 // get all musics
-router.get("/all-musics", controller.getMusics);
+router.get("/all", controller.getMusics);
 
 module.exports = router;
