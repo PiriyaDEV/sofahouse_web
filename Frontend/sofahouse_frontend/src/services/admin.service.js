@@ -8,7 +8,7 @@ export default new (class AdminService {
         return response.data;
       })
       .catch((error) => {
-        return error.response;
+        throw error;
       });
   }
 })();

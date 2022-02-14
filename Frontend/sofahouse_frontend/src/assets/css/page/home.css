@@ -102,6 +102,9 @@
 
 .music-flex > img {
   width: 125px;
+  height: 125px;
+  background-size: cover;
+  background-position: center;
   border-radius: 28px;
 }
 

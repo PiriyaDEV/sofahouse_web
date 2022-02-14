@@ -8,7 +8,32 @@ import {
 
 const initialState = {
   loading: false,
-  musics: [],
+  musics: [
+    {
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+    },
+    {
+    id: 1,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+    },
+    {
+    id: 2,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+    }
+  ],
   error: '',
   select: {
     index: 0,
@@ -18,7 +43,7 @@ const initialState = {
     url: "",
     category: "",
     created_at: 0
-  }
+  },
 }
 
 const reducer = (state = initialState, action) => {

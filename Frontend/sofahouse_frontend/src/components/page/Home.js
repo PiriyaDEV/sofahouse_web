@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useSelector } from 'react-redux'
 
 import "../../assets/css/text.css";
@@ -10,7 +10,7 @@ import vinylMc from "../../assets/images/vinyl-mc.png";
 import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
-import centerTemp from "../../assets/images/temp/temp-mid.png";
+// import centerTemp from "../../assets/images/temp/temp-mid.png";
 import longLogo from "../../assets/images/long-logo.png";
 import bbl from "../../assets/images/bbl.png";
 import bbr from "../../assets/images/bbr.png";
@@ -20,15 +20,56 @@ import desc2 from "../../assets/images/desc/desc2.png";
 import desc3 from "../../assets/images/desc/desc3.png";
 
 // Temp
-import temp1 from "../../assets/images/temp/insecure.png";
+// import temp1 from "../../assets/images/temp/insecure.png";
 import temp2 from "../../assets/images/temp/lmb.png";
 
 //Js
 import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
+  const [temp1, setTemp1] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+  })
+  const [temp2, setTemp2] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+  })
   const [play, setPlay] = useState(true);
-  const musicSelect = useSelector(state => state.music.select)
+  const musicSelect = useSelector(state => state.music)
+
+  useEffect(() => {
+    musicList()
+  }, [musicSelect]);
+
+  const musicList = () => {
+    if(musicSelect.select.index === musicSelect.musics.length - 1) {
+      setTemp1(musicSelect.musics[0])
+    }else {
+      setTemp1(musicSelect.musics[musicSelect.select.index + 1])
+    }
+    if(musicSelect.select.index === musicSelect.musics.length - 1) {
+      setTemp2(musicSelect.musics[1])
+    }else {
+      setTemp2(musicSelect.musics[musicSelect.select.index + 2])
+    }
+  }
+  
+  const thumnail = (url) => {
+    let thumbnail1 = "https://img.youtube.com/vi/";
+    // let mediumQuality = "/mqdefault.jpg";
+    let maxQuality = "/maxresdefault.jpg";
+
+    return thumbnail1 + url.split("v=").pop().split("&")[0] + maxQuality;
+  }
 
   return (
     <div id="home" className="section">
@@ -49,28 +90,28 @@ export default function Home() {
               <img className="home-vinyl headset" src={headset} alt="" />
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="bg-text">{musicSelect.title}</h1>
-            <h1 className="sm-text avn-medium grey-text">{musicSelect.artist}</h1>
+            <h1 className="bg-text">{musicSelect.select.title}</h1>
+            <h1 className="sm-text avn-medium grey-text">{musicSelect.select.artist}</h1>
           </div>
 
           <div id="mid-img" className="section">
-            <img src={centerTemp} alt="" />
+            <img src={thumnail(musicSelect.select.url)} alt="" />
           </div>
 
           <div id="main-music-section">
             <div id="main-music">
               <div className="music-flex">
-                <img src={temp1} alt="" />
-                <h1 className="ssm-text">insecure</h1>
+                <img src={thumnail(temp1.url)} alt="" />
+                <h1 className="ssm-text">{temp1.title}</h1>
                 <h1 className="xm-text avn-medium grey-text">
-                  Mercury Goldfish
+                {temp1.artist}
                 </h1>
               </div>
 
               <div className="music-flex">
-                <img src={temp2} alt="" />
-                <h1 className="ssm-text">Leave Me Be</h1>
-                <h1 className="xm-text avn-medium grey-text">Oey Usicha</h1>
+                <img src={thumnail(temp2.url)} alt="" />
+                <h1 className="ssm-text">{temp2.title}</h1>
+                <h1 className="xm-text avn-medium grey-text">{temp2.artist}</h1>
               </div>
             </div>
 

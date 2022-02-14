@@ -31,11 +31,15 @@ export default function Login() {
 
     await adminService.login(admin).then((res) => {
       if (res.success) {
+        localStorage.setItem("accessToken", res.token);
         linkPath("admin");
       } else {
         setShowInvalidMessage(true);
         setInvalidMessage("Invalid Username or Password");
       }
+    }).catch(() => {
+      setShowInvalidMessage(true);
+      setInvalidMessage("Something wrong! Try again later");
     });
   };
 
@@ -54,7 +58,7 @@ export default function Login() {
                 className="sm-text grey-text login-input"
                 value={username}
                 onChange={(e) => {
-                  setUsername(e.target.value);
+                  setUsername(e.target.value.trim());
                   setShowInvalidMessage(false);
                 }}
               />
@@ -66,7 +70,7 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setPassword(e.target.value.trim());
                   setShowInvalidMessage(false);
                 }}
               />
