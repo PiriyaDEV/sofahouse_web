@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect , useRef} from "react";
 import { useSelector } from 'react-redux'
 
 import "../../assets/css/text.css";
@@ -21,7 +21,7 @@ import desc3 from "../../assets/images/desc/desc3.png";
 
 // Temp
 // import temp1 from "../../assets/images/temp/insecure.png";
-import temp2 from "../../assets/images/temp/lmb.png";
+// import temp2 from "../../assets/images/temp/lmb.png";
 
 //Js
 import PlayConsole from "../element/PlayConsole";
@@ -44,22 +44,57 @@ export default function Home() {
     created_at: 0
   })
   const [play, setPlay] = useState(true);
-  const musicSelect = useSelector(state => state.music)
+  const carousel1 = useRef()
+  const carousel2 = useRef()
+  const carousel3 = useRef()
+  const music = useSelector(state => state.music)
 
   useEffect(() => {
     musicList()
-  }, [musicSelect]);
+    handleCarousel(1);
+  }, [music]);
 
   const musicList = () => {
-    if(musicSelect.select.index === musicSelect.musics.length - 1) {
-      setTemp1(musicSelect.musics[0])
-    }else {
-      setTemp1(musicSelect.musics[musicSelect.select.index + 1])
+    if(music.select.index === music.musics.length - 1) {
+      setTemp1(music.musics[0])
+    } else {
+      setTemp1(music.musics[music.select.index + 1])
     }
-    if(musicSelect.select.index === musicSelect.musics.length - 1) {
-      setTemp2(musicSelect.musics[1])
-    }else {
-      setTemp2(musicSelect.musics[musicSelect.select.index + 2])
+    if(music.select.index + 1 === music.musics.length - 1) {
+      setTemp2(music.musics[0])
+    } else if(music.select.index === music.musics.length - 1) {
+      setTemp2(music.musics[1])
+    } else{
+      setTemp2(music.musics[music.select.index + 2])
+    }
+  }
+
+  const musicListCarousel= (position1,position2) => {
+    if(position1 < music.musics.length - 1) {
+      setTemp1(music.musics[position1])
+    } else {
+      setTemp1(music.musics[music.musics.length - position1])
+    }
+    if(position2 < music.musics.length - 1) {
+      setTemp2(music.musics[position2])
+    } else {
+      setTemp2(music.musics[music.musics.length - position2])
+    }
+  }
+
+  const handleCarousel = (position) => {
+    if(position === 1) {
+      carousel1.current.className = "blue-clr blue-clr-active"
+      carousel2.current.className = "blue-clr"
+      carousel3.current.className = "blue-clr"
+    } else if(position === 2) {
+      carousel1.current.className = "blue-clr"
+      carousel2.current.className = "blue-clr blue-clr-active"
+      carousel3.current.className = "blue-clr"
+    } else {
+      carousel1.current.className = "blue-clr"
+      carousel2.current.className = "blue-clr"
+      carousel3.current.className = "blue-clr blue-clr-active"
     }
   }
   
@@ -90,12 +125,12 @@ export default function Home() {
               <img className="home-vinyl headset" src={headset} alt="" />
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="bg-text">{musicSelect.select.title}</h1>
-            <h1 className="sm-text avn-medium grey-text">{musicSelect.select.artist}</h1>
+            <h1 className="bg-text">{music.select.title}</h1>
+            <h1 className="sm-text avn-medium grey-text">{music.select.artist}</h1>
           </div>
 
           <div id="mid-img" className="section">
-            <img src={thumnail(musicSelect.select.url)} alt="" />
+            <img src={thumnail(music.select.url)} alt="" />
           </div>
 
           <div id="main-music-section">
@@ -116,9 +151,9 @@ export default function Home() {
             </div>
 
             <div className="section">
-              <span className="blue-clr"></span>
-              <span className="blue-clr"></span>
-              <span className="blue-clr"></span>
+              <span ref={carousel1} onClick={() => {handleCarousel(1); musicListCarousel(1,2);}} className="blue-clr blue-clr-active"></span>
+              <span ref={carousel2} onClick={() => {handleCarousel(2); musicListCarousel(3,4);}} className="blue-clr"></span>
+              <span ref={carousel3} onClick={() => {handleCarousel(3); musicListCarousel(5,6);}} className="blue-clr"></span>
             </div>
 
             <div onClick={() => linkPath("portfolio")} id="main-btn">

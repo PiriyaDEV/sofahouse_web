@@ -9,16 +9,40 @@ import "../../assets/css/page/login.css";
 import temp1 from "../../assets/images/temp/insecure.png";
 
 export default function Admin() {
-  const [showAddInvalidMessage, setShowAddInvalidMessage] = useState(false);
-  const [addInvalidMessage, setAddInvalidMessage] = useState("");
-  const [showEditInvalidMessage, setShowEditInvalidMessage] = useState(false);
-  const [editInvalidMessage, setEditInvalidMessage] = useState("");
-  const [newMusic, setNewMusic] = useState({ category: "Lyrics/Song Writing" });
-  const [editMusic, setEditMusic] = useState({});
+  const initialAddMusicErrorState = {
+    show: false,
+    message: "",
+  };
+
+  const initialAddMusicState = {
+    title: "",
+    artist: "",
+    url: "",
+    category: "Lyrics/Song Writing",
+  };
+
+  const [addMusicError, setAddMusicError] = useState(initialAddMusicErrorState);
+  const [newMusic, setNewMusic] = useState(initialAddMusicState);
 
   const logout = async () => {
     localStorage.removeItem("accessToken");
     linkPath("admin-login");
+  };
+
+  const showAddMusicError = (text) => {
+    setAddMusicError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const handleChangeAddMusic = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setNewMusic({ ...newMusic, [name]: value });
+
+    setAddMusicError(initialAddMusicErrorState);
   };
 
   const addMusic = async () => {
@@ -28,31 +52,19 @@ export default function Admin() {
       !newMusic.url ||
       !newMusic.category
     ) {
-      setShowAddInvalidMessage(true);
-      setAddInvalidMessage("Please fill all required information!");
+      showAddMusicError("Please fill all required information!");
       return;
     }
 
-    let musicInfo = {
-      title: newMusic.title,
-      artist: newMusic.artist,
-      url: newMusic.url,
-      category: newMusic.category,
-    };
-
     await musicService
-      .addNewMusic({ music: musicInfo })
+      .addNewMusic({ music: newMusic })
       .then((res) => {
-        if (res.success) {
-          setNewMusic({ category: "Lyrics/Song Writing" });
-        } else {
-          setShowAddInvalidMessage(true);
-          setAddInvalidMessage("Something wrong! Try again later");
-        }
+        res.success
+          ? setNewMusic(initialAddMusicState)
+          : showAddMusicError("Please fill all required information!");
       })
       .catch(() => {
-        setShowAddInvalidMessage(true);
-        setAddInvalidMessage("Something wrong! Try again later");
+        showAddMusicError("Something wrong! Try again later");
       });
   };
 
@@ -70,73 +82,60 @@ export default function Admin() {
             <h1 className="sm-text">Title :</h1>
             <input
               className="sm-text login-input"
+              name="title"
               value={newMusic.title}
-              onChange={(e) => {
-                setNewMusic({
-                  ...newMusic,
-                  title: e.target.value.trim(),
-                });
-                setAddInvalidMessage(false);
-              }}
+              onChange={handleChangeAddMusic}
             />
           </div>
           <div className="admin-box">
             <h1 className="sm-text">Artist :</h1>
-            <input className="sm-text login-input" 
-            value={newMusic.artist}
-            onChange={(e) => {
-              setNewMusic({
-                ...newMusic,
-                artist: e.target.value.trim(),
-              });
-              setAddInvalidMessage(false);
-            }}/>
+            <input
+              className="sm-text login-input"
+              name="artist"
+              value={newMusic.artist}
+              onChange={handleChangeAddMusic}
+            />
           </div>
           <div className="admin-box">
             <h1 className="sm-text">Youtube Link :</h1>
-            <input className="sm-text login-input" 
-            value={newMusic.url}
-            onChange={(e) => {
-              setNewMusic({
-                ...newMusic,
-                url: e.target.value.trim(),
-              });
-              setAddInvalidMessage(false);
-            }}
+            <input
+              className="sm-text login-input"
+              name="url"
+              value={newMusic.url}
+              onChange={handleChangeAddMusic}
             />
           </div>
         </div>
         <div className="admin-box">
           <h1 className="sm-text">Category :</h1>
           <select
-            name="category"
             id="select-cat"
             className="sm-text cat-select"
+            name="category"
             value={newMusic.category}
-            onChange={(e) => {
-              setNewMusic({
-                ...newMusic,
-                category: e.target.value,
-              });
-            }}
+            onChange={handleChangeAddMusic}
           >
-            <option value="Lyrics/Song Writing">Lyrics/Song Writing</option>
-            <option value="Music Production">Music Production</option>
-            <option value="Vocal Recording">Vocal Recording</option>
-            <option value="Music Score">Music Score</option>
-            <option value="Mixing/Mastering">Mixing/Mastering</option>
+            <option defaultValue="Lyrics/Song Writing">
+              Lyrics/Song Writing
+            </option>
+            <option defaultValue="Music Production">Music Production</option>
+            <option defaultValue="Vocal Recording">Vocal Recording</option>
+            <option defaultValue="Music Score">Music Score</option>
+            <option defaultValue="Mixing/Mastering">Mixing/Mastering</option>
           </select>
         </div>
 
         {/* Invalid */}
         <div>
-          {showAddInvalidMessage ? (
-            <h1 className="ssm-text grey-text">{addInvalidMessage}</h1>
+          {addMusicError.show ? (
+            <h1 className="ssm-text grey-text">{addMusicError.message}</h1>
           ) : null}
         </div>
 
         <div id="music-add-box">
-          <button className="music-add-btn sm-text" onClick={() => addMusic()}>Add</button>
+          <button className="music-add-btn sm-text" onClick={() => addMusic()}>
+            Add
+          </button>
         </div>
 
         <div id="temp-music" className="section">
@@ -176,9 +175,7 @@ export default function Admin() {
               </div>
               {/* Invalid */}
               <div>
-                {showEditInvalidMessage ? (
-                  <h1 className="ssm-text grey-text">{editInvalidMessage}</h1>
-                ) : null}
+                <h1 className="ssm-text grey-text">{}</h1>
               </div>
               <div id="edit-btn">
                 <button className="music-save-btn sm-text">Save</button>
