@@ -4,24 +4,29 @@ const authConfig = require("../config/auth.config");
 
 // verify access token
 const verifyToken = (req, res, next) => {
-  let token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  // access token not found
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized",
+    });
+  }
 
   try {
-    // access token not found
-    if (!token) throw new Error("Required access token");
-
     // verify jwt
     jwt.verify(token, authConfig.secretKey);
   } catch (err) {
     // failed, unauthorized
     return res.status(403).json({
       success: false,
-      message: "Unauthorized",
+      message: "Forbidden",
     });
   }
 
-  next();
+  return next();
 };
 
 module.exports = verifyToken;

@@ -84,16 +84,16 @@ exports.login = async (req, res) => {
         username: result.username,
       },
       authConfig.secretKey,
-      { expiresIn: "12h" }
+      { expiresIn: "2h" }
     );
 
     // response the result
     return res.status(200).json({
       success: true,
-      message: "Logged-in successfully",
+      message: "Logged in successfully",
       id: result.id,
       username: result.username,
-      token: token,
+      token: token
     });
   } catch (error) {
     // return if error
