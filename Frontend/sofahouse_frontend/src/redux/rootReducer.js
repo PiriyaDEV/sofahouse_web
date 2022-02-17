@@ -5,4 +5,4 @@ const rootReducer = combineReducers({
     music: musicReducer,
   })
   
-  export default rootReducer
+export default rootReducer

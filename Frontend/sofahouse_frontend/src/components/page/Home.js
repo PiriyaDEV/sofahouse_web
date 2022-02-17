@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect , useRef} from "react";
 import { useSelector } from 'react-redux'
 
 import "../../assets/css/text.css";
@@ -10,7 +10,7 @@ import vinylMc from "../../assets/images/vinyl-mc.png";
 import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
-import centerTemp from "../../assets/images/temp/temp-mid.png";
+// import centerTemp from "../../assets/images/temp/temp-mid.png";
 import longLogo from "../../assets/images/long-logo.png";
 import bbl from "../../assets/images/bbl.png";
 import bbr from "../../assets/images/bbr.png";
@@ -20,15 +20,91 @@ import desc2 from "../../assets/images/desc/desc2.png";
 import desc3 from "../../assets/images/desc/desc3.png";
 
 // Temp
-import temp1 from "../../assets/images/temp/insecure.png";
-import temp2 from "../../assets/images/temp/lmb.png";
+// import temp1 from "../../assets/images/temp/insecure.png";
+// import temp2 from "../../assets/images/temp/lmb.png";
 
 //Js
 import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
+  const [temp1, setTemp1] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+  })
+  const [temp2, setTemp2] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0
+  })
   const [play, setPlay] = useState(true);
-  const musicSelect = useSelector(state => state.music.select)
+  const carousel1 = useRef()
+  const carousel2 = useRef()
+  const carousel3 = useRef()
+  const music = useSelector(state => state.music)
+
+  useEffect(() => {
+    musicList()
+    handleCarousel(1);
+  }, [music]);
+
+  const musicList = () => {
+    if(music.select.index === music.musics.length - 1) {
+      setTemp1(music.musics[0])
+    } else {
+      setTemp1(music.musics[music.select.index + 1])
+    }
+    if(music.select.index + 1 === music.musics.length - 1) {
+      setTemp2(music.musics[0])
+    } else if(music.select.index === music.musics.length - 1) {
+      setTemp2(music.musics[1])
+    } else{
+      setTemp2(music.musics[music.select.index + 2])
+    }
+  }
+
+  const musicListCarousel= (position1,position2) => {
+    if(music.select.index + position1 <= music.musics.length - 1) {
+      setTemp1(music.musics[music.select.index + position1])
+    } else {
+      setTemp1(music.musics[music.select.index + position1 - music.musics.length])
+    }
+    if(music.select.index + position2 <= music.musics.length - 1) {
+      setTemp2(music.musics[music.select.index + position2])
+    } else {
+      setTemp2(music.musics[ music.select.index + position2 - music.musics.length])
+    }
+  }
+
+  const handleCarousel = (position) => {
+    if(position === 1) {
+      carousel1.current.className = "blue-clr blue-clr-active"
+      carousel2.current.className = "blue-clr"
+      carousel3.current.className = "blue-clr"
+    } else if(position === 2) {
+      carousel1.current.className = "blue-clr"
+      carousel2.current.className = "blue-clr blue-clr-active"
+      carousel3.current.className = "blue-clr"
+    } else {
+      carousel1.current.className = "blue-clr"
+      carousel2.current.className = "blue-clr"
+      carousel3.current.className = "blue-clr blue-clr-active"
+    }
+  }
+  
+  const thumnail = (url) => {
+    let thumbnail1 = "https://img.youtube.com/vi/";
+    let mediumQuality = "/mqdefault.jpg";
+    // let maxQuality = "/maxresdefault.jpg";
+
+    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+  }
 
   return (
     <div id="home" className="section">
@@ -49,35 +125,35 @@ export default function Home() {
               <img className="home-vinyl headset" src={headset} alt="" />
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="bg-text">{musicSelect.title}</h1>
-            <h1 className="sm-text avn-medium grey-text">{musicSelect.artist}</h1>
+            <h1 className="bg-text">{music.select.title}</h1>
+            <h1 className="sm-text avn-medium grey-text">{music.select.artist}</h1>
           </div>
 
           <div id="mid-img" className="section">
-            <img src={centerTemp} alt="" />
+            <img src={thumnail(music.select.url)} alt="" />
           </div>
 
           <div id="main-music-section">
             <div id="main-music">
               <div className="music-flex">
-                <img src={temp1} alt="" />
-                <h1 className="ssm-text">insecure</h1>
+                <img src={thumnail(temp1.url)} alt="" />
+                <h1 className="ssm-text">{temp1.title}</h1>
                 <h1 className="xm-text avn-medium grey-text">
-                  Mercury Goldfish
+                {temp1.artist}
                 </h1>
               </div>
 
               <div className="music-flex">
-                <img src={temp2} alt="" />
-                <h1 className="ssm-text">Leave Me Be</h1>
-                <h1 className="xm-text avn-medium grey-text">Oey Usicha</h1>
+                <img src={thumnail(temp2.url)} alt="" />
+                <h1 className="ssm-text">{temp2.title}</h1>
+                <h1 className="xm-text avn-medium grey-text">{temp2.artist}</h1>
               </div>
             </div>
 
             <div className="section">
-              <span className="blue-clr"></span>
-              <span className="blue-clr"></span>
-              <span className="blue-clr"></span>
+              <span ref={carousel1} onClick={() => {handleCarousel(1); musicListCarousel(1,2);}} className="blue-clr blue-clr-active"></span>
+              <span ref={carousel2} onClick={() => {handleCarousel(2); musicListCarousel(3,4);}} className="blue-clr"></span>
+              <span ref={carousel3} onClick={() => {handleCarousel(3); musicListCarousel(5,6);}} className="blue-clr"></span>
             </div>
 
             <div onClick={() => linkPath("portfolio")} id="main-btn">
