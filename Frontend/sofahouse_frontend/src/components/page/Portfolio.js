@@ -1,4 +1,5 @@
-import React from "react";
+import React,{ useState } from "react";
+import { useSelector } from 'react-redux'
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
@@ -22,17 +23,43 @@ import tmn1 from "../../assets/images/testimonial/tmn1.png";
 SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
 export default function Portfolio() {
+  const musicList = useSelector(state => state.music.musics)
+  const [category,setCategory] = useState("Lyrics/ Song Writing")
+
   const music = [];
-  for (let i = 0; i < 5; i += 1) {
-    music.push(
-      <SwiperSlide key={`slide-${i}`} tag="li">
-        <div class="carousal-music">
-          <img src={temp1} alt="" />
-          <h1 className="xm2-text">SONG NAME</h1>
-          <h1 className="xm2-text avn-medium grey-text">artist</h1>
-        </div>
-      </SwiperSlide>
-    );
+
+  const thumnail = (url) => {
+    let thumbnail1 = "https://img.youtube.com/vi/";
+    let mediumQuality = "/mqdefault.jpg";
+    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+  }
+
+  const categorySelect = (categoryName) => {
+    setCategory(categoryName)
+  }
+
+  const checkCategory = (categoryName) => {
+    let active = "sm-text grey-text work-active"
+    let inactive = "sm-text grey-text"
+    if(category === categoryName) {
+      return active
+    } else { 
+      return inactive
+    }
+  }
+
+  if(musicList){
+    for (let i = 0; i < musicList.length; i += 1) {
+      music.push(
+        <SwiperSlide key={`slide-${i}`} tag="li">
+          <div class="carousal-music">
+            <img src={thumnail(musicList[i].url)} alt="" />
+            <h1 className="xm2-text">{musicList[i].title}</h1>
+            <h1 className="xm2-text avn-medium grey-text">{musicList[i].artist}</h1>
+          </div>
+        </SwiperSlide>
+      );
+    }
   }
 
   const person = [];
@@ -58,13 +85,13 @@ export default function Portfolio() {
         {/* Work Section */}
         <div id="work-section">
           <div id="work-menu">
-            <h1 className="sm-text grey-text work-active">
+            <h1 onClick={() => categorySelect("Lyrics/ Song Writing")} className={checkCategory("Lyrics/ Song Writing")}>
               Lyrics/ Song Writing
             </h1>
-            <h1 className="sm-text grey-text">Music Production</h1>
-            <h1 className="sm-text grey-text">Vocal Recording</h1>
-            <h1 className="sm-text grey-text">Music Score</h1>
-            <h1 className="sm-text grey-text">Mixing & Mastering</h1>
+            <h1 onClick={() =>categorySelect("Music Production")} className={checkCategory("Music Production")}>Music Production</h1>
+            <h1 onClick={() =>categorySelect("Vocal Recording")} className={checkCategory("Vocal Recording")}>Vocal Recording</h1>
+            <h1 onClick={() =>categorySelect("Music Score")} className={checkCategory("Music Score")}>Music Score</h1>
+            <h1 onClick={() =>categorySelect("Mixing & Mastering")} className={checkCategory("Mixing & Mastering")}>Mixing & Mastering</h1>
           </div>
           <div id="work-carousal" className="section">
             <Swiper
@@ -72,8 +99,8 @@ export default function Portfolio() {
               tag="section"
               wrapperTag="ul"
               navigation={{
-                prevEl: ".swiper-button-prev",
-                nextEl: ".swiper-button-next",
+                prevEl: ".music-prev",
+                nextEl: ".music-next",
               }}
               slidesPerView={5}
               spaceBetween={30}
@@ -83,8 +110,8 @@ export default function Portfolio() {
             >
               {music}
             </Swiper>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev music-prev"></div>
+            <div class="swiper-button-next music-next"></div>
           </div>
         </div>
 
@@ -149,8 +176,8 @@ export default function Portfolio() {
               tag="section"
               wrapperTag="ul"
               navigation={{
-                prevEl: ".swiper-button-prev",
-                nextEl: ".swiper-button-next",
+                prevEl: ".person-prev",
+                nextEl: ".person-next",
               }}
               slidesPerView={4}
               spaceBetween={30}
@@ -159,8 +186,8 @@ export default function Portfolio() {
             >
               {person}
             </Swiper>
-            <div class="swiper-button-prev grey-pag"></div>
-            <div class="swiper-button-next grey-pag"></div>
+            <div class="swiper-button-prev grey-pag person-prev"></div>
+            <div class="swiper-button-next grey-pag person-next"></div>
           </div>
         </div>
       </div>

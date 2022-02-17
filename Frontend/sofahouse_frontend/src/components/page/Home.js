@@ -70,15 +70,15 @@ export default function Home() {
   }
 
   const musicListCarousel= (position1,position2) => {
-    if(position1 < music.musics.length - 1) {
-      setTemp1(music.musics[position1])
+    if(music.select.index + position1 <= music.musics.length - 1) {
+      setTemp1(music.musics[music.select.index + position1])
     } else {
-      setTemp1(music.musics[music.musics.length - position1])
+      setTemp1(music.musics[music.select.index + position1 - music.musics.length])
     }
-    if(position2 < music.musics.length - 1) {
-      setTemp2(music.musics[position2])
+    if(music.select.index + position2 <= music.musics.length - 1) {
+      setTemp2(music.musics[music.select.index + position2])
     } else {
-      setTemp2(music.musics[music.musics.length - position2])
+      setTemp2(music.musics[ music.select.index + position2 - music.musics.length])
     }
   }
 
@@ -100,10 +100,10 @@ export default function Home() {
   
   const thumnail = (url) => {
     let thumbnail1 = "https://img.youtube.com/vi/";
-    // let mediumQuality = "/mqdefault.jpg";
-    let maxQuality = "/maxresdefault.jpg";
+    let mediumQuality = "/mqdefault.jpg";
+    // let maxQuality = "/maxresdefault.jpg";
 
-    return thumbnail1 + url.split("v=").pop().split("&")[0] + maxQuality;
+    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
   }
 
   return (

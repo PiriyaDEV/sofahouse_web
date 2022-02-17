@@ -8,38 +8,52 @@ import "../../assets/css/page.css";
 import longLogo from "../../assets/images/long-logo.png";
 
 export default function Login() {
-  const [showInvalidMessage, setShowInvalidMessage] = useState(false);
-  const [invalidMessage, setInvalidMessage] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const initialErrorState = {
+    show: false,
+    message: "",
+  };
+
+  const initialLoginAdminState = {
+    username: "",
+    password: ""
+  };
+
+  const [loginError, setLoginError] = useState(initialErrorState);
+  const [loginAdmin, setLoginAdmin] = useState(initialLoginAdminState);
+
+  const showLoginError = (text) => {
+    setLoginError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const handleChangeLogin = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setLoginAdmin({ ...loginAdmin, [name]: value });
+    setLoginError(initialErrorState);
+  };
 
   const login = async () => {
-    if (!username) {
-      setShowInvalidMessage(true);
-      setInvalidMessage("Username required");
-      return;
-    } else if (!password) {
-      setShowInvalidMessage(true);
-      setInvalidMessage("Password required");
-      return;
+    loginAdmin.username = loginAdmin.username.trim();
+
+    if (!loginAdmin.username) {
+      return showLoginError("Username required");
+    } else if (!loginAdmin.password) {
+      return showLoginError("Password required");
     }
 
-    let admin = {
-      username: username,
-      password: password,
-    };
-
-    await adminService.login(admin).then((res) => {
+    await adminService.login(loginAdmin).then((res) => {
       if (res.success) {
         localStorage.setItem("accessToken", res.token);
         linkPath("admin");
       } else {
-        setShowInvalidMessage(true);
-        setInvalidMessage("Invalid Username or Password");
+        showLoginError("Invalid Username or Password");
       }
     }).catch(() => {
-      setShowInvalidMessage(true);
-      setInvalidMessage("Something wrong! Try again later");
+      showLoginError("Invalid Username or Password");
     });
   };
 
@@ -56,31 +70,28 @@ export default function Login() {
               <h1 className="sm-text">Username :</h1>
               <input
                 className="sm-text grey-text login-input"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value.trim());
-                  setShowInvalidMessage(false);
-                }}
+                name="username"
+                value={loginAdmin.username}
+                onChange={handleChangeLogin}
               />
             </div>
             <div className="login-box">
               <h1 className="sm-text">Password :</h1>
               <input
                 className="sm-text grey-text login-input"
+                name="password"
                 type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value.trim());
-                  setShowInvalidMessage(false);
-                }}
+                value={loginAdmin.password}
+                onChange={handleChangeLogin}
+                onKeyPress={(event) => event.key === "Enter" ? login() : null}
               />
             </div>
 
-            <button id="login-btn" className="sm-text" onClick={() => login()}>
+            <button id="login-btn" className="sm-text" onClick={login}>
               Login
             </button>
-            {showInvalidMessage ? (
-              <h1 className="ssm-text invalid grey-text">{invalidMessage}</h1>
+            {loginError.show ? (
+              <h1 className="ssm-text invalid grey-text">{loginError.message}</h1>
             ) : null}
           </div>
         </div>

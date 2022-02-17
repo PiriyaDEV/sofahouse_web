@@ -8,8 +8,7 @@ import {
 
 const initialState = {
   loading: false,
-  musics: [
-    {
+  musics: [{
     id: 0,
     title: "Title",
     artist: "Artist",
@@ -32,8 +31,7 @@ const initialState = {
     url: "",
     category: "",
     created_at: 0
-    }
-  ],
+    }],
   error: '',
   select: {
     index: 0,
