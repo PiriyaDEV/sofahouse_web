@@ -45,6 +45,12 @@ export const previousMusic = (select,musics) => {
     }
 }
 
+export const skipMusic = (index,musics) => {
+    return (dispatch) => {
+        dispatch(selectMusic(musics[index], index))
+    }
+}
+
 export const shuffleMusic = (musics) => {
     return (dispatch) => {
         dispatch(updateMusicList(musics.sort((a, b) => 0.5 - Math.random())))
