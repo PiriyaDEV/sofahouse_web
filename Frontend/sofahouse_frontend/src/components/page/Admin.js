@@ -27,7 +27,7 @@ export default function Admin() {
 
   useEffect(() => {
     isLogin();
-}, []);
+  }, []);
   
   const dispatch = useDispatch()
 
@@ -89,7 +89,9 @@ export default function Admin() {
     const name = event.target.name;
 
     setEditMusic({ ...editMusic, [name]: value });
-    setEditMusicError(initialErrorState);
+    if (editMusic.id !== 0) {
+      setEditMusicError(initialErrorState);
+    }
   };
 
   const selectMusic = (music) => {
@@ -227,6 +229,7 @@ export default function Admin() {
             <input
               className="sm-text login-input"
               name="title"
+              maxLength="64"
               value={newMusic.title}
               onChange={handleChangeAddMusic}
             />
@@ -236,6 +239,7 @@ export default function Admin() {
             <input
               className="sm-text login-input"
               name="artist"
+              maxLength="64"
               value={newMusic.artist}
               onChange={handleChangeAddMusic}
             />
@@ -245,6 +249,7 @@ export default function Admin() {
             <input
               className="sm-text login-input"
               name="url"
+              maxLength="255"
               value={newMusic.url}
               onChange={handleChangeAddMusic}
             />
@@ -294,6 +299,7 @@ export default function Admin() {
                 <input 
                   className="sm-text login-input" 
                   name="title"
+                  maxLength="64"
                   value={editMusic.title}
                   onChange={handleChangeEditMusic}
                 />
@@ -303,6 +309,7 @@ export default function Admin() {
                 <input 
                   className="sm-text login-input" 
                   name="artist"
+                  maxLength="64"
                   value={editMusic.artist}
                   onChange={handleChangeEditMusic}
                 />
@@ -312,6 +319,7 @@ export default function Admin() {
                 <input 
                   className="sm-text login-input" 
                   name="url"
+                  maxLength="255"
                   value={editMusic.url}
                   onChange={handleChangeEditMusic}
                 />

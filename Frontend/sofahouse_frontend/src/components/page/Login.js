@@ -71,6 +71,7 @@ export default function Login() {
               <input
                 className="sm-text grey-text login-input"
                 name="username"
+                maxLength="64"
                 value={loginAdmin.username}
                 onChange={handleChangeLogin}
               />
@@ -80,6 +81,7 @@ export default function Login() {
               <input
                 className="sm-text grey-text login-input"
                 name="password"
+                maxLength="100"
                 type="password"
                 value={loginAdmin.password}
                 onChange={handleChangeLogin}

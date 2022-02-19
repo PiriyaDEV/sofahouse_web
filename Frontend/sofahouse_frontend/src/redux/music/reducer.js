@@ -17,7 +17,7 @@ const initialState = {
     created_at: 0
     },
     {
-    id: 1,
+    id: 0,
     title: "Title",
     artist: "Artist",
     url: "",
@@ -25,7 +25,7 @@ const initialState = {
     created_at: 0
     },
     {
-    id: 2,
+    id: 0,
     title: "Title",
     artist: "Artist",
     url: "",

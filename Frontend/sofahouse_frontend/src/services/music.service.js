@@ -3,7 +3,6 @@ import authHeader from "./auth-header";
 
 export default new (class musicService {
   async addNewMusic(music) {
-    console.log(music)
     return await http
       .post("/music/add", music, {
         headers: authHeader(),
@@ -25,7 +24,7 @@ export default new (class musicService {
         return response.data;
       })
       .catch((error) => {
-        return error.response;
+        throw error;
       });
   }
 
@@ -38,7 +37,7 @@ export default new (class musicService {
         return response.data;
       })
       .catch((error) => {
-        return error.response;
+        throw error;
       });
   }
 
@@ -49,7 +48,7 @@ export default new (class musicService {
         return response.data;
       })
       .catch((error) => {
-        return error.response;
+        throw error;
       });
   }
 })();
