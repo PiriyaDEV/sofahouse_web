@@ -1,5 +1,6 @@
 import React, { useState , useEffect , useRef} from "react";
-import { useSelector } from 'react-redux'
+import { useSelector , useDispatch } from 'react-redux'
+import { skipMusic } from '../../redux'
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -27,6 +28,7 @@ import desc3 from "../../assets/images/desc/desc3.png";
 import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
+  const dispatch = useDispatch()
   const [temp1, setTemp1] = useState({
     id: 0,
     title: "Title",
@@ -53,6 +55,14 @@ export default function Home() {
     musicList()
     handleCarousel(1);
   }, [music]);
+
+  const skipMusics = (musicSelected) => {
+    for(let i=0;i < music.musics.length;i++) {
+      if(music.musics[i].id === musicSelected.id) {
+        dispatch(skipMusic(i,music.musics))
+      }
+    }
+  }
 
   const musicList = () => {
     if(music.select.index === music.musics.length - 1) {
@@ -135,7 +145,7 @@ export default function Home() {
 
           <div id="main-music-section">
             <div id="main-music">
-              <div className="music-flex">
+              <div onClick={() => skipMusics(temp1)} className="music-flex">
                 <img src={thumnail(temp1.url)} alt="" />
                 <h1 className="ssm-text">{temp1.title}</h1>
                 <h1 className="xm-text avn-medium grey-text">
@@ -143,7 +153,7 @@ export default function Home() {
                 </h1>
               </div>
 
-              <div className="music-flex">
+              <div onClick={() => skipMusics(temp2)} className="music-flex">
                 <img src={thumnail(temp2.url)} alt="" />
                 <h1 className="ssm-text">{temp2.title}</h1>
                 <h1 className="xm-text avn-medium grey-text">{temp2.artist}</h1>

@@ -15,12 +15,11 @@ import Hamburger from "./components/element/Hamburger";
 import { fetchMusic } from './redux'
 
 function App() {
-
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchMusic())
-}, []);
+      dispatch(fetchMusic())
+  }, []);
 
   return (
     <div>

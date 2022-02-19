@@ -15,7 +15,6 @@ import vinylMc from "../../assets/images/vinyl-mc.png";
 import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
-import temp1 from "../../assets/images/temp/insecure.png";
 import portPlay from "../../assets/images/port-play.png";
 
 import tmn1 from "../../assets/images/testimonial/tmn1.png";
@@ -24,6 +23,7 @@ SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
 
 export default function Portfolio() {
   const musicList = useSelector(state => state.music.musics)
+  const [musicCategory,setMusicCategory] = useState([])
   const [category,setCategory] = useState("Lyrics/ Song Writing")
 
   const music = [];
@@ -36,6 +36,7 @@ export default function Portfolio() {
 
   const categorySelect = (categoryName) => {
     setCategory(categoryName)
+    setMusicCategory(musicList.filter((musicsList) => musicsList.category === categoryName))
   }
 
   const checkCategory = (categoryName) => {
@@ -47,6 +48,8 @@ export default function Portfolio() {
       return inactive
     }
   }
+
+
 
   if(musicList){
     for (let i = 0; i < musicList.length; i += 1) {

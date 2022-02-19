@@ -66,13 +66,11 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
     case UPDATE_MUSIC_LIST:
-      console.log(action.payload)
       return {
         ...state,
         musics: action.payload,
       }
     case SELECT_MUSIC:
-      console.log(action.payload.id)
       return {
         ...state,
         select: action.payload,

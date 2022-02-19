@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import musicService from "../../services/music.service";
-import { useSelector , useDispatch } from 'react-redux'
+import { useSelector , useDispatch } from 'react-redux';
+import jwt_decoded from "jwt-decode";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -8,12 +9,28 @@ import "../../assets/css/page/admin.css";
 import "../../assets/css/page/login.css";
 import { fetchMusic } from '../../redux'
 
-import temp1 from "../../assets/images/temp/insecure.png"
-
-
 export default function Admin() {
-  const dispatch = useDispatch()
+  const isLogin = () => {
+    const token = localStorage.getItem("admin_tk");
+
+    if (!token) {
+      linkPath("/admin-login")
+    }
+
+    const decoded = jwt_decoded(token);
+    
+    if (Date.now() >= decoded.exp * 1000) {
+      localStorage.removeItem("admin_tk");
+      linkPath("/admin-login")
+    }
+  }
+
+  useEffect(() => {
+    isLogin();
+}, []);
   
+  const dispatch = useDispatch()
+
   const initialErrorState = {
     show: false,
     message: "",
@@ -42,6 +59,8 @@ export default function Admin() {
   // edit selected music
   const [editMusicError, setEditMusicError] = useState(initialErrorState);
   const [editMusic, setEditMusic] = useState(initialEditMusicState);
+  // temp music
+  const [tempMusic, setTempMusic] = useState({});
 
   const showAddMusicError = (text) => {
     setAddMusicError({
@@ -50,11 +69,12 @@ export default function Admin() {
     });
   };
 
-  const thumnail = (url) => {
-    let thumbnail1 = "https://img.youtube.com/vi/";
-    let mediumQuality = "/mqdefault.jpg";
-    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
-  }
+  const showEditMusicError = (text) => {
+    setEditMusicError({
+      show: true,
+      message: text,
+    });
+  };
 
   const handleChangeAddMusic = (event) => {
     const value = event.target.value;
@@ -64,9 +84,36 @@ export default function Admin() {
     setAddMusicError(initialErrorState);
   };
 
+  const handleChangeEditMusic = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setEditMusic({ ...editMusic, [name]: value });
+    setEditMusicError(initialErrorState);
+  };
+
+  const selectMusic = (music) => {
+    setEditMusic(music);
+    setTempMusic(music);
+    setEditMusicError(initialErrorState);
+  }
+
+  const thumnail = (url) => {
+    let thumbnail1 = "https://img.youtube.com/vi/";
+    let mediumQuality = "/mqdefault.jpg";
+    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+  }
+
+  const logout = async () => {
+    localStorage.removeItem("admin_tk");
+    linkPath("admin-login");
+  };
+
   const addMusic = async () => {
     Object.keys(newMusic).forEach(key => {
-      newMusic[key] = newMusic[key].trim();
+      if (typeof newMusic[key] === "string") {
+        newMusic[key] = newMusic[key].trim();
+      }
     });
 
     if (
@@ -89,18 +136,81 @@ export default function Admin() {
         }
       })
       .catch(() => {
-        showAddMusicError("Something went wrong, try again later");
+        showAddMusicError("Something went wrong, try again later!");
       });
   };
 
-  const logout = async () => {
-    localStorage.removeItem("accessToken");
-    linkPath("admin-login");
+  const updateMusic = async () => {
+    Object.keys(editMusic).forEach(key => {
+      if (typeof editMusic[key] === "string") {
+        editMusic[key] = editMusic[key].trim();
+      }
+    });
+
+    if (editMusic.id === 0) {
+      return showEditMusicError("Please select music to edit!");
+    } else if (
+      !editMusic.title ||
+      !editMusic.artist ||
+      !editMusic.url ||
+      !editMusic.category
+    ) {
+      return showEditMusicError("Please fill all required information!");
+    }
+
+    let musicToUpdate = {
+      id: editMusic.id,
+    }
+
+    let isChange = false;
+
+    Object.keys(editMusic).forEach(key => {
+      if (editMusic[key] !== tempMusic[key]) {
+        musicToUpdate[key] = editMusic[key];
+        isChange = true;
+      }
+    });
+
+    if (!isChange) return;
+
+    await musicService
+      .updateMusic({ music: musicToUpdate })
+      .then((res) => {
+        if (res.success) {
+          setEditMusic(initialEditMusicState);
+          dispatch(fetchMusic());
+        } else {
+          showEditMusicError("Please fill all required information!");
+        }
+      })
+      .catch(() => {
+        showEditMusicError("Something went wrong, try again later!");
+      });
   };
 
-  const selectMusic = (music) => {
-    setEditMusic(music);
-  }
+  const deleteMusic = async () => {
+    if (editMusic.id === 0) {
+      return showEditMusicError("Please select music to edit!");
+    }
+    
+    let musicToDelete = {
+      id: editMusic.id
+    }
+
+    await musicService
+      .deleteMusic({ music: musicToDelete })
+      .then((res) => {
+        if (res.success) {
+          setEditMusic(initialEditMusicState);
+          dispatch(fetchMusic());
+        } else {
+          showEditMusicError("Something went wrong, try again later!");
+        }
+      })
+      .catch(() => {
+        showEditMusicError("Something went wrong, try again later!");
+      });
+  };
 
   return (
     <div id="admin" className="section">
@@ -181,22 +291,39 @@ export default function Admin() {
             <div>
               <div className="admin-box">
                 <h1 className="sm-text">Title :</h1>
-                <input className="sm-text login-input" value={editMusic.title} />
+                <input 
+                  className="sm-text login-input" 
+                  name="title"
+                  value={editMusic.title}
+                  onChange={handleChangeEditMusic}
+                />
               </div>
               <div className="admin-box">
                 <h1 className="sm-text">Artist :</h1>
-                <input className="sm-text login-input" value={editMusic.artist} />
+                <input 
+                  className="sm-text login-input" 
+                  name="artist"
+                  value={editMusic.artist}
+                  onChange={handleChangeEditMusic}
+                />
               </div>
               <div className="admin-box">
                 <h1 className="sm-text">Youtube Link :</h1>
-                <input className="sm-text login-input" value={editMusic.url} />
+                <input 
+                  className="sm-text login-input" 
+                  name="url"
+                  value={editMusic.url}
+                  onChange={handleChangeEditMusic}
+                />
               </div>
               <div className="admin-box">
                 <h1 className="sm-text">Category :</h1>
                 <select
                   id="select-cat"
                   className="sm-text cat-select"
+                  name="category"
                   value={editMusic.category}
+                  onChange={handleChangeEditMusic}
                 >
                   <option defaultValue="Lyrics/Song Writing">
                     Lyrics/Song Writing
@@ -214,8 +341,8 @@ export default function Admin() {
                   ) : null }
               </div>
               <div id="edit-btn">
-                <button className="music-save-btn sm-text">Save</button>
-                <button className="music-delete-btn sm-text">Delete</button>
+                <button className="music-save-btn sm-text" onClick={updateMusic}>Save</button>
+                <button className="music-delete-btn sm-text" onClick={deleteMusic}>Delete</button>
               </div>
             </div>
           </div>

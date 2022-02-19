@@ -47,7 +47,7 @@ export default function Login() {
 
     await adminService.login(loginAdmin).then((res) => {
       if (res.success) {
-        localStorage.setItem("accessToken", res.token);
+        localStorage.setItem("admin_tk", res.token);
         linkPath("admin");
       } else {
         showLoginError("Invalid Username or Password");
@@ -63,7 +63,7 @@ export default function Login() {
         <div id="login-section" className="section">
           <div>
             <div className="section">
-              <img id="login-logo" src={longLogo} alt="" />
+              <img id="login-logo" src={longLogo} alt="" onClick={() => linkPath("/")}/>
             </div>
 
             <div className="login-box">
