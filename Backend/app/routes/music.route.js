@@ -19,4 +19,7 @@ router.put("/delete", auth, controller.delete);
 // get all musics
 router.get("/all", controller.getMusics);
 
+// get all musics by category
+router.get("/allByCategory", controller.getMusicsByCategory);
+
 module.exports = router;

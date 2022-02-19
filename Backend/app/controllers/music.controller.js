@@ -66,6 +66,11 @@ exports.update = async (req, res) => {
     });
   }
 
+  // avoid directly update music status
+  if (music.hasOwnProperty("status")) {
+    delete music.status;
+  }
+
   try {
     // update music
     await Music.update(music);
@@ -132,6 +137,23 @@ exports.getMusics = async (req, res) => {
   try {
     // get data
     const result = await Music.getMusics();
+
+    // response the result
+    return res.status(200).json(result);
+  } catch (error) {
+    // return if error
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// get all musics by category
+exports.getMusicsByCategory = async (req, res) => {
+  try {
+    // get data
+    const result = await Music.getMusicsByCategory();
 
     // response the result
     return res.status(200).json(result);
