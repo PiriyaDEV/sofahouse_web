@@ -3,7 +3,7 @@
 -- Create Admins Table
 CREATE TABLE IF NOT EXISTS admins(
   id                INT             NOT NULL  AUTO_INCREMENT,
-  username          VARCHAR(64)     NOT NULL,
+  username          VARCHAR(64)     NOT NULL  UNIQUE,
   password          VARCHAR(100)    NOT NULL,
   status            BOOLEAN         NOT NULL,
   last_login        BIGINT          NOT NULL,

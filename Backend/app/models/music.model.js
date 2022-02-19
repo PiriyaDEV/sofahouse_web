@@ -64,3 +64,48 @@ exports.getMusics = async () => {
     throw new Error("Unexpected error");
   }
 };
+
+// get musics by category
+exports.getMusicsByCategory = async (category) => {
+  try {
+    const [result, fields] = await sql.query(
+      `SELECT
+        m1.category,
+        (
+          SELECT
+            JSON_ARRAYAGG(
+              JSON_OBJECT(
+                'id',
+                m2.id,
+                'title',
+                m2.title,
+                'artist',
+                m2.artist,
+                'url',
+                m2.url,
+                'category',
+                m2.category,
+                'created_at',
+                m2.created_at
+              )
+            )
+          FROM
+            musics m2
+          WHERE
+            m2.status = 1
+            AND m2.category = m1.category
+        ) AS musics
+      FROM
+        musics m1
+      GROUP BY
+        m1.category`
+    );
+
+    logger.info(`Selected ${result.length} music(s)`);
+    return result;
+  } catch (error) {
+    // if query error
+    logger.error(error);
+    throw new Error("Unexpected error");
+  }
+};
