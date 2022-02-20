@@ -35,11 +35,11 @@ export default function Portfolio() {
   const [swiperRef, setSwiperRef] = useState(null);
   const [category, setCategory] = useState("Lyrics/Song Writing");
   const [musicCategory, setMusicCategory] = useState([]);
-
+  const [currentIndex, setCurrentIndex] = useState({ start: 0, end: 4 });
   const [play, setPlay] = useState(false);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState([0, 0, 0, 0, 0]);
   const inputRange = useRef(null);
   const [musicListSelect, setMusicListSelect] = useState([
     {
@@ -168,11 +168,29 @@ export default function Portfolio() {
     }
   };
 
-  const handleDuration = (duration) => {
-    setDuration(duration);
+  const handleDuration = (duration, index) => {
+    let currentDuration = duration;
+    console.log(currentDuration);
+    currentDuration[index] = duration;
+    setDuration(currentDuration);
   };
 
-  const clickPrev = () => {};
+  const clickPrev = () => {
+    // if (musicCategory) {
+    //   const musicList = [];
+    //   for (let i = currentIndex.start; i < 5; i++) {
+    //     if(i < 0) {
+    //       musicList.push(musicCategory[musicCategory.length-i])
+    //     } else {
+    //       musicList.push(musicCategory[i]);
+    //     }
+    //   }
+    //   setMusicListSelect(musicList);
+    //   setCurrentIndex({start: currentIndex.start-1 , end: currentIndex.end})
+    // }
+  };
+
+  console.log(currentIndex)
 
   const clickNext = () => {};
 
@@ -251,19 +269,6 @@ export default function Portfolio() {
         <div id="port-play-section">
           <div id="port-vinyl">
             <div id="home-vinyl-section">
-              {musicSelect && (
-                <ReactPlayer
-                  playing={play}
-                  volume={0.1}
-                  width="0"
-                  height="0"
-                  onProgress={handleProgress}
-                  onDuration={handleDuration}
-                  loop={true}
-                  ref={inputRange}
-                  url={musicSelect.url}
-                />
-              )}
               <img className="port-vinyl vinyl-play" src={vinylPlay} alt="" />
               {play ? (
                 <img
@@ -362,9 +367,22 @@ export default function Portfolio() {
                       />
                     )}
                     <h1 className="xm-text avn-medium grey-text">
-                      <Duration seconds={duration} />
+                      <Duration seconds={duration[index]} />
                     </h1>
                   </div>
+                  {music && music.id === musicSelect.id && (
+                    <ReactPlayer
+                      playing={play}
+                      volume={0.1}
+                      width="0"
+                      height="0"
+                      onProgress={handleProgress}
+                      onDuration={(e) => handleDuration(e, index)}
+                      loop={true}
+                      ref={inputRange}
+                      url={music.url}
+                    />
+                  )}
                 </div>
               ))}
           </div>
