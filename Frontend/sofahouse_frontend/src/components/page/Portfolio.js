@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-// import { fetchMusicCategory } from "../../redux";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination, Controller, Thumbs } from "swiper";
+import SwiperCore, {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Controller,
+  Thumbs,
+} from "swiper";
+import ReactPlayer from "react-player";
+import Duration from "../function/Duration";
 import "swiper/swiper-bundle.css";
 
 import "../../assets/css/text.css";
@@ -17,31 +24,41 @@ import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
 import portPlay from "../../assets/images/port-play.png";
+import stop from "../../assets/images/port-stop.png";
 
 import tmn1 from "../../assets/images/testimonial/tmn1.png";
 
-SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
+SwiperCore.use([Navigation, Pagination, Controller, Thumbs, Autoplay]);
 
 export default function Portfolio() {
   const musicList = useSelector((state) => state.music.musics);
-  const [musicCategory, setMusicCategory] = useState([{
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0
-    },
+  const [swiperRef, setSwiperRef] = useState(null);
+  const [category, setCategory] = useState("Lyrics/Song Writing");
+  const [musicCategory, setMusicCategory] = useState([]);
+
+  const [play, setPlay] = useState(false);
+  const [played, setPlayed] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const inputRange = useRef(null);
+  const [musicListSelect, setMusicListSelect] = useState([
     {
       id: 0,
       title: "Title",
       artist: "Artist",
       url: "",
       category: "",
-      created_at: 0
-      }
-]);
-  const [category, setCategory] = useState("Lyrics/Song Writing");
+      created_at: 0,
+    },
+  ]);
+  const [musicSelect, setMusicSelect] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0,
+  });
 
   const music = [];
 
@@ -53,7 +70,10 @@ export default function Portfolio() {
 
   const categorySelect = (categoryName) => {
     setCategory(categoryName);
-    setMusicCategory(musicList.filter((musicsList) => musicsList.category === categoryName))
+    setMusicCategory(
+      musicList.filter((musicsList) => musicsList.category === categoryName)
+    );
+    swiperRef.slideTo(2, 0);
   };
 
   const checkCategory = (categoryName) => {
@@ -66,18 +86,32 @@ export default function Portfolio() {
     }
   };
 
+  useEffect(() => {
+    setMusicCategory(
+      musicList.filter(
+        (musicsList) => musicsList.category === "Lyrics/Song Writing"
+      )
+    );
+    setMusicSelect(musicList[0]);
+  }, [musicList]);
 
   useEffect(() => {
-    setMusicCategory(musicList)
-  }, [musicList]);
+    if (musicCategory) {
+      const musicList = [];
+      for (let i = 0; i < 5; i++) {
+        musicList.push(musicCategory[i]);
+      }
+      setMusicListSelect(musicList);
+    }
+  }, [musicCategory]);
 
   for (let i = 0; i < musicCategory.length; i += 1) {
     music.push(
       <SwiperSlide key={`slide-${i}`} tag="li">
         <div className="carousal-music">
           <img src={thumnail(musicCategory[i].url)} alt="" />
-          <h1 className="xm2-text">{musicCategory[i].title}</h1>
-          <h1 className="xm2-text avn-medium grey-text">
+          <h1 className="xm2-text truncate">{musicCategory[i].title}</h1>
+          <h1 className="xm2-text avn-medium grey-text truncate">
             {musicCategory[i].artist}
           </h1>
         </div>
@@ -101,6 +135,46 @@ export default function Portfolio() {
       </SwiperSlide>
     );
   }
+
+  const togglePlay = (index) => {
+    if (musicListSelect[index].id === musicSelect.id) {
+      setPlay(!play);
+    } else {
+      if (play) {
+        setMusicSelect(musicListSelect[index]);
+      } else {
+        setMusicSelect(musicListSelect[index]);
+        setPlay(!play);
+      }
+    }
+  };
+
+  const handleSeekMouseDown = (e) => {
+    setSeeking(true);
+  };
+
+  const handleSeekChange = (e, index) => {
+    setPlayed(parseFloat(e.target.value));
+  };
+
+  const handleSeekMouseUp = (e) => {
+    setSeeking(false);
+    inputRange.current.seekTo(parseFloat(e.target.value));
+  };
+
+  const handleProgress = (state) => {
+    if (!seeking) {
+      setPlayed(state.played);
+    }
+  };
+
+  const handleDuration = (duration) => {
+    setDuration(duration);
+  };
+
+  const clickPrev = () => {};
+
+  const clickNext = () => {};
 
   return (
     <div id="portfolio" className="section">
@@ -142,6 +216,7 @@ export default function Portfolio() {
           <div id="work-carousal" className="section">
             <Swiper
               id="main"
+              onSwiper={setSwiperRef}
               tag="section"
               wrapperTag="ul"
               navigation={{
@@ -151,13 +226,24 @@ export default function Portfolio() {
               slidesPerView={5}
               spaceBetween={30}
               loop
+              // autoplay={{
+              //   delay: 2500,
+              //   disableOnInteraction: false,
+              // }}
               loopAdditionalSlides={100}
               centeredSlides={true}
+              initialSlide={2}
             >
               {music}
             </Swiper>
-            <div className="swiper-button-prev music-prev"></div>
-            <div className="swiper-button-next music-next"></div>
+            <div
+              onClick={() => clickPrev()}
+              className="swiper-button-prev music-prev"
+            ></div>
+            <div
+              onClick={() => clickNext()}
+              className="swiper-button-next music-next"
+            ></div>
           </div>
         </div>
 
@@ -165,18 +251,42 @@ export default function Portfolio() {
         <div id="port-play-section">
           <div id="port-vinyl">
             <div id="home-vinyl-section">
+              {musicSelect && (
+                <ReactPlayer
+                  playing={play}
+                  volume={0.1}
+                  width="0"
+                  height="0"
+                  onProgress={handleProgress}
+                  onDuration={handleDuration}
+                  loop={true}
+                  ref={inputRange}
+                  url={musicSelect.url}
+                />
+              )}
               <img className="port-vinyl vinyl-play" src={vinylPlay} alt="" />
-              <img
-                // className="home-vinyl vinyl-disc rotate"
-                className="port-vinyl vinyl-disc rotate"
-                src={vinylDisc}
-                alt=""
-              />
+              {play ? (
+                <img
+                  // className="home-vinyl vinyl-disc rotate"
+                  className="port-vinyl vinyl-disc rotate"
+                  src={vinylDisc}
+                  alt=""
+                />
+              ) : (
+                <img
+                  // className="home-vinyl vinyl-disc rotate"
+                  className="port-vinyl vinyl-disc"
+                  src={vinylDisc}
+                  alt=""
+                />
+              )}
               <img className="port-vinyl headset" src={headset} alt="" />
               <img className="port-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="xm-text">SONG NAME</h1>
-            <h1 className="xm2-text avn-medium grey-text">artist</h1>
+            <h1 className="xm-text">{musicSelect.title}</h1>
+            <h1 className="xm2-text avn-medium grey-text">
+              {musicSelect.artist}
+            </h1>
           </div>
 
           <div id="port-play-text">
@@ -189,26 +299,74 @@ export default function Portfolio() {
           </div>
 
           <div>
-            {[...Array(5)].map((x, i) => (
-              <div className="port-play-box" key={i}>
-                <img className="play-btn" src={portPlay} alt="" />
-                <div>
-                  <h1 className="xm-text">SONG NAME</h1>
-                  <h1 className="xm2-text avn-medium grey-text">artist</h1>
+            {musicListSelect &&
+              musicListSelect.map((music, index) => (
+                <div className="port-play-box" key={index}>
+                  {play === true && music.id === musicSelect.id ? (
+                    <img
+                      onClick={() => togglePlay(index)}
+                      className="play-btn"
+                      src={stop}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      onClick={() => togglePlay(index)}
+                      className="play-btn"
+                      src={portPlay}
+                      alt=""
+                    />
+                  )}
+                  <div>
+                    {music ? (
+                      <h1 className="xm-text">{music.title}</h1>
+                    ) : (
+                      <h1 className="xm-text">Title</h1>
+                    )}
+                    {music ? (
+                      <h1 className="xm2-text avn-medium grey-text">
+                        {music.artist}
+                      </h1>
+                    ) : (
+                      <h1 className="xm2-text avn-medium grey-text">Artist</h1>
+                    )}
+                  </div>
+                  <div className="port-range">
+                    <h1 className="xm-text avn-medium grey-text">
+                      {music && music.id === musicSelect.id ? (
+                        <Duration seconds={duration * played} />
+                      ) : (
+                        "0:00"
+                      )}
+                    </h1>
+                    {music && music.id === musicSelect.id ? (
+                      <input
+                        id="play-range"
+                        type="range"
+                        min={0}
+                        max={0.999999}
+                        value={played}
+                        onMouseDown={handleSeekMouseDown}
+                        onChange={handleSeekChange}
+                        onMouseUp={handleSeekMouseUp}
+                        step="any"
+                      />
+                    ) : (
+                      <input
+                        id="play-range"
+                        type="range"
+                        value={0}
+                        min={0}
+                        max={0.999999}
+                        step="any"
+                      />
+                    )}
+                    <h1 className="xm-text avn-medium grey-text">
+                      <Duration seconds={duration} />
+                    </h1>
+                  </div>
                 </div>
-                <div className="port-range">
-                  <h1 className="xm-text avn-medium grey-text">00:00</h1>
-                  <input
-                    id="play-range"
-                    type="range"
-                    min={0}
-                    max={0.999999}
-                    step="any"
-                  />
-                  <h1 className="xm-text avn-medium grey-text">00:00</h1>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
@@ -228,6 +386,9 @@ export default function Portfolio() {
               slidesPerView={4}
               spaceBetween={30}
               loop
+              autoplay={{
+                delay: 2500,
+              }}
               loopAdditionalSlides={100}
             >
               {person}

@@ -176,17 +176,17 @@ export default function Home() {
             <div id="main-music">
               <div onClick={() => skipMusics(temp1)} className="music-flex">
                 {temp1 ? (
-                  <img src={thumnail(temp1.url)} alt="" />
+                  <img className="pointer" src={thumnail(temp1.url)} alt="" />
                 ) : (
                   <img src={tempInfo.tempPic} alt="" />
                 )}
                 {temp1 ? (
-                  <h1 className="ssm-text">{temp1.title}</h1>
+                  <h1 className="ssm-text truncate pointer">{temp1.title}</h1>
                 ) : (
                   <h1 className="ssm-text">Title</h1>
                 )}
                 {temp1 ? (
-                  <h1 className="xm-text avn-medium grey-text">
+                  <h1 className="xm-text avn-medium grey-text truncate pointer">
                     {temp1.artist}
                   </h1>
                 ) : (
@@ -201,12 +201,12 @@ export default function Home() {
                   <img src={tempInfo.tempPic} alt="" />
                 )}
                 {temp2 ? (
-                  <h1 className="ssm-text">{temp2.title}</h1>
+                  <h1 className="ssm-text truncate">{temp2.title}</h1>
                 ) : (
                   <h1 className="ssm-text">Title</h1>
                 )}
                 {temp2 ? (
-                  <h1 className="xm-text avn-medium grey-text">
+                  <h1 className="xm-text avn-medium grey-text truncate">
                     {temp2.artist}
                   </h1>
                 ) : (

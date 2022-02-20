@@ -14,16 +14,46 @@ export default function Contact() {
   return (
     <div id="contact">
       {hover === true && (
-        <img id="contact-mail" className="big-contact" src={mail} alt="" />
+        <img
+          id="contact-mail"
+          className="big-contact"
+          src={mail}
+          alt=""
+          onClick={() => linkPath("mailto:mail@example.org")}
+        />
       )}
       {hover === true && (
-        <img id="contact-fb" className="small-contact" src={fb} alt="" />
+        <img
+          id="contact-fb"
+          className="small-contact"
+          src={fb}
+          alt=""
+          onClick={() => linkNewTab("https://www.facebook.com/sofahouse.th/")}
+        />
       )}
       {hover === true && (
-        <img id="contact-yt" className="small-contact" src={yt} alt="" />
+        <img
+          id="contact-yt"
+          className="small-contact"
+          src={yt}
+          alt=""
+          onClick={() =>
+            linkNewTab(
+              "https://www.youtube.com/channel/UCyhA-4Ekza2xGuMRTfo1RrA"
+            )
+          }
+        />
       )}
       {hover === true && (
-        <img id="contact-ig" className="small-contact" src={ig} alt="" />
+        <img
+          id="contact-ig"
+          className="small-contact"
+          src={ig}
+          alt=""
+          onClick={() =>
+            linkNewTab("https://www.instagram.com/sofahousemusic.th/?hl=en")
+          }
+        />
       )}
       <div
         id="contact-main-btn"
@@ -35,3 +65,11 @@ export default function Contact() {
     </div>
   );
 }
+
+let linkNewTab = (path) => {
+  window.open(path, "_blank");
+};
+
+let linkPath = (value) => {
+  window.location.href = value;
+};
