@@ -147,6 +147,17 @@ option {
   color: #707070 !important;
 }
 
+.truncate {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
   .xm2-text {
     font-size: 1.25em;

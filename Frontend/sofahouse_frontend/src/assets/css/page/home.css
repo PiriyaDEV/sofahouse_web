@@ -103,7 +103,7 @@
 .music-flex > img {
   width: 125px;
   height: 125px;
-  background-size: cover;
+  object-fit: cover;
   background-position: center;
   border-radius: 28px;
 }
@@ -115,6 +115,7 @@
   background-color: #2d435b;
   border-radius: 50%;
   display: inline-block;
+  cursor: pointer;
 }
 
 .blue-clr-active {

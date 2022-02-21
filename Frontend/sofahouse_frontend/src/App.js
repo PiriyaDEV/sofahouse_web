@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
       dispatch(fetchMusic())
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
