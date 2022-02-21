@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
 import musicService from "../../services/music.service";
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import jwt_decoded from "jwt-decode";
+import ReactPlayer from "react-player";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
 import "../../assets/css/page/admin.css";
 import "../../assets/css/page/login.css";
-import { fetchMusic } from '../../redux'
+import { fetchMusic } from "../../redux";
 
 export default function Admin() {
   const isLogin = () => {
     const token = localStorage.getItem("admin_tk");
 
     if (!token) {
-      linkPath("/admin-login")
+      linkPath("/admin-login");
     }
 
     const decoded = jwt_decoded(token);
-    
+
     if (Date.now() >= decoded.exp * 1000) {
       localStorage.removeItem("admin_tk");
-      linkPath("/admin-login")
+      linkPath("/admin-login");
     }
-  }
+  };
 
   useEffect(() => {
     isLogin();
   }, []);
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const initialErrorState = {
     show: false,
@@ -39,6 +40,7 @@ export default function Admin() {
   const initialAddMusicState = {
     title: "",
     artist: "",
+    duration: "",
     url: "",
     category: "Lyrics/Song Writing",
   };
@@ -47,12 +49,13 @@ export default function Admin() {
     id: 0,
     title: "",
     artist: "",
+    duration: "",
     url: "",
     category: "Lyrics/Song Writing",
-  }
+  };
 
   // music list
-  const musicList = useSelector(state => state.music.musics);
+  const musicList = useSelector((state) => state.music.musics);
   // add new music
   const [addMusicError, setAddMusicError] = useState(initialErrorState);
   const [newMusic, setNewMusic] = useState(initialAddMusicState);
@@ -98,13 +101,13 @@ export default function Admin() {
     setEditMusic(music);
     setTempMusic(music);
     setEditMusicError(initialErrorState);
-  }
+  };
 
   const thumnail = (url) => {
     let thumbnail1 = "https://img.youtube.com/vi/";
     let mediumQuality = "/mqdefault.jpg";
     return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
-  }
+  };
 
   const logout = async () => {
     localStorage.removeItem("admin_tk");
@@ -112,7 +115,7 @@ export default function Admin() {
   };
 
   const addMusic = async () => {
-    Object.keys(newMusic).forEach(key => {
+    Object.keys(newMusic).forEach((key) => {
       if (typeof newMusic[key] === "string") {
         newMusic[key] = newMusic[key].trim();
       }
@@ -121,6 +124,7 @@ export default function Admin() {
     if (
       !newMusic.title ||
       !newMusic.artist ||
+      !newMusic.duration ||
       !newMusic.url ||
       !newMusic.category
     ) {
@@ -132,6 +136,7 @@ export default function Admin() {
       .then((res) => {
         if (res.success) {
           setNewMusic(initialAddMusicState);
+          setAddMusicError(initialErrorState);
           dispatch(fetchMusic());
         } else {
           showAddMusicError("Please fill all required information!");
@@ -143,7 +148,7 @@ export default function Admin() {
   };
 
   const updateMusic = async () => {
-    Object.keys(editMusic).forEach(key => {
+    Object.keys(editMusic).forEach((key) => {
       if (typeof editMusic[key] === "string") {
         editMusic[key] = editMusic[key].trim();
       }
@@ -154,6 +159,7 @@ export default function Admin() {
     } else if (
       !editMusic.title ||
       !editMusic.artist ||
+      !editMusic.duration ||
       !editMusic.url ||
       !editMusic.category
     ) {
@@ -162,11 +168,11 @@ export default function Admin() {
 
     let musicToUpdate = {
       id: editMusic.id,
-    }
+    };
 
     let isChange = false;
 
-    Object.keys(editMusic).forEach(key => {
+    Object.keys(editMusic).forEach((key) => {
       if (editMusic[key] !== tempMusic[key]) {
         musicToUpdate[key] = editMusic[key];
         isChange = true;
@@ -180,6 +186,7 @@ export default function Admin() {
       .then((res) => {
         if (res.success) {
           setEditMusic(initialEditMusicState);
+          setEditMusicError(initialErrorState);
           dispatch(fetchMusic());
         } else {
           showEditMusicError("Please fill all required information!");
@@ -194,10 +201,10 @@ export default function Admin() {
     if (editMusic.id === 0) {
       return showEditMusicError("Please select music to edit!");
     }
-    
+
     let musicToDelete = {
-      id: editMusic.id
-    }
+      id: editMusic.id,
+    };
 
     await musicService
       .deleteMusic({ music: musicToDelete })
@@ -214,9 +221,41 @@ export default function Admin() {
       });
   };
 
+  const YoutubeAddSound = () => {
+    return (
+      <ReactPlayer
+        playing={false}
+        volume={0}
+        width="0"
+        height="0"
+        onDuration={(duration) => 
+          setNewMusic({ ...newMusic, duration: duration })
+        }
+        url={newMusic.url}
+      />
+    );
+  };
+
+  const YoutubeEditSound = () => {
+    return (
+      <ReactPlayer
+        playing={false}
+        volume={0}
+        width="0"
+        height="0"
+        onDuration={(duration) => 
+          setEditMusic({ ...editMusic, duration: duration })
+        }
+        url={editMusic.url}
+      />
+    );
+  };
+
   return (
     <div id="admin" className="section">
       <div id="admin-container" className="page-container">
+        <YoutubeAddSound />
+        <YoutubeEditSound />
         <div id="logout-div">
           <button className="music-delete-btn sm-text" onClick={logout}>
             Log Out
@@ -296,8 +335,8 @@ export default function Admin() {
             <div>
               <div className="admin-box">
                 <h1 className="sm-text">Title :</h1>
-                <input 
-                  className="sm-text login-input" 
+                <input
+                  className="sm-text login-input"
                   name="title"
                   maxLength="64"
                   value={editMusic.title}
@@ -306,8 +345,8 @@ export default function Admin() {
               </div>
               <div className="admin-box">
                 <h1 className="sm-text">Artist :</h1>
-                <input 
-                  className="sm-text login-input" 
+                <input
+                  className="sm-text login-input"
                   name="artist"
                   maxLength="64"
                   value={editMusic.artist}
@@ -316,8 +355,8 @@ export default function Admin() {
               </div>
               <div className="admin-box">
                 <h1 className="sm-text">Youtube Link :</h1>
-                <input 
-                  className="sm-text login-input" 
+                <input
+                  className="sm-text login-input"
                   name="url"
                   maxLength="255"
                   value={editMusic.url}
@@ -336,21 +375,39 @@ export default function Admin() {
                   <option defaultValue="Lyrics/Song Writing">
                     Lyrics/Song Writing
                   </option>
-                  <option defaultValue="Music Production">Music Production</option>
-                  <option defaultValue="Vocal Recording">Vocal Recording</option>
+                  <option defaultValue="Music Production">
+                    Music Production
+                  </option>
+                  <option defaultValue="Vocal Recording">
+                    Vocal Recording
+                  </option>
                   <option defaultValue="Music Score">Music Score</option>
-                  <option defaultValue="Mixing/Mastering">Mixing/Mastering</option>
+                  <option defaultValue="Mixing/Mastering">
+                    Mixing/Mastering
+                  </option>
                 </select>
               </div>
               {/* Invalid */}
               <div>
                 {editMusicError.show ? (
-                  <h1 className="ssm-text grey-text">{editMusicError.message}</h1>
-                  ) : null }
+                  <h1 className="ssm-text grey-text">
+                    {editMusicError.message}
+                  </h1>
+                ) : null}
               </div>
               <div id="edit-btn">
-                <button className="music-save-btn sm-text" onClick={updateMusic}>Save</button>
-                <button className="music-delete-btn sm-text" onClick={deleteMusic}>Delete</button>
+                <button
+                  className="music-save-btn sm-text"
+                  onClick={updateMusic}
+                >
+                  Save
+                </button>
+                <button
+                  className="music-delete-btn sm-text"
+                  onClick={deleteMusic}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -362,91 +419,136 @@ export default function Admin() {
           <h1 className="sm-text">Lyrics/Song Writing</h1>
 
           <div className="cat-list">
-            {musicList && musicList
-            .filter((music) => music.category === "Lyrics/Song Writing")
-            .map((music, i) => (
-              <div className="list-box" key={i} onClick={() => selectMusic(music)}>
-                <div>
-                  <img className="list-pics" src={thumnail(music.url)} alt="" />
-                </div>
-                <div>
-                  <h1 className="sm-text">{music.title}</h1>
-                  <h1 className="ssm-text">{music.artist}</h1>
-                </div>
-              </div>
-            ))}
+            {musicList &&
+              musicList
+                .filter((music) => music.category === "Lyrics/Song Writing")
+                .map((music, i) => (
+                  <div
+                    className="list-box"
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
           </div>
 
           <h1 className="sm-text">Music Production</h1>
 
           <div className="cat-list">
-          {musicList && musicList
-            .filter((music) => music.category === "Music Production")
-            .map((music, i) => (
-              <div className="list-box" key={i} onClick={() => selectMusic(music)}>
-                <div>
-                  <img className="list-pics" src={thumnail(music.url)} alt="" />
-                </div>
-                <div>
-                <h1 className="sm-text">{music.title}</h1>
-                  <h1 className="ssm-text">{music.artist}</h1>
-                </div>
-              </div>
-            ))}
+            {musicList &&
+              musicList
+                .filter((music) => music.category === "Music Production")
+                .map((music, i) => (
+                  <div
+                    className="list-box"
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
           </div>
 
           <h1 className="sm-text">Vocal Recording</h1>
 
           <div className="cat-list">
-          {musicList && musicList
-            .filter((music) => music.category === "Vocal Recording")
-            .map((music, i) => (
-              <div className="list-box" key={i} onClick={() => selectMusic(music)}>
-                <div>
-                  <img className="list-pics" src={thumnail(music.url)} alt="" />
-                </div>
-                <div>
-                <h1 className="sm-text">{music.title}</h1>
-                  <h1 className="ssm-text">{music.artist}</h1>
-                </div>
-              </div>
-            ))}
+            {musicList &&
+              musicList
+                .filter((music) => music.category === "Vocal Recording")
+                .map((music, i) => (
+                  <div
+                    className="list-box"
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
           </div>
 
           <h1 className="sm-text">Music Score</h1>
 
           <div className="cat-list">
-          {musicList && musicList
-            .filter((music) => music.category === "Music Score")
-            .map((music, i) => (
-              <div className="list-box" key={i} onClick={() => selectMusic(music)}>
-                <div>
-                  <img className="list-pics" src={thumnail(music.url)} alt="" />
-                </div>
-                <div>
-                <h1 className="sm-text">{music.title}</h1>
-                  <h1 className="ssm-text">{music.artist}</h1>
-                </div>
-              </div>
-            ))}
+            {musicList &&
+              musicList
+                .filter((music) => music.category === "Music Score")
+                .map((music, i) => (
+                  <div
+                    className="list-box"
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
           </div>
 
           <h1 className="sm-text">Mixing/Mastering</h1>
 
           <div className="cat-list">
-          {musicList && musicList
-            .filter((music) => music.category === "Mixing/Mastering")
-            .map((music, i) => (
-              <div className="list-box" key={i} onClick={() => selectMusic(music)}>
-                <div>
-                  <img className="list-pics" src={thumnail(music.url)} alt="" />
-                </div>
-                <div>
-                <h1 className="sm-text">{music.title}</h1>
-                  <h1 className="ssm-text">{music.artist}</h1>
-                </div>
-              </div>
-            ))}
+            {musicList &&
+              musicList
+                .filter((music) => music.category === "Mixing/Mastering")
+                .map((music, i) => (
+                  <div
+                    className="list-box"
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>

@@ -40,6 +40,13 @@
   object-fit: cover;
 }
 
+.port-truncate {
+  width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .swiper-container {
   width: 100%;
   margin: 0px 0px;

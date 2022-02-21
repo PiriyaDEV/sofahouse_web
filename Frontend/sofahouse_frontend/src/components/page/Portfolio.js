@@ -35,11 +35,10 @@ export default function Portfolio() {
   const [swiperRef, setSwiperRef] = useState(null);
   const [category, setCategory] = useState("Lyrics/Song Writing");
   const [musicCategory, setMusicCategory] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState({ start: 0, end: 4 });
   const [play, setPlay] = useState(false);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
-  const [duration, setDuration] = useState([0, 0, 0, 0, 0]);
+  const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
   const [musicListSelect, setMusicListSelect] = useState([
     {
@@ -110,10 +109,18 @@ export default function Portfolio() {
       <SwiperSlide key={`slide-${i}`} tag="li">
         <div className="carousal-music">
           <img src={thumnail(musicCategory[i].url)} alt="" />
-          <h1 className="xm2-text truncate">{musicCategory[i].title}</h1>
-          <h1 className="xm2-text avn-medium grey-text truncate">
-            {musicCategory[i].artist}
-          </h1>
+          {musicCategory ? (
+            <h1 className="xm2-text truncate">{musicCategory[i].title}</h1>
+          ) : (
+            <h1 className="xm2-text truncate">Title</h1>
+          )}
+          {musicCategory ? (
+            <h1 className="xm2-text avn-medium grey-text truncate">
+              {musicCategory[i].artist}
+            </h1>
+          ) : (
+            <h1 className="xm2-text avn-medium grey-text truncate">Artist</h1>
+          )}
         </div>
       </SwiperSlide>
     );
@@ -140,6 +147,11 @@ export default function Portfolio() {
     if (musicListSelect[index].id === musicSelect.id) {
       setPlay(!play);
     } else {
+      setPlayed(0);
+      var tObj = document.getElementsByClassName("play-range");
+      for (var i = 0; i < tObj.length; i++) {
+        tObj[i].value = 0;
+      }
       if (play) {
         setMusicSelect(musicListSelect[index]);
       } else {
@@ -168,31 +180,42 @@ export default function Portfolio() {
     }
   };
 
-  const handleDuration = (duration, index) => {
-    let currentDuration = duration;
-    console.log(currentDuration);
-    currentDuration[index] = duration;
-    setDuration(currentDuration);
+  const handleDuration = (duration) => {
+    setDuration(duration);
   };
 
-  const clickPrev = () => {
-    // if (musicCategory) {
-    //   const musicList = [];
-    //   for (let i = currentIndex.start; i < 5; i++) {
-    //     if(i < 0) {
-    //       musicList.push(musicCategory[musicCategory.length-i])
-    //     } else {
-    //       musicList.push(musicCategory[i]);
-    //     }
-    //   }
-    //   setMusicListSelect(musicList);
-    //   setCurrentIndex({start: currentIndex.start-1 , end: currentIndex.end})
-    // }
+  const slideChange = (e) => {
+    setPlay(false);
+    setPlayed(0);
+    var tObj = document.getElementsByClassName("play-range");
+    for (var i = 0; i < tObj.length; i++) {
+      tObj[i].value = 0;
+    }
+    if (musicCategory) {
+      const musicList = [];
+
+      let count = 0;
+      for (let i = e.realIndex - 2; i < musicCategory.length; i++) {
+        if (count === 5) {
+          break;
+        } else {
+          if (i < 0) {
+            musicList.push(musicCategory[musicCategory.length + i]);
+          } else {
+            musicList.push(musicCategory[i]);
+          }
+          count++;
+        }
+      }
+      if (count === 3) {
+        musicList.push(musicCategory[0]);
+        musicList.push(musicCategory[1]);
+      } else if (count === 4) {
+        musicList.push(musicCategory[0]);
+      }
+      setMusicListSelect(musicList);
+    }
   };
-
-  console.log(currentIndex)
-
-  const clickNext = () => {};
 
   return (
     <div id="portfolio" className="section">
@@ -244,22 +267,17 @@ export default function Portfolio() {
               slidesPerView={5}
               spaceBetween={30}
               loop
-              // autoplay={{
-              //   delay: 2500,
-              //   disableOnInteraction: false,
-              // }}
               loopAdditionalSlides={100}
               centeredSlides={true}
               initialSlide={2}
+              onSlideChange={slideChange}
             >
               {music}
             </Swiper>
             <div
-              onClick={() => clickPrev()}
               className="swiper-button-prev music-prev"
             ></div>
             <div
-              onClick={() => clickNext()}
               className="swiper-button-next music-next"
             ></div>
           </div>
@@ -272,14 +290,12 @@ export default function Portfolio() {
               <img className="port-vinyl vinyl-play" src={vinylPlay} alt="" />
               {play ? (
                 <img
-                  // className="home-vinyl vinyl-disc rotate"
                   className="port-vinyl vinyl-disc rotate"
                   src={vinylDisc}
                   alt=""
                 />
               ) : (
                 <img
-                  // className="home-vinyl vinyl-disc rotate"
                   className="port-vinyl vinyl-disc"
                   src={vinylDisc}
                   alt=""
@@ -288,10 +304,19 @@ export default function Portfolio() {
               <img className="port-vinyl headset" src={headset} alt="" />
               <img className="port-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
-            <h1 className="xm-text">{musicSelect.title}</h1>
-            <h1 className="xm2-text avn-medium grey-text">
-              {musicSelect.artist}
-            </h1>
+            {musicSelect ? (
+              <h1 className="xm-text truncate">{musicSelect.title}</h1>
+            ) : (
+              <h1 className="xm-text">Title</h1>
+            )}
+
+            {musicSelect ? (
+              <h1 className="xm2-text avn-medium grey-text truncate">
+                {musicSelect.artist}
+              </h1>
+            ) : (
+              <h1 className="xm2-text avn-medium grey-text">Artist</h1>
+            )}
           </div>
 
           <div id="port-play-text">
@@ -324,12 +349,12 @@ export default function Portfolio() {
                   )}
                   <div>
                     {music ? (
-                      <h1 className="xm-text">{music.title}</h1>
+                      <h1 className="xm-text port-truncate">{music.title}</h1>
                     ) : (
                       <h1 className="xm-text">Title</h1>
                     )}
                     {music ? (
-                      <h1 className="xm2-text avn-medium grey-text">
+                      <h1 className="xm2-text avn-medium grey-text port-truncate">
                         {music.artist}
                       </h1>
                     ) : (
@@ -347,6 +372,7 @@ export default function Portfolio() {
                     {music && music.id === musicSelect.id ? (
                       <input
                         id="play-range"
+                        className="play-range"
                         type="range"
                         min={0}
                         max={0.999999}
@@ -359,16 +385,23 @@ export default function Portfolio() {
                     ) : (
                       <input
                         id="play-range"
+                        className="play-range"
                         type="range"
-                        value={0}
+                        defaultValue={0}
                         min={0}
-                        max={0.999999}
+                        max={0}
                         step="any"
                       />
                     )}
-                    <h1 className="xm-text avn-medium grey-text">
-                      <Duration seconds={duration[index]} />
-                    </h1>
+                    {music ? (
+                      <h1 className="xm-text avn-medium grey-text">
+                        <Duration seconds={music.duration} />
+                      </h1>
+                    ) : (
+                      <h1 className="xm-text avn-medium grey-text">
+                        <Duration seconds={0} />
+                      </h1>
+                    )}
                   </div>
                   {music && music.id === musicSelect.id && (
                     <ReactPlayer
@@ -377,7 +410,7 @@ export default function Portfolio() {
                       width="0"
                       height="0"
                       onProgress={handleProgress}
-                      onDuration={(e) => handleDuration(e, index)}
+                      onDuration={handleDuration}
                       loop={true}
                       ref={inputRange}
                       url={music.url}
