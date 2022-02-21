@@ -47,6 +47,7 @@ exports.getMusics = async () => {
         id,
         title,
         artist,
+        duration,
         url,
         category,
         created_at
@@ -81,6 +82,8 @@ exports.getMusicsByCategory = async (category) => {
                 m2.title,
                 'artist',
                 m2.artist,
+                'duration',
+                m2.duration,
                 'url',
                 m2.url,
                 'category',

@@ -16,6 +16,7 @@ exports.add = async (req, res) => {
   if (
     !music.hasOwnProperty("title") ||
     !music.hasOwnProperty("artist") ||
+    !music.hasOwnProperty("duration") ||
     !music.hasOwnProperty("url") ||
     !music.hasOwnProperty("category")
   ) {

@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS musics(
   id                INT             NOT NULL  AUTO_INCREMENT,
   title             VARCHAR(64)     NOT NULL,
   artist            VARCHAR(64)     NOT NULL,
+  duration          INT             NOT NULL,
   url               VARCHAR(255)    NOT NULL,
   category          VARCHAR(64)     NOT NULL,
   status            BOOLEAN         NOT NULL,
