@@ -1,3 +1,6 @@
+#contact {
+  z-index: 9999;
+}
 #contact-main-btn {
   padding: 5px;
   background-color: #ffffff;
@@ -66,4 +69,43 @@
   position: fixed;
   bottom: 50px;
   right: 50px;
+}
+
+@media screen and (max-width: 935px) {
+  #contact {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #contact {
+    bottom: 25px;
+    right: 20px;
+  }
+
+  #paperplane {
+    width: 35px;
+  }
+
+  .big-contact {
+    width: 40px;
+  }
+
+  .small-contact {
+    width: 30px;
+  }
+
+  #contact-yt {
+    right: 78px;
+  }
+
+  #contact-ig {
+    right: 69px;
+  }
+
+  #contact-main-btn {
+    width: 50px;
+    height: 50px;
+  }
 }

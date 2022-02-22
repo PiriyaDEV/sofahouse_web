@@ -31,4 +31,7 @@
   #nav-menu {
     display: none;
   }
+  #navbar{
+    position: fixed;
+  }
 }

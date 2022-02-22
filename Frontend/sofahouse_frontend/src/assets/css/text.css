@@ -154,7 +154,7 @@ option {
   text-overflow: ellipsis;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
@@ -193,5 +193,11 @@ option {
 
   .bg4-text {
     font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .bg-text {
+    font-size: 2em;
   }
 }

@@ -49,7 +49,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #ffffff;
+  background: #fff5f3;
   padding-top: 50px;
   font-size: 1.15em;
   box-shadow: 0 4px 10px rgb(0 0 0 / 20%);
@@ -88,5 +88,22 @@
   .bm-burger-button {
     display: block;
     z-index: 10000 !important;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #nav-logo {
+    width: 60px;
+  }
+
+  #hp-hamburger{
+    width: 220px !important;
+  }
+
+  .bm-burger-button {
+    width: 30px;
+    height: 21px;
+    right: 22px;
+    top: 22px;
   }
 }
