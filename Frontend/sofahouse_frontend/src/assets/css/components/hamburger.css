@@ -1,5 +1,6 @@
 #hp-hamburger {
   z-index: 100000 !important;
+  top: 0;
 }
 /* Individual item */
 .bm-item {
@@ -92,11 +93,7 @@
 }
 
 @media screen and (max-width: 414px) {
-  #nav-logo {
-    width: 60px;
-  }
-
-  #hp-hamburger{
+  #hp-hamburger {
     width: 220px !important;
   }
 
