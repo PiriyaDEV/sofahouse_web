@@ -26,6 +26,7 @@ function App() {
       <Switch>
         <Route exact path="/" id="app-home">
           <Hamburger
+            path={"/"}
             pageWrapId={"app-home-content"}
             outerContainerId={"app-home"}
           />
@@ -38,6 +39,7 @@ function App() {
         </Route>
         <Route path="/portfolio" id="app-portfolio">
           <Hamburger
+            path={"portfolio"}
             pageWrapId={"app-portfolio-content"}
             outerContainerId={"app-portfolio"}
           />
@@ -50,6 +52,7 @@ function App() {
         </Route>
         <Route path="/service" id="app-service">
           <Hamburger
+            path={"service"}
             pageWrapId={"app-service-content"}
             outerContainerId={"app-service"}
           />
@@ -61,6 +64,7 @@ function App() {
         </Route>
         <Route path="/about" id="app-aboutus">
           <Hamburger
+            path={"aboutus"}
             pageWrapId={"app-aboutus-content"}
             outerContainerId={"app-aboutus"}
           />

@@ -26,6 +26,7 @@
 
 #nav-logo {
   width: 70px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {

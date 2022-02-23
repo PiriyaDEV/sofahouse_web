@@ -29,7 +29,16 @@ import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
   const dispatch = useDispatch();
+
   const [temp1, setTemp1] = useState({
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0,
+  },
+  {
     id: 0,
     title: "Title",
     artist: "Artist",
@@ -44,7 +53,31 @@ export default function Home() {
     url: "",
     category: "",
     created_at: 0,
-  });
+  },{
+    id: 0,
+    title: "Title",
+    artist: "Artist",
+    url: "",
+    category: "",
+    created_at: 0,
+  }
+  );
+  // const [temp3, setTemp3] = useState({
+  //   id: 0,
+  //   title: "Title",
+  //   artist: "Artist",
+  //   url: "",
+  //   category: "",
+  //   created_at: 0,
+  // },
+  // {
+  //   id: 0,
+  //   title: "Title",
+  //   artist: "Artist",
+  //   url: "",
+  //   category: "",
+  //   created_at: 0,
+  // });
 
   const tempInfo = () => [
     {
@@ -85,6 +118,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // getSubtitles();
     const musicList = () => {
       if (music.select.index === music.musics.length - 1) {
         setTemp1(music.musics[0]);

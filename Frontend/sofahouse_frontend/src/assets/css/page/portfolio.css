@@ -190,6 +190,15 @@ li {
     display: block;
   }
 
+  #tmn-carousal {
+    padding: 0px 60px;
+  }
+
+  .carousal-tmn > img {
+    width: 120px;
+    height: 120px;
+  }
+
   #work-menu {
     display: flex;
     justify-content: space-between;
@@ -278,6 +287,11 @@ li {
     height: 75px;
   }
 
+  .carousal-tmn > img {
+    width: 90px;
+    height: 90px;
+  }
+
   .swiper-slide-prev > .carousal-music > img,
   .swiper-slide-next > .carousal-music > img,
   .swiper-slide-active > .carousal-music > img {
@@ -325,6 +339,18 @@ li {
   #work-carousal,
   #tmn-carousal {
     width: 350px;
+  }
+
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 18px;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    padding: 10px;
+    height: 16px;
+    width: 16px;
   }
 
   #work-menu > h1 {
@@ -387,6 +413,11 @@ li {
     height: 150px;
   }
 
+  .carousal-tmn > img {
+    width: 120px;
+    height: 120px;
+  }
+
   #work-carousal,
   #tmn-carousal {
     width: 250px;
@@ -426,6 +457,14 @@ li {
   #work-section {
     margin-top: 50px;
   }
+
+  #tmn-carousal {
+    padding: 10px;
+  }
+
+  .grey-pag {
+    margin-top: -5px;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -435,6 +474,11 @@ li {
   .swiper-slide-next > .carousal-music > img {
     width: 130px;
     height: 130px;
+  }
+
+  .carousal-tmn > img {
+    width: 90px;
+    height: 90px;
   }
 
   #work-carousal,

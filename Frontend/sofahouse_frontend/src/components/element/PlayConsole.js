@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
-import { fetchMusic , nextMusic , previousMusic , shuffleMusic } from '../../redux'
+import { nextMusic , previousMusic , shuffleMusic } from '../../redux'
 
 import "../../assets/css/components/playConsole.css";
 
@@ -23,17 +23,17 @@ export default function PlayConsole(props) {
   const musicList = useSelector(state => state.music.musics)
   const dispatch = useDispatch()
 
-  const [muted, setMuted] = useState(true);
-  const [play, setPlay] = useState(true);
+  const [muted, setMuted] = useState(false);
+  const [play, setPlay] = useState(false);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
 
 
-  useEffect(() => {
-      dispatch(fetchMusic())
-  }, []);
+  // useEffect(() => {
+  //     dispatch(fetchMusic())
+  // }, []);
 
 
   const toggleMute = () => {

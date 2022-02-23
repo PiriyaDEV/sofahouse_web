@@ -268,7 +268,6 @@ export default function Portfolio() {
                   nextEl: ".music-next",
                 }}
                 slidesPerView={1}
-                // spaceBetween={30}
                 loop
                 loopAdditionalSlides={100}
                 centeredSlides={true}
@@ -454,13 +453,22 @@ export default function Portfolio() {
                   prevEl: ".person-prev",
                   nextEl: ".person-next",
                 }}
-                slidesPerView={4}
+                slidesPerView={1}
                 spaceBetween={30}
                 loop
                 autoplay={{
                   delay: 2500,
                 }}
                 loopAdditionalSlides={100}
+                breakpoints={{
+                  // when window width is >= 700px
+                  700: {
+                    slidesPerView: 4,
+                  },
+                  500: {
+                    slidesPerView: 3,
+                  }
+                }}
               >
                 {person}
               </Swiper>
