@@ -1,6 +1,6 @@
-import React ,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
 import Navbar from "./components/element/Navbar";
 import Home from "./components/page/Home";
@@ -12,13 +12,13 @@ import Contact from "./components/element/Contact";
 import Login from "./components/page/Login";
 import Admin from "./components/page/Admin";
 import Hamburger from "./components/element/Hamburger";
-import { fetchMusic } from './redux'
+import { fetchMusic } from "./redux";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fetchMusic())
+    dispatch(fetchMusic());
   }, [dispatch]);
 
   return (
@@ -58,6 +58,7 @@ function App() {
           />
           <Navbar path={"service"} />
           <div id="app-service-content">
+            <Contact />
             <Service />
             <Footer />
           </div>
@@ -70,6 +71,7 @@ function App() {
           />
           <Navbar path={"aboutus"} />
           <div id="app-aboutus-content">
+            <Contact />
             <AboutUs />
             <Footer />
           </div>

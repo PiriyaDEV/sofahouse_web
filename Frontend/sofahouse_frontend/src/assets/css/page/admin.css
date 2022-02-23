@@ -117,3 +117,17 @@
   gap: 30px;
   margin-bottom: 60px;
 }
+
+@media screen and (max-width: 414px) {
+  .login-input{
+    width: calc(100% - 20px);
+  }
+
+  .login-box{
+    display: block;
+  }
+
+  #login-logo{
+    width: 200px;
+  }
+}
