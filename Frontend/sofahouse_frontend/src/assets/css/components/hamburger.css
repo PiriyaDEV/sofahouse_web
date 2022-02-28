@@ -15,7 +15,7 @@
 
 /* Change color on hover */
 .bm-item:hover {
-  color: #607b98;
+  color: #373a47;
 }
 
 /* The rest copied directly from react-burger-menu docs */
@@ -72,17 +72,17 @@
 }
 
 .hamburger-active {
-  background-color: #2d435b;
-  color: #ffffff;
+  background-color: #f2cfc5;
+  color: #2d435b;
 }
 
 .hamburger-text {
-  border-top: 1px solid #2d435b;
+  border-top: 1px solid #e5e5e5;
   padding: 15px 25px;
 }
 
 .hamburger-last {
-  border-bottom: 1px solid #2d435b;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 @media screen and (max-width: 767px) {
@@ -94,7 +94,7 @@
 
 @media screen and (max-width: 414px) {
   #hp-hamburger {
-    width: 220px !important;
+    width: 180px !important;
   }
 
   .bm-burger-button {

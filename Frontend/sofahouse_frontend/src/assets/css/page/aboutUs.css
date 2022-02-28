@@ -119,7 +119,6 @@
   #about-description {
     display: block;
   }
-  
 
   .about-banner {
     padding: 20px;
@@ -141,45 +140,55 @@
     margin-right: auto;
     left: 0;
     right: 0;
+    border-radius: 34px;
   }
 
-  #about-info-section{
+  .about-banner{
+    border-radius: 30px;
+  }
+
+  #why-box {
+    padding: 50px 15px 30px 15px;
+    margin-bottom: 40px;
+  }
+
+  #about-info-section {
     padding: 20px 15px;
   }
 
-  #about-headphone{
+  #about-headphone {
     position: relative;
     top: inherit;
     left: 0;
     margin: 0;
-    width: 130px;
+    width: 100px;
   }
 
-  #headphone-container{
+  #headphone-container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  #why-section{
+  #why-section {
     margin-top: 100px;
   }
 
-  #about-info-section{
+  #about-info-section {
     margin: 30px 0px;
   }
 }
 
 @media screen and (max-width: 360px) {
-  #sofa-why{
+  #sofa-why {
     position: relative;
   }
 
-  #why-section{
+  #why-section {
     margin-top: 60px;
   }
 
-  #sofa-why > h1{
+  #sofa-why > h1 {
     text-align: center;
   }
 }
