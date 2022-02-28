@@ -1,5 +1,6 @@
 #hp-hamburger {
   z-index: 100000 !important;
+  top: 0;
 }
 /* Individual item */
 .bm-item {
@@ -14,7 +15,7 @@
 
 /* Change color on hover */
 .bm-item:hover {
-  color: #607b98;
+  color: #373a47;
 }
 
 /* The rest copied directly from react-burger-menu docs */
@@ -49,7 +50,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #ffffff;
+  background: #fff5f3;
   padding-top: 50px;
   font-size: 1.15em;
   box-shadow: 0 4px 10px rgb(0 0 0 / 20%);
@@ -71,22 +72,35 @@
 }
 
 .hamburger-active {
-  background-color: #2d435b;
-  color: #ffffff;
+  background-color: #f2cfc5;
+  color: #2d435b;
 }
 
 .hamburger-text {
-  border-top: 1px solid #2d435b;
+  border-top: 1px solid #e5e5e5;
   padding: 15px 25px;
 }
 
 .hamburger-last {
-  border-bottom: 1px solid #2d435b;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 @media screen and (max-width: 767px) {
   .bm-burger-button {
     display: block;
     z-index: 10000 !important;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #hp-hamburger {
+    width: 180px !important;
+  }
+
+  .bm-burger-button {
+    width: 30px;
+    height: 21px;
+    right: 22px;
+    top: 22px;
   }
 }

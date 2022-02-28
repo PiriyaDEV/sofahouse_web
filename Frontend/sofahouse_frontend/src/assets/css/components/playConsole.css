@@ -70,3 +70,55 @@ input[type="range"]::-webkit-slider-runnable-track {
   cursor: pointer;
   background: transparent;
 }
+
+@media screen and (max-width: 980px) {
+  #middle-console > div:first-child {
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  #middle-console > div:first-child {
+    gap: 30px;
+  }
+  #play-range-section {
+    padding: 0px;
+  }
+  .pink-icon {
+    width: 30px;
+  }
+  .play-icon {
+    width: 23px;
+  }
+  #play-section {
+    border-radius: 30px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  #right-icon,
+  #left-icon {
+    display: none;
+  }
+  #play-section {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #middle-console > div:first-child {
+    gap: 20px;
+  }
+
+  .play-icon {
+    width: 18px;
+  }
+
+  .mid-icon {
+    padding: 0px 10px;
+  }
+
+  #play-section {
+    border-radius: 24px;
+  }
+}

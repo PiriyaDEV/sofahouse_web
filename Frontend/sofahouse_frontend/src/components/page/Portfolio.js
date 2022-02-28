@@ -28,6 +28,8 @@ import stop from "../../assets/images/port-stop.png";
 
 import tmn1 from "../../assets/images/testimonial/tmn1.png";
 
+// import screenWidth from "../../assets/css/page/screen"
+
 SwiperCore.use([Navigation, Pagination, Controller, Thumbs, Autoplay]);
 
 export default function Portfolio() {
@@ -69,9 +71,7 @@ export default function Portfolio() {
 
   const categorySelect = (categoryName) => {
     setCategory(categoryName);
-    setMusicCategory(
-      musicList.filter((musicsList) => musicsList.category === categoryName)
-    );
+    setMusicCategory(musicList.filter((musicsList) => musicsList.category === categoryName));
     swiperRef.slideTo(2, 0);
   };
 
@@ -254,78 +254,106 @@ export default function Portfolio() {
               Mixing & Mastering
             </h1>
           </div>
-          <div id="work-carousal" className="section">
-            <Swiper
-              id="main"
-              onSwiper={setSwiperRef}
-              tag="section"
-              wrapperTag="ul"
-              navigation={{
-                prevEl: ".music-prev",
-                nextEl: ".music-next",
-              }}
-              slidesPerView={5}
-              spaceBetween={30}
-              loop
-              loopAdditionalSlides={100}
-              centeredSlides={true}
-              initialSlide={2}
-              onSlideChange={slideChange}
-            >
-              {music}
-            </Swiper>
-            <div
-              className="swiper-button-prev music-prev"
-            ></div>
-            <div
-              className="swiper-button-next music-next"
-            ></div>
+          <div className="section">
+            <div id="work-carousal" className="section">
+              <Swiper
+                id="main"
+                onSwiper={setSwiperRef}
+                tag="section"
+                wrapperTag="ul"
+                navigation={{
+                  prevEl: ".music-prev",
+                  nextEl: ".music-next",
+                }}
+                slidesPerView={1}
+                loop
+                loopAdditionalSlides={100}
+                centeredSlides={true}
+                initialSlide={2}
+                onSlideChange={slideChange}
+                breakpoints={{
+                  // when window width is >= 700px
+                  700: {
+                    slidesPerView: 5,
+                  },
+                  414: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
+                {music}
+              </Swiper>
+              <div className="swiper-button-prev music-prev"></div>
+              <div className="swiper-button-next music-next"></div>
+            </div>
           </div>
         </div>
 
         {/* Play Section */}
         <div id="port-play-section">
-          <div id="port-vinyl">
-            <div id="home-vinyl-section">
-              <img className="port-vinyl vinyl-play" src={vinylPlay} alt="" />
-              {play ? (
-                <img
-                  className="port-vinyl vinyl-disc rotate"
-                  src={vinylDisc}
-                  alt=""
-                />
+          <div id="vinyl-mb-container">
+            <div id="port-vinyl">
+              <div id="home-vinyl-section">
+                <img className="port-vinyl vinyl-play" src={vinylPlay} alt="" />
+                {play ? (
+                  <img
+                    className="port-vinyl vinyl-disc rotate"
+                    src={vinylDisc}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="port-vinyl vinyl-disc"
+                    src={vinylDisc}
+                    alt=""
+                  />
+                )}
+                <img className="port-vinyl headset" src={headset} alt="" />
+                <img className="port-vinyl vinyl-mc" src={vinylMc} alt="" />
+              </div>
+              {musicSelect ? (
+                <h1 className="xm-text truncate">{musicSelect.title}</h1>
               ) : (
-                <img
-                  className="port-vinyl vinyl-disc"
-                  src={vinylDisc}
-                  alt=""
-                />
+                <h1 className="xm-text">Title</h1>
               )}
-              <img className="port-vinyl headset" src={headset} alt="" />
-              <img className="port-vinyl vinyl-mc" src={vinylMc} alt="" />
-            </div>
-            {musicSelect ? (
-              <h1 className="xm-text truncate">{musicSelect.title}</h1>
-            ) : (
-              <h1 className="xm-text">Title</h1>
-            )}
 
-            {musicSelect ? (
-              <h1 className="xm2-text avn-medium grey-text truncate">
-                {musicSelect.artist}
-              </h1>
-            ) : (
-              <h1 className="xm2-text avn-medium grey-text">Artist</h1>
-            )}
+              {musicSelect ? (
+                <h1 className="xm2-text avn-medium grey-text truncate">
+                  {musicSelect.artist}
+                </h1>
+              ) : (
+                <h1 className="xm2-text avn-medium grey-text">Artist</h1>
+              )}
+            </div>
+            <div id="port-play-text" className="play-text-mb">
+              <ReactPlayer
+                id="port-vdo-player"
+                playing={play}
+                volume={0.1}
+                // width="0"
+                // height="0"
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                loop={true}
+                ref={inputRange}
+                url={musicSelect.url}
+              />
+            </div>
           </div>
 
-          <div id="port-play-text">
-            <p className="xm-text grey-text avn-medium">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Dui
-            </p>
+          <div id="port-play-text" className="section play-text-pc">
+              <ReactPlayer
+                id="port-vdo-player"
+                playing={play}
+                volume={0.1}
+                // width="0"
+                // height="0"
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                loop={true}
+                ref={inputRange}
+                url={musicSelect.url}
+              />
           </div>
 
           <div>
@@ -376,7 +404,7 @@ export default function Portfolio() {
                         type="range"
                         min={0}
                         max={0.999999}
-                        value={played}
+                        defaultValue={played}
                         onMouseDown={handleSeekMouseDown}
                         onChange={handleSeekChange}
                         onMouseUp={handleSeekMouseUp}
@@ -403,7 +431,7 @@ export default function Portfolio() {
                       </h1>
                     )}
                   </div>
-                  {music && music.id === musicSelect.id && (
+                  {/* {music && music.id === musicSelect.id && (
                     <ReactPlayer
                       playing={play}
                       volume={0.1}
@@ -415,7 +443,7 @@ export default function Portfolio() {
                       ref={inputRange}
                       url={music.url}
                     />
-                  )}
+                  )} */}
                 </div>
               ))}
           </div>
@@ -425,27 +453,38 @@ export default function Portfolio() {
         <div id="tmn-section">
           <h1 className="bg-text">OUR TESTIMONIALS</h1>
 
-          <div id="tmn-carousal" className="section">
-            <Swiper
-              id="main"
-              tag="section"
-              wrapperTag="ul"
-              navigation={{
-                prevEl: ".person-prev",
-                nextEl: ".person-next",
-              }}
-              slidesPerView={4}
-              spaceBetween={30}
-              loop
-              autoplay={{
-                delay: 2500,
-              }}
-              loopAdditionalSlides={100}
-            >
-              {person}
-            </Swiper>
-            <div className="swiper-button-prev grey-pag person-prev"></div>
-            <div className="swiper-button-next grey-pag person-next"></div>
+          <div className="tmn-carousal-section">
+            <div id="tmn-carousal" className="section">
+              <Swiper
+                id="main"
+                tag="section"
+                wrapperTag="ul"
+                navigation={{
+                  prevEl: ".person-prev",
+                  nextEl: ".person-next",
+                }}
+                slidesPerView={1}
+                spaceBetween={30}
+                loop
+                autoplay={{
+                  delay: 3500,
+                }}
+                loopAdditionalSlides={100}
+                breakpoints={{
+                  // when window width is >= 700px
+                  700: {
+                    slidesPerView: 4,
+                  },
+                  500: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
+                {person}
+              </Swiper>
+              <div className="swiper-button-prev grey-pag person-prev"></div>
+              <div className="swiper-button-next grey-pag person-next"></div>
+            </div>
           </div>
         </div>
       </div>

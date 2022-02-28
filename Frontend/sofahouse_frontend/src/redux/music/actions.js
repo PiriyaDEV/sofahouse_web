@@ -4,6 +4,7 @@ import {
     FETCH_MUSIC_FAILURE,
     UPDATE_MUSIC_LIST,
     SELECT_MUSIC,
+    GET_DURATIONPLAYED
 } from './type'
 
 import musicService from "../../services/music.service"
@@ -45,6 +46,12 @@ export const previousMusic = (select,musics) => {
     }
 }
 
+export const getDuration = (play,duration) => {
+    return (dispatch) => {
+        dispatch(setDuration({play: play, duration: duration}));
+    }
+}
+
 export const skipMusic = (index,musics) => {
     return (dispatch) => {
         dispatch(selectMusic(musics[index], index))
@@ -55,6 +62,13 @@ export const shuffleMusic = (musics) => {
     return (dispatch) => {
         dispatch(updateMusicList(musics.sort((a, b) => 0.5 - Math.random())))
         dispatch(selectMusic(musics[0], 0))
+    }
+}
+
+export const setDuration = durationPlayed => {
+    return { 
+        type: GET_DURATIONPLAYED,
+        payload: durationPlayed,
     }
 }
 

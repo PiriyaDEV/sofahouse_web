@@ -14,7 +14,10 @@ export default function AboutUs() {
       <div className="page-container">
         {/* Info Section */}
         <div id="about-info-section">
-          <img id="about-headphone" src={aboutHeadphone} alt="" />
+          <div id="headphone-container">
+            <img id="about-headphone" src={aboutHeadphone} alt="" />
+          </div>
+
           <h1 className="bg3-text">SOFA ABOUT US</h1>
 
           <div id="about-description">
@@ -119,7 +122,8 @@ export default function AboutUs() {
           >
             <h1 className="bg4-text">Mision</h1>
             <p className="bg2-text skv-text">
-            “Our Mission is to understand and enhance brand’s <br /> identity through one-stop music service.”
+              “Our Mission is to understand and enhance brand’s <br /> identity
+              through one-stop music service.”
             </p>
           </div>
         </div>

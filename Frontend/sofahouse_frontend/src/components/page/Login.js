@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import adminService from "../../services/admin.service";
+import jwt_decoded from "jwt-decode";
 
 import "../../assets/css/page/login.css";
 import "../../assets/css/text.css";
@@ -8,6 +9,24 @@ import "../../assets/css/page.css";
 import longLogo from "../../assets/images/long-logo.png";
 
 export default function Login() {
+  const isLogin = () => {
+    const token = localStorage.getItem("admin_tk");
+
+    if (token) {
+      const decoded = jwt_decoded(token);
+
+      if (Date.now() >= decoded.exp * 1000) {
+        localStorage.removeItem("admin_tk");
+      } else {
+        linkPath("/admin");
+      }
+    }
+  };
+
+  useEffect(() => {
+    isLogin();
+  }, []);
+
   const initialErrorState = {
     show: false,
     message: "",
@@ -74,6 +93,7 @@ export default function Login() {
                 maxLength="64"
                 value={loginAdmin.username}
                 onChange={handleChangeLogin}
+                onKeyPress={(event) => event.key === "Enter" ? login() : null}
               />
             </div>
             <div className="login-box">

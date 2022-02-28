@@ -108,3 +108,164 @@
   margin-left: 100px;
   border-radius: 15px;
 }
+
+@media screen and (max-width: 980px) {
+  #music-middle-section {
+    display: block;
+  }
+
+  #production-section {
+    width: inherit;
+  }
+
+  #home-vinyl-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+
+  #service {
+    margin-bottom: 0px;
+  }
+
+  #service-type-section {
+    margin-top: 80px;
+  }
+
+  #production-btn-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .service-box-section {
+    display: block;
+    padding-top: 0px;
+  }
+
+  #service-container {
+    margin-top: 50px;
+  }
+
+  .service-pics {
+    width: 140px;
+    left: 0px;
+    top: inherit;
+  }
+
+  .service-box > p {
+    text-align: center;
+    margin-left: 20px;
+  }
+
+  .service-box {
+    padding: 20px;
+    margin-left: 0px;
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #service {
+    margin-top: 130px;
+  }
+
+  #home-vinyl-section {
+    margin-top: 30px;
+  }
+
+  #white-service {
+    padding: 30px 20px 20px 40px;
+    margin-top: 10px;
+  }
+
+  #music-main-section > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .music-main-pics {
+    width: 140px;
+  }
+
+  #music-main-section {
+    display: block;
+    top: inherit;
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  #production-btn-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-box {
+    padding: 10px;
+    justify-content: flex-start !important;
+  }
+
+  .service-box > p {
+    text-align: left;
+  }
+
+  .service-pics {
+    position: relative;
+  }
+
+  .production-btn {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .service-pics,
+  .music-main-pics {
+    width: 120px;
+  }
+
+  .sv-br {
+    display: block !important;
+  }
+
+  #music-main-section > div {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  #service-type-section {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #service-type-section {
+    margin-top: 50px;
+  }
+  .service-pics,
+  .music-main-pics {
+    width: 100px;
+  }
+  .service-box {
+    margin-bottom: 30px;
+  }
+  #service-container {
+    margin-top: 30px;
+  }
+  #service {
+    margin-top: 90px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .service-pics,
+  .music-main-pics {
+    width: 80px;
+  }
+}

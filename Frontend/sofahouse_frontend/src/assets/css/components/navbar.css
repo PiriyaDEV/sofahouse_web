@@ -2,6 +2,7 @@
   padding: 13px 0px 13px 0px;
   background-color: #ffffff;
   z-index: 9999;
+  top: 0px;
 }
 
 #navbar > .navbar-container {
@@ -25,10 +26,20 @@
 
 #nav-logo {
   width: 70px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
   #nav-menu {
     display: none;
+  }
+  #navbar {
+    position: fixed;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #nav-logo {
+    width: 60px;
   }
 }

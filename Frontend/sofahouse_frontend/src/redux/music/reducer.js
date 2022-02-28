@@ -4,6 +4,7 @@ import {
   FETCH_MUSIC_FAILURE,
   UPDATE_MUSIC_LIST,
   SELECT_MUSIC,
+  GET_DURATIONPLAYED
 } from './type'
 
 const initialState = {
@@ -16,22 +17,7 @@ const initialState = {
     category: "",
     created_at: 0
     },
-    {
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0
-    },
-    {
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0
-    }],
+    ],
   error: '',
   select: {
     index: 0,
@@ -42,6 +28,11 @@ const initialState = {
     category: "",
     created_at: 0
   },
+  durationPlayed: {
+    play: false,
+    duration: 0,
+  }
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -75,6 +66,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         select: action.payload,
       }
+    case GET_DURATIONPLAYED: 
+      return {
+        ...state,
+        durationPlayed: action.payload,
+    }
     default: return state
   }
 }
