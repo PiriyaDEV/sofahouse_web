@@ -50,6 +50,7 @@ exports.getMusics = async () => {
         duration,
         url,
         category,
+        show_homepage,
         created_at
       FROM
         musics
@@ -88,6 +89,8 @@ exports.getMusicsByCategory = async (category) => {
                 m2.url,
                 'category',
                 m2.category,
+                'show_homepage',
+                m2.show_homepage,
                 'created_at',
                 m2.created_at
               )

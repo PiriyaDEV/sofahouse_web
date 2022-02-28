@@ -18,7 +18,8 @@ exports.add = async (req, res) => {
     !music.hasOwnProperty("artist") ||
     !music.hasOwnProperty("duration") ||
     !music.hasOwnProperty("url") ||
-    !music.hasOwnProperty("category")
+    !music.hasOwnProperty("category") ||
+    !music.hasOwnProperty("show_homepage")
   ) {
     // failed, information not found
     return res.status(200).json({

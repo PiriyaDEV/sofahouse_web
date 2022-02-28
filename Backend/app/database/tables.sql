@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS musics(
   duration          INT             NOT NULL,
   url               VARCHAR(255)    NOT NULL,
   category          VARCHAR(64)     NOT NULL,
+  show_homepage     BOOLEAN         NOT NULL,
   status            BOOLEAN         NOT NULL,
   created_at        BIGINT          NOT NULL,
   updated_at        BIGINT          NOT NULL,
