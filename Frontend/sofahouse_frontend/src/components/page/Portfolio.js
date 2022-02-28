@@ -467,7 +467,7 @@ export default function Portfolio() {
                 spaceBetween={30}
                 loop
                 autoplay={{
-                  delay: 2500,
+                  delay: 3500,
                 }}
                 loopAdditionalSlides={100}
                 breakpoints={{
