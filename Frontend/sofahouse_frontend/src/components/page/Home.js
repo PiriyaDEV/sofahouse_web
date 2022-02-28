@@ -15,7 +15,6 @@ import vinylMc from "../../assets/images/vinyl-mc.png";
 import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
-// import centerTemp from "../../assets/images/temp/temp-mid.png";
 import longLogo from "../../assets/images/long-logo.png";
 import bbl from "../../assets/images/bbl.png";
 import bbr from "../../assets/images/bbr.png";
@@ -33,7 +32,6 @@ import PlayConsole from "../element/PlayConsole";
 export default function Home() {
   const dispatch = useDispatch();
 
-  // const [playing, setPlaying] = useState(false);
   const inputRange = useRef(null);
   const [youtubePlay, setYoutubePlay] = useState(false);
 
@@ -45,7 +43,7 @@ export default function Home() {
     },
   ];
 
-  const [play, setPlay] = useState(true);
+  // const [play, setPlay] = useState(true);
   const music = useSelector((state) => state.music);
 
   const skipMusics = (musicSelected) => {
@@ -127,7 +125,7 @@ export default function Home() {
               <img
                 // className="home-vinyl vinyl-disc rotate"
                 className={`home-vinyl vinyl-disc ${
-                  play === true ? "rotate" : null
+                  youtubePlay === true ? "rotate" : null
                 }`}
                 src={vinylDisc}
                 alt=""
@@ -203,7 +201,7 @@ export default function Home() {
           </div>
         </div>
         {/* Play Section */}
-        <PlayConsole func={setPlay} youtubePlay={youtubePlay} />
+        <PlayConsole youtubePlay={youtubePlay} />
         {/* Description Section */}
         <div id="desc-section">
           <p className="skv-bold bg-text">

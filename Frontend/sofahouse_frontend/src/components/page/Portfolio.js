@@ -42,6 +42,7 @@ export default function Portfolio() {
   const [seeking, setSeeking] = useState(false);
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
+  const inputRange2 = useRef(null);
   const [musicListSelect, setMusicListSelect] = useState([
     {
       id: 0,
@@ -172,6 +173,7 @@ export default function Portfolio() {
   const handleSeekMouseUp = (e) => {
     setSeeking(false);
     inputRange.current.seekTo(parseFloat(e.target.value));
+    inputRange2.current.seekTo(parseFloat(e.target.value));
   };
 
   const handleProgress = (state) => {
@@ -182,6 +184,14 @@ export default function Portfolio() {
 
   const handleDuration = (duration) => {
     setDuration(duration);
+  };
+
+  const handleplay = () => {
+    setPlay(true);
+  };
+
+  const handlepause = () => {
+    setPlay(false);
   };
 
   const slideChange = (e) => {
@@ -213,6 +223,7 @@ export default function Portfolio() {
       } else if (count === 4) {
         musicList.push(musicCategory[0]);
       }
+      setMusicSelect(musicList[0]);
       setMusicListSelect(musicList);
     }
   };
@@ -330,12 +341,13 @@ export default function Portfolio() {
                 id="port-vdo-player"
                 playing={play}
                 volume={0.1}
-                // width="0"
-                // height="0"
-                onProgress={handleProgress}
-                onDuration={handleDuration}
+                // onProgress={handleProgress}
+                onPlay={handleplay}
+                onPause={handlepause}        
+                // onDuration={handleDuration}
+                muted={true}
                 loop={true}
-                ref={inputRange}
+                ref={inputRange2}
                 url={musicSelect.url}
               />
             </div>
@@ -346,10 +358,10 @@ export default function Portfolio() {
                 id="port-vdo-player"
                 playing={play}
                 volume={0.1}
-                // width="0"
-                // height="0"
                 onProgress={handleProgress}
                 onDuration={handleDuration}
+                onPlay={handleplay}
+                onPause={handlepause}
                 loop={true}
                 ref={inputRange}
                 url={musicSelect.url}
@@ -404,7 +416,8 @@ export default function Portfolio() {
                         type="range"
                         min={0}
                         max={0.999999}
-                        defaultValue={played}
+                        value={played}
+                        // defaultValue={played}
                         onMouseDown={handleSeekMouseDown}
                         onChange={handleSeekChange}
                         onMouseUp={handleSeekMouseUp}
