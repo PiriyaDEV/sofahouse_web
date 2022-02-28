@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import ReactPlayer from "react-player";
 import Duration from "../function/Duration";
-import { nextMusic , previousMusic , shuffleMusic } from '../../redux'
+import { nextMusic , previousMusic , shuffleMusic , getDuration} from '../../redux'
 
 import "../../assets/css/components/playConsole.css";
 
@@ -30,17 +30,20 @@ export default function PlayConsole(props) {
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
 
-
-  // useEffect(() => {
-  //     dispatch(fetchMusic())
-  // }, []);
-
+  useEffect(() => {
+    if(props.youtubePlay === true) {
+      setPlay(true);
+    } else {
+      setPlay(false);
+    }
+  }, [props]);
 
   const toggleMute = () => {
     setMuted(!muted);
   };
 
   const togglePlay = () => {
+    dispatch(getDuration(!play,played))
     setPlay(!play);
     props.func(!play);
   };
@@ -56,6 +59,7 @@ export default function PlayConsole(props) {
   const handleSeekMouseUp = (e) => {
     setSeeking(false);
     inputRange.current.seekTo(parseFloat(e.target.value));
+    dispatch(getDuration(play,e.target.value))
   };
 
   const handleProgress = (state) => {

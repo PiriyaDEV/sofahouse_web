@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { skipMusic } from "../../redux";
+import ReactPlayer from "react-player";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
 import "../../assets/css/page/home.css";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
 
 // Img
 import vinylMc from "../../assets/images/vinyl-mc.png";
@@ -21,8 +25,7 @@ import desc2 from "../../assets/images/desc/desc2.png";
 import desc3 from "../../assets/images/desc/desc3.png";
 
 // Temp
-// import temp1 from "../../assets/images/temp/insecure.png";
-// import temp2 from "../../assets/images/temp/lmb.png";
+import temp1 from "../../assets/images/temp/insecure.png";
 
 //Js
 import PlayConsole from "../element/PlayConsole";
@@ -30,54 +33,9 @@ import PlayConsole from "../element/PlayConsole";
 export default function Home() {
   const dispatch = useDispatch();
 
-  const [temp1, setTemp1] = useState({
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0,
-  },
-  {
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0,
-  });
-  const [temp2, setTemp2] = useState({
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0,
-  },{
-    id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0,
-  }
-  );
-  // const [temp3, setTemp3] = useState({
-  //   id: 0,
-  //   title: "Title",
-  //   artist: "Artist",
-  //   url: "",
-  //   category: "",
-  //   created_at: 0,
-  // },
-  // {
-  //   id: 0,
-  //   title: "Title",
-  //   artist: "Artist",
-  //   url: "",
-  //   category: "",
-  //   created_at: 0,
-  // });
+  // const [playing, setPlaying] = useState(false);
+  const inputRange = useRef(null);
+  const [youtubePlay, setYoutubePlay] = useState(false);
 
   const tempInfo = () => [
     {
@@ -88,9 +46,6 @@ export default function Home() {
   ];
 
   const [play, setPlay] = useState(true);
-  const carousel1 = useRef();
-  const carousel2 = useRef();
-  const carousel3 = useRef();
   const music = useSelector((state) => state.music);
 
   const skipMusics = (musicSelected) => {
@@ -101,60 +56,6 @@ export default function Home() {
     }
   };
 
-  const handleCarousel = (position) => {
-    if (position === 1) {
-      carousel1.current.className = "blue-clr blue-clr-active";
-      carousel2.current.className = "blue-clr";
-      carousel3.current.className = "blue-clr";
-    } else if (position === 2) {
-      carousel1.current.className = "blue-clr";
-      carousel2.current.className = "blue-clr blue-clr-active";
-      carousel3.current.className = "blue-clr";
-    } else {
-      carousel1.current.className = "blue-clr";
-      carousel2.current.className = "blue-clr";
-      carousel3.current.className = "blue-clr blue-clr-active";
-    }
-  };
-
-  useEffect(() => {
-    // getSubtitles();
-    const musicList = () => {
-      if (music.select.index === music.musics.length - 1) {
-        setTemp1(music.musics[0]);
-      } else {
-        setTemp1(music.musics[music.select.index + 1]);
-      }
-      if (music.select.index + 1 === music.musics.length - 1) {
-        setTemp2(music.musics[0]);
-      } else if (music.select.index === music.musics.length - 1) {
-        setTemp2(music.musics[1]);
-      } else {
-        setTemp2(music.musics[music.select.index + 2]);
-      }
-    };
-
-    musicList();
-    handleCarousel(1);
-  }, [music]);
-
-  const musicListCarousel = (position1, position2) => {
-    if (music.select.index + position1 <= music.musics.length - 1) {
-      setTemp1(music.musics[music.select.index + position1]);
-    } else {
-      setTemp1(
-        music.musics[music.select.index + position1 - music.musics.length]
-      );
-    }
-    if (music.select.index + position2 <= music.musics.length - 1) {
-      setTemp2(music.musics[music.select.index + position2]);
-    } else {
-      setTemp2(
-        music.musics[music.select.index + position2 - music.musics.length]
-      );
-    }
-  };
-
   const thumnail = (url) => {
     let thumbnail1 = "https://img.youtube.com/vi/";
     let mediumQuality = "/mqdefault.jpg";
@@ -162,6 +63,58 @@ export default function Home() {
 
     return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
   };
+
+  useEffect(() => {
+    inputRange.current.seekTo(parseFloat(music.durationPlayed.duration));
+  }, [music.durationPlayed.duration]);
+
+  const handleplay = () => {
+    console.log("playing");
+    setYoutubePlay(true);
+  };
+
+  const handlepause = () => {
+    console.log("pause");
+    setYoutubePlay(false);
+  };
+
+  const homeDisplay = [];
+  for (let i = 0; i < music.musics.length; i += 1) {
+    if (music.musics[i].show_homepage) {
+      homeDisplay.push(
+        <SwiperSlide key={`home-slide-${i}`} tag="li">
+          <div
+            onClick={() => skipMusics(music.musics[i])}
+            className="music-flex"
+          >
+            {music ? (
+              <img
+                className="pointer"
+                src={thumnail(music.musics[i].url)}
+                alt=""
+              />
+            ) : (
+              <img src={tempInfo.tempPic} alt="" />
+            )}
+            {music ? (
+              <h1 className="ssm-text truncate pointer">
+                {music.musics[i].title}
+              </h1>
+            ) : (
+              <h1 className="ssm-text">Title</h1>
+            )}
+            {music ? (
+              <h1 className="xm-text avn-medium grey-text truncate pointer">
+                {music.musics[i].artist}
+              </h1>
+            ) : (
+              <h1 className="xm-text avn-medium grey-text">Artist</h1>
+            )}
+          </div>
+        </SwiperSlide>
+      );
+    }
+  }
 
   return (
     <div id="home" className="section">
@@ -199,81 +152,49 @@ export default function Home() {
           </div>
 
           <div id="mid-img" className="section">
-            {music.select ? (
+            <ReactPlayer
+              playing={music.durationPlayed.play}
+              onPlay={handleplay}
+              onPause={handlepause}
+              controls={false}
+              volume={0.1}
+              muted={true}
+              ref={inputRange}
+              url={music.select.url}
+              className="home-player"
+              // controls={false}
+            />
+            {/* {music.select ? (
               <img src={thumnail(music.select.url)} alt="" />
             ) : (
               <img src={tempInfo.tempPic} alt="" />
-            )}
+            )} */}
           </div>
 
           <div id="main-music-section">
-            <div id="main-music">
-              <div onClick={() => skipMusics(temp1)} className="music-flex">
-                {temp1 ? (
-                  <img className="pointer" src={thumnail(temp1.url)} alt="" />
-                ) : (
-                  <img src={tempInfo.tempPic} alt="" />
-                )}
-                {temp1 ? (
-                  <h1 className="ssm-text truncate pointer">{temp1.title}</h1>
-                ) : (
-                  <h1 className="ssm-text">Title</h1>
-                )}
-                {temp1 ? (
-                  <h1 className="xm-text avn-medium grey-text truncate pointer">
-                    {temp1.artist}
-                  </h1>
-                ) : (
-                  <h1 className="xm-text avn-medium grey-text">Artist</h1>
-                )}
-              </div>
-
-              <div onClick={() => skipMusics(temp2)} className="music-flex">
-                {temp2 ? (
-                  <img src={thumnail(temp2.url)} alt="" />
-                ) : (
-                  <img src={tempInfo.tempPic} alt="" />
-                )}
-                {temp2 ? (
-                  <h1 className="ssm-text truncate">{temp2.title}</h1>
-                ) : (
-                  <h1 className="ssm-text">Title</h1>
-                )}
-                {temp2 ? (
-                  <h1 className="xm-text avn-medium grey-text truncate">
-                    {temp2.artist}
-                  </h1>
-                ) : (
-                  <h1 className="xm-text avn-medium grey-text">Artist</h1>
-                )}
-              </div>
-            </div>
-
             <div className="section">
-              <span
-                ref={carousel1}
-                onClick={() => {
-                  handleCarousel(1);
-                  musicListCarousel(1, 2);
-                }}
-                className="blue-clr blue-clr-active"
-              ></span>
-              <span
-                ref={carousel2}
-                onClick={() => {
-                  handleCarousel(2);
-                  musicListCarousel(3, 4);
-                }}
-                className="blue-clr"
-              ></span>
-              <span
-                ref={carousel3}
-                onClick={() => {
-                  handleCarousel(3);
-                  musicListCarousel(5, 6);
-                }}
-                className="blue-clr"
-              ></span>
+              <div id="home-carousal">
+                <Swiper
+                  id="home-swiper"
+                  tag="section"
+                  wrapperTag="ul"
+                  // navigation={{
+                  //   prevEl: ".music-prev",
+                  //   nextEl: ".music-next",
+                  // }}
+                  slidesPerView={2}
+                  loop
+                  pagination={{ clickable: true }}
+                  loopAdditionalSlides={100}
+                  centeredSlides={false}
+                  allowTouchMove={false}
+                  autoplay={{
+                    delay: 2500,
+                  }}
+                >
+                  {homeDisplay}
+                </Swiper>
+              </div>
             </div>
 
             <div onClick={() => linkPath("portfolio")} id="main-btn">
@@ -282,7 +203,7 @@ export default function Home() {
           </div>
         </div>
         {/* Play Section */}
-        <PlayConsole func={setPlay} />
+        <PlayConsole func={setPlay} youtubePlay={youtubePlay} />
         {/* Description Section */}
         <div id="desc-section">
           <p className="skv-bold bg-text">

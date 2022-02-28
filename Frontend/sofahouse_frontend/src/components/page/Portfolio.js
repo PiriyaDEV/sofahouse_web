@@ -71,9 +71,7 @@ export default function Portfolio() {
 
   const categorySelect = (categoryName) => {
     setCategory(categoryName);
-    setMusicCategory(
-      musicList.filter((musicsList) => musicsList.category === categoryName)
-    );
+    setMusicCategory(musicList.filter((musicsList) => musicsList.category === categoryName));
     swiperRef.slideTo(2, 0);
   };
 
@@ -280,7 +278,7 @@ export default function Portfolio() {
                   },
                   414: {
                     slidesPerView: 3,
-                  }
+                  },
                 }}
               >
                 {music}
@@ -328,22 +326,34 @@ export default function Portfolio() {
               )}
             </div>
             <div id="port-play-text" className="play-text-mb">
-              <p className="xm-text grey-text avn-medium">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Dui
-              </p>
+              <ReactPlayer
+                id="port-vdo-player"
+                playing={play}
+                volume={0.1}
+                // width="0"
+                // height="0"
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                loop={true}
+                ref={inputRange}
+                url={musicSelect.url}
+              />
             </div>
           </div>
 
-          <div id="port-play-text" className="play-text-pc">
-            <p className="xm-text grey-text avn-medium">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Dui
-            </p>
+          <div id="port-play-text" className="section play-text-pc">
+              <ReactPlayer
+                id="port-vdo-player"
+                playing={play}
+                volume={0.1}
+                // width="0"
+                // height="0"
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                loop={true}
+                ref={inputRange}
+                url={musicSelect.url}
+              />
           </div>
 
           <div>
@@ -394,7 +404,7 @@ export default function Portfolio() {
                         type="range"
                         min={0}
                         max={0.999999}
-                        value={played}
+                        defaultValue={played}
                         onMouseDown={handleSeekMouseDown}
                         onChange={handleSeekChange}
                         onMouseUp={handleSeekMouseUp}
@@ -421,7 +431,7 @@ export default function Portfolio() {
                       </h1>
                     )}
                   </div>
-                  {music && music.id === musicSelect.id && (
+                  {/* {music && music.id === musicSelect.id && (
                     <ReactPlayer
                       playing={play}
                       volume={0.1}
@@ -433,7 +443,7 @@ export default function Portfolio() {
                       ref={inputRange}
                       url={music.url}
                     />
-                  )}
+                  )} */}
                 </div>
               ))}
           </div>
@@ -467,7 +477,7 @@ export default function Portfolio() {
                   },
                   500: {
                     slidesPerView: 3,
-                  }
+                  },
                 }}
               >
                 {person}

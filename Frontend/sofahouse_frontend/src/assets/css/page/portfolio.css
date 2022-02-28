@@ -21,7 +21,7 @@
 
 /* Swiper */
 #work-carousal {
-  width: 700px;
+  width: 1050px;
   background-image: linear-gradient(to right, #eee8e6, #fcf5f4, #eee8e6);
   padding: 30px 50px;
   border-radius: 28px;
@@ -121,7 +121,7 @@ li {
 #port-play-text {
   border-radius: 28px;
   background-image: linear-gradient(to bottom, #fff9f8, #fce9e4);
-  padding: 20px 30px;
+  padding: 15px;
 }
 
 .port-play-box > img {
@@ -185,6 +185,23 @@ li {
   margin-top: 15px;
 }
 
+#port-vdo-player {
+  width: 100% !important;
+  height: 50% !important;
+}
+
+@media screen and (max-width: 1920px) {
+  #work-carousal {
+    width: 850px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  #work-carousal {
+    width: 700px;
+  }
+}
+
 @media screen and (max-width: 1070px) {
   #work-section {
     display: block;
@@ -237,7 +254,7 @@ li {
 
   #vinyl-mb-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 50px;
     margin-bottom: 30px;

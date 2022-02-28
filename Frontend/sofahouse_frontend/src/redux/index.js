@@ -1,1 +1,1 @@
-export { fetchMusic , nextMusic , previousMusic ,shuffleMusic , skipMusic } from './music/actions'
+export { fetchMusic , nextMusic , previousMusic ,shuffleMusic , skipMusic , getDuration} from './music/actions'

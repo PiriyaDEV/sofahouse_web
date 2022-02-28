@@ -40,18 +40,20 @@ export default function Admin() {
   const initialAddMusicState = {
     title: "",
     artist: "",
-    duration: "",
+    duration: 0,
     url: "",
     category: "Lyrics/Song Writing",
+    show_homepage: false,
   };
 
   const initialEditMusicState = {
     id: 0,
     title: "",
     artist: "",
-    duration: "",
+    duration: 0,
     url: "",
     category: "Lyrics/Song Writing",
+    show_homepage: false,
   };
 
   // music list
@@ -80,16 +82,24 @@ export default function Admin() {
   };
 
   const handleChangeAddMusic = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    let value = event.target.value;
+    let name = event.target.name;
+
+    if (name === "show_homepage") {
+      value = event.target.checked;
+    }
 
     setNewMusic({ ...newMusic, [name]: value });
     setAddMusicError(initialErrorState);
   };
 
   const handleChangeEditMusic = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    let value = event.target.value;
+    let name = event.target.name;
+
+    if (name === "show_homepage") {
+      value = event.target.checked;
+    }
 
     setEditMusic({ ...editMusic, [name]: value });
     if (editMusic.id !== 0) {
@@ -126,7 +136,8 @@ export default function Admin() {
       !newMusic.artist ||
       !newMusic.duration ||
       !newMusic.url ||
-      !newMusic.category
+      !newMusic.category ||
+      !newMusic.hasOwnProperty("show_homepage")
     ) {
       return showAddMusicError("Please fill all required information!");
     }
@@ -161,7 +172,8 @@ export default function Admin() {
       !editMusic.artist ||
       !editMusic.duration ||
       !editMusic.url ||
-      !editMusic.category
+      !editMusic.category ||
+      !editMusic.hasOwnProperty("show_homepage")
     ) {
       return showEditMusicError("Please fill all required information!");
     }
@@ -228,7 +240,7 @@ export default function Admin() {
         volume={0}
         width="0"
         height="0"
-        onDuration={(duration) => 
+        onDuration={(duration) =>
           setNewMusic({ ...newMusic, duration: duration })
         }
         url={newMusic.url}
@@ -243,7 +255,7 @@ export default function Admin() {
         volume={0}
         width="0"
         height="0"
-        onDuration={(duration) => 
+        onDuration={(duration) =>
           setEditMusic({ ...editMusic, duration: duration })
         }
         url={editMusic.url}
@@ -264,7 +276,7 @@ export default function Admin() {
         <h1 className="bg-text">Add Music</h1>
         <div id="add-box">
           <div className="admin-box">
-            <h1 className="sm-text">Title :</h1>
+            <h1 className="sm-text">Title:</h1>
             <input
               className="sm-text login-input"
               name="title"
@@ -274,7 +286,7 @@ export default function Admin() {
             />
           </div>
           <div className="admin-box">
-            <h1 className="sm-text">Artist :</h1>
+            <h1 className="sm-text">Artist:</h1>
             <input
               className="sm-text login-input"
               name="artist"
@@ -284,7 +296,7 @@ export default function Admin() {
             />
           </div>
           <div className="admin-box">
-            <h1 className="sm-text">Youtube Link :</h1>
+            <h1 className="sm-text">Youtube Link:</h1>
             <input
               className="sm-text login-input"
               name="url"
@@ -294,23 +306,35 @@ export default function Admin() {
             />
           </div>
         </div>
-        <div className="admin-box">
-          <h1 className="sm-text">Category :</h1>
-          <select
-            id="select-cat"
-            className="sm-text cat-select"
-            name="category"
-            value={newMusic.category}
-            onChange={handleChangeAddMusic}
-          >
-            <option defaultValue="Lyrics/Song Writing">
-              Lyrics/Song Writing
-            </option>
-            <option defaultValue="Music Production">Music Production</option>
-            <option defaultValue="Vocal Recording">Vocal Recording</option>
-            <option defaultValue="Music Score">Music Score</option>
-            <option defaultValue="Mixing/Mastering">Mixing/Mastering</option>
-          </select>
+        <div id="admin-box-2">
+          <div className="admin-box">
+            <h1 className="sm-text">Category:</h1>
+            <select
+              id="select-cat"
+              className="sm-text cat-select"
+              name="category"
+              value={newMusic.category}
+              onChange={handleChangeAddMusic}
+            >
+              <option defaultValue="Lyrics/Song Writing">
+                Lyrics/Song Writing
+              </option>
+              <option defaultValue="Music Production">Music Production</option>
+              <option defaultValue="Vocal Recording">Vocal Recording</option>
+              <option defaultValue="Music Score">Music Score</option>
+              <option defaultValue="Mixing/Mastering">Mixing/Mastering</option>
+            </select>
+          </div>
+          <div className="admin-box admin-show-box">
+            <h1 className="sm-text">Show Home:</h1>
+            <input
+              className="sm-text admin-checkbox"
+              name="show_homepage"
+              type="checkbox"
+              checked={newMusic.show_homepage}
+              onChange={handleChangeAddMusic}
+            />
+          </div>
         </div>
 
         {/* Invalid */}
@@ -321,7 +345,7 @@ export default function Admin() {
         </div>
 
         <div id="music-add-box">
-          <button className="music-add-btn sm-text" onClick={addMusic}>
+          <button className="music-add-btn section sm-text" onClick={addMusic}>
             Add
           </button>
         </div>
@@ -334,7 +358,7 @@ export default function Admin() {
 
             <div>
               <div className="admin-box">
-                <h1 className="sm-text">Title :</h1>
+                <h1 className="sm-text">Title:</h1>
                 <input
                   className="sm-text login-input"
                   name="title"
@@ -344,7 +368,7 @@ export default function Admin() {
                 />
               </div>
               <div className="admin-box">
-                <h1 className="sm-text">Artist :</h1>
+                <h1 className="sm-text">Artist:</h1>
                 <input
                   className="sm-text login-input"
                   name="artist"
@@ -354,7 +378,7 @@ export default function Admin() {
                 />
               </div>
               <div className="admin-box">
-                <h1 className="sm-text">Youtube Link :</h1>
+                <h1 className="sm-text">Youtube Link:</h1>
                 <input
                   className="sm-text login-input"
                   name="url"
@@ -364,7 +388,7 @@ export default function Admin() {
                 />
               </div>
               <div className="admin-box">
-                <h1 className="sm-text">Category :</h1>
+                <h1 className="sm-text">Category:</h1>
                 <select
                   id="select-cat"
                   className="sm-text cat-select"
@@ -386,6 +410,16 @@ export default function Admin() {
                     Mixing/Mastering
                   </option>
                 </select>
+              </div>
+              <div className="admin-box">
+                <h1 className="sm-text">Show Home:</h1>
+                <input
+                  className="sm-text admin-checkbox"
+                  name="show_homepage"
+                  type="checkbox"
+                  checked={editMusic.show_homepage}
+                  onChange={handleChangeEditMusic}
+                />
               </div>
               {/* Invalid */}
               <div>
