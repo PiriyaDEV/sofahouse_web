@@ -48,8 +48,13 @@ exports.getMusics = async () => {
         title,
         artist,
         duration,
-        url,
-        category,
+        cover_url,
+        music_url,
+        cat_lyrics_song,
+        cat_music_prod,
+        cat_vocal_rec,
+        cat_music_score,
+        cat_mix_master,
         show_homepage,
         created_at
       FROM
@@ -67,51 +72,3 @@ exports.getMusics = async () => {
   }
 };
 
-// get musics by category
-exports.getMusicsByCategory = async (category) => {
-  try {
-    const [result, fields] = await sql.query(
-      `SELECT
-        m1.category,
-        (
-          SELECT
-            JSON_ARRAYAGG(
-              JSON_OBJECT(
-                'id',
-                m2.id,
-                'title',
-                m2.title,
-                'artist',
-                m2.artist,
-                'duration',
-                m2.duration,
-                'url',
-                m2.url,
-                'category',
-                m2.category,
-                'show_homepage',
-                m2.show_homepage,
-                'created_at',
-                m2.created_at
-              )
-            )
-          FROM
-            musics m2
-          WHERE
-            m2.status = 1
-            AND m2.category = m1.category
-        ) AS musics
-      FROM
-        musics m1
-      GROUP BY
-        m1.category`
-    );
-
-    logger.info(`Selected ${result.length} music(s)`);
-    return result;
-  } catch (error) {
-    // if query error
-    logger.error(error);
-    throw new Error("Unexpected error");
-  }
-};

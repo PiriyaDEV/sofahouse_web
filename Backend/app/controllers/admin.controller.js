@@ -84,7 +84,7 @@ exports.login = async (req, res) => {
         username: result.username,
       },
       authConfig.secretKey,
-      { expiresIn: "2h" }
+      { expiresIn: "12h" }
     );
 
     // response the result
