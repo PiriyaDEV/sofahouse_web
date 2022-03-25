@@ -11,22 +11,35 @@ const initialState = {
   loading: false,
   musics: [{
     id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0
-    },
-    ],
+    title: 'Title',
+    artist: 'Artist',
+    duration: 0,
+    music_url: '',
+    cover_url: '',
+    cat_lyrics_song: false,
+    cat_music_prod: false,
+    cat_vocal_rec: false,
+    cat_music_score: false,
+    cat_mix_master: false,
+    show_homepage: false,
+    created_at: 0,
+  }],
   error: '',
   select: {
     index: 0,
     id: 0,
-    title: "Title",
-    artist: "Artist",
-    url: "",
-    category: "",
-    created_at: 0
+    title: 'Title',
+    artist: 'Artist',
+    duration: 0,
+    music_url: '',
+    cover_url: '',
+    cat_lyrics_song: false,
+    cat_music_prod: false,
+    cat_vocal_rec: false,
+    cat_music_score: false,
+    cat_mix_master: false,
+    show_homepage: false,
+    created_at: 0,
   },
   durationPlayed: {
     play: false,
@@ -49,7 +62,7 @@ const reducer = (state = initialState, action) => {
         musics: action.payload,
         error: '',
       };
-    case FETCH_MUSIC_FAILURE: 
+    case FETCH_MUSIC_FAILURE:
       return {
         ...state,
         loading: false,
@@ -66,7 +79,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         select: action.payload,
       }
-    case GET_DURATIONPLAYED: 
+    case GET_DURATIONPLAYED:
       return {
         ...state,
         durationPlayed: action.payload,

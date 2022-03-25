@@ -101,7 +101,7 @@ export default function PlayConsole(props) {
           onDuration={handleDuration}
           onEnded={handleEnded}
           ref={inputRange}
-          url={musicSelect.url}
+          url={musicSelect.music_url}
         />
       )}
       <div id="play-section">

@@ -10,9 +10,9 @@ export default function Footer() {
       <div id="footer-container" className="page-container">
         <h1
           className="xm-text avn-book darkgrey-text pointer"
-          onClick={() => linkPath("mailto:mail@example.org")}
+          onClick={() => linkPath("mailto:sofahouse.th@gmail.com")}
         >
-          Email: Lorem ipsum
+          Email: sofahouse.th@gmail.com
         </h1>
         <div className="vl"></div>
         <h1
@@ -24,7 +24,7 @@ export default function Footer() {
           Location: https://g.page/ideo-chula-samyan-01?share
         </h1>
         <div className="vl"></div>
-        <h1 className="xm-text avn-book darkgrey-text">Phone: +66 XXX XXX</h1>
+        <h1 className="xm-text avn-book darkgrey-text">Phone: +66 92-456-4055</h1>
       </div>
     </div>
   );

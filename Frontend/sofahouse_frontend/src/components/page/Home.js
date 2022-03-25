@@ -26,6 +26,9 @@ import desc3 from "../../assets/images/desc/desc3.png";
 // Temp
 import temp1 from "../../assets/images/temp/insecure.png";
 
+import Studio1 from "../../assets/images/IMG_3745.JPG"
+// import Studio2 from "../../assets/images/IMG_3746.JPG"
+
 //Js
 import PlayConsole from "../element/PlayConsole";
 
@@ -54,12 +57,9 @@ export default function Home() {
     }
   };
 
-  const thumnail = (url) => {
-    let thumbnail1 = "https://img.youtube.com/vi/";
-    let mediumQuality = "/mqdefault.jpg";
-    // let maxQuality = "/maxresdefault.jpg";
-
-    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+  const picFromGGDrive = (link) => {
+    let ggsrc = link.split('/');
+    return "https://drive.google.com/uc?export=view&id=" + ggsrc[5];
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function Home() {
             {music ? (
               <img
                 className="pointer"
-                src={thumnail(music.musics[i].url)}
+                src={picFromGGDrive(music.musics[i].cover_url)}
                 alt=""
               />
             ) : (
@@ -158,15 +158,10 @@ export default function Home() {
               volume={0.1}
               muted={true}
               ref={inputRange}
-              url={music.select.url}
+              url={music.select.music_url}
               className="home-player"
               // controls={false}
             />
-            {/* {music.select ? (
-              <img src={thumnail(music.select.url)} alt="" />
-            ) : (
-              <img src={tempInfo.tempPic} alt="" />
-            )} */}
           </div>
 
           <div id="main-music-section">
@@ -214,7 +209,9 @@ export default function Home() {
           </div>
 
           <div id="desc-banner-section">
-            <div id="desc-banner"></div>
+            <div id="desc-banner">
+              <img src={Studio1} alt=""/>
+            </div>
             <div id="desc-abs">
               <div id="banner-flex-section">
                 <img className="banner-disc" src={desc1} alt="" />

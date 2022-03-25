@@ -86,7 +86,7 @@ export default function Login() {
             </div>
 
             <div className="login-box">
-              <h1 className="sm-text">Username :</h1>
+              <h1 className="sm-text">Username</h1>
               <input
                 className="sm-text grey-text login-input"
                 name="username"
@@ -97,7 +97,7 @@ export default function Login() {
               />
             </div>
             <div className="login-box">
-              <h1 className="sm-text">Password :</h1>
+              <h1 className="sm-text">Password</h1>
               <input
                 className="sm-text grey-text login-input"
                 name="password"

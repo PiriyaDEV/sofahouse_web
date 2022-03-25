@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
-import musicService from "../../services/music.service";
-import { useSelector, useDispatch } from "react-redux";
-import jwt_decoded from "jwt-decode";
-import ReactPlayer from "react-player";
+import React, { useState, useEffect } from 'react';
+import musicService from '../../services/music.service';
+import { useSelector, useDispatch } from 'react-redux';
+import jwt_decoded from 'jwt-decode';
+import ReactPlayer from 'react-player';
 
-import "../../assets/css/text.css";
-import "../../assets/css/page.css";
-import "../../assets/css/page/admin.css";
-import "../../assets/css/page/login.css";
-import { fetchMusic } from "../../redux";
+import '../../assets/css/text.css';
+import '../../assets/css/page.css';
+import '../../assets/css/page/admin.css';
+import '../../assets/css/page/login.css';
+import { fetchMusic } from '../../redux';
 
 export default function Admin() {
   const isLogin = () => {
-    const token = localStorage.getItem("admin_tk");
+    const token = localStorage.getItem('admin_tk');
 
     if (!token) {
-      linkPath("/admin-login");
+      linkPath('/admin-login');
     }
 
     const decoded = jwt_decoded(token);
 
     if (Date.now() >= decoded.exp * 1000) {
-      localStorage.removeItem("admin_tk");
-      linkPath("/admin-login");
+      localStorage.removeItem('admin_tk');
+      linkPath('/admin-login');
     }
   };
 
@@ -34,27 +34,46 @@ export default function Admin() {
 
   const initialErrorState = {
     show: false,
-    message: "",
+    message: '',
   };
 
   const initialAddMusicState = {
-    title: "",
-    artist: "",
+    title: '',
+    artist: '',
     duration: 0,
-    url: "",
-    category: "Lyrics/Song Writing",
+    cover_url: '',
+    music_url: '',
+    cat_lyrics_song: false,
+    cat_music_prod: false,
+    cat_vocal_rec: false,
+    cat_music_score: false,
+    cat_mix_master: false,
     show_homepage: false,
   };
 
   const initialEditMusicState = {
     id: 0,
-    title: "",
-    artist: "",
+    title: '',
+    artist: '',
     duration: 0,
-    url: "",
-    category: "Lyrics/Song Writing",
+    cover_url: '',
+    music_url: '',
+    cat_lyrics_song: false,
+    cat_music_prod: false,
+    cat_vocal_rec: false,
+    cat_music_score: false,
+    cat_mix_master: false,
     show_homepage: false,
   };
+
+  const checkboxField = [
+    'cat_lyrics_song',
+    'cat_music_prod',
+    'cat_vocal_rec',
+    'cat_music_score',
+    'cat_mix_master',
+    'show_homepage',
+  ];
 
   // music list
   const musicList = useSelector((state) => state.music.musics);
@@ -85,7 +104,7 @@ export default function Admin() {
     let value = event.target.value;
     let name = event.target.name;
 
-    if (name === "show_homepage") {
+    if (checkboxField.includes(name)) {
       value = event.target.checked;
     }
 
@@ -97,7 +116,7 @@ export default function Admin() {
     let value = event.target.value;
     let name = event.target.name;
 
-    if (name === "show_homepage") {
+    if (checkboxField.includes(name)) {
       value = event.target.checked;
     }
 
@@ -114,32 +133,61 @@ export default function Admin() {
   };
 
   const thumnail = (url) => {
-    let thumbnail1 = "https://img.youtube.com/vi/";
-    let mediumQuality = "/mqdefault.jpg";
-    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+    if (url) {
+      let ggsrc = url.split('/');
+      return 'https://drive.google.com/uc?export=view&id=' + ggsrc[5];
+    }
   };
 
   const logout = async () => {
-    localStorage.removeItem("admin_tk");
-    linkPath("admin-login");
+    localStorage.removeItem('admin_tk');
+    linkPath('admin-login');
+  };
+
+  const checkRequiredFields = (music) => {
+    if (
+      !music.title ||
+      !music.artist ||
+      !music.duration ||
+      !music.cover_url ||
+      !music.music_url ||
+      !music.hasOwnProperty('cat_lyrics_song') ||
+      !music.hasOwnProperty('cat_music_prod') ||
+      !music.hasOwnProperty('cat_vocal_rec') ||
+      !music.hasOwnProperty('cat_music_score') ||
+      !music.hasOwnProperty('cat_mix_master') ||
+      !music.hasOwnProperty('show_homepage')
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  const validateCategory = (music) => {
+    if (
+      !music.cat_lyrics_song &&
+      !music.cat_music_prod &&
+      !music.cat_vocal_rec &&
+      !music.cat_music_score &&
+      !music.cat_mix_master
+    ) {
+      return false;
+    }
+
+    return true;
   };
 
   const addMusic = async () => {
     Object.keys(newMusic).forEach((key) => {
-      if (typeof newMusic[key] === "string") {
+      if (typeof newMusic[key] === 'string') {
         newMusic[key] = newMusic[key].trim();
       }
     });
 
-    if (
-      !newMusic.title ||
-      !newMusic.artist ||
-      !newMusic.duration ||
-      !newMusic.url ||
-      !newMusic.category ||
-      !newMusic.hasOwnProperty("show_homepage")
-    ) {
-      return showAddMusicError("Please fill all required information!");
+    if (!checkRequiredFields(newMusic)) {
+      return showAddMusicError('Please fill all required information!');
+    } else if (!validateCategory(newMusic)) {
+      return showAddMusicError('Require at least one category!');
     }
 
     await musicService
@@ -150,32 +198,27 @@ export default function Admin() {
           setAddMusicError(initialErrorState);
           dispatch(fetchMusic());
         } else {
-          showAddMusicError("Please fill all required information!");
+          showAddMusicError('Please fill all required information!');
         }
       })
       .catch(() => {
-        showAddMusicError("Something went wrong, try again later!");
+        showAddMusicError('Something went wrong, try again later!');
       });
   };
 
   const updateMusic = async () => {
     Object.keys(editMusic).forEach((key) => {
-      if (typeof editMusic[key] === "string") {
+      if (typeof editMusic[key] === 'string') {
         editMusic[key] = editMusic[key].trim();
       }
     });
 
     if (editMusic.id === 0) {
-      return showEditMusicError("Please select music to edit!");
-    } else if (
-      !editMusic.title ||
-      !editMusic.artist ||
-      !editMusic.duration ||
-      !editMusic.url ||
-      !editMusic.category ||
-      !editMusic.hasOwnProperty("show_homepage")
-    ) {
-      return showEditMusicError("Please fill all required information!");
+      return showEditMusicError('Please select music to edit!');
+    } else if (!checkRequiredFields(editMusic)) {
+      return showEditMusicError('Please fill all required information!');
+    } else if (!validateCategory(editMusic)) {
+      return showEditMusicError('Require at least one category!');
     }
 
     let musicToUpdate = {
@@ -201,17 +244,17 @@ export default function Admin() {
           setEditMusicError(initialErrorState);
           dispatch(fetchMusic());
         } else {
-          showEditMusicError("Please fill all required information!");
+          showEditMusicError('Please fill all required information!');
         }
       })
       .catch(() => {
-        showEditMusicError("Something went wrong, try again later!");
+        showEditMusicError('Something went wrong, try again later!');
       });
   };
 
   const deleteMusic = async () => {
     if (editMusic.id === 0) {
-      return showEditMusicError("Please select music to edit!");
+      return showEditMusicError('Please select music to edit!');
     }
 
     let musicToDelete = {
@@ -225,11 +268,11 @@ export default function Admin() {
           setEditMusic(initialEditMusicState);
           dispatch(fetchMusic());
         } else {
-          showEditMusicError("Something went wrong, try again later!");
+          showEditMusicError('Something went wrong, try again later!');
         }
       })
       .catch(() => {
-        showEditMusicError("Something went wrong, try again later!");
+        showEditMusicError('Something went wrong, try again later!');
       });
   };
 
@@ -238,12 +281,12 @@ export default function Admin() {
       <ReactPlayer
         playing={false}
         volume={0}
-        width="0"
-        height="0"
+        width='0'
+        height='0'
         onDuration={(duration) =>
           setNewMusic({ ...newMusic, duration: duration })
         }
-        url={newMusic.url}
+        url={newMusic.music_url}
       />
     );
   };
@@ -253,170 +296,274 @@ export default function Admin() {
       <ReactPlayer
         playing={false}
         volume={0}
-        width="0"
-        height="0"
+        width='0'
+        height='0'
         onDuration={(duration) =>
           setEditMusic({ ...editMusic, duration: duration })
         }
-        url={editMusic.url}
+        url={editMusic.music_url}
       />
     );
   };
 
   return (
-    <div id="admin" className="section">
-      <div id="admin-container" className="page-container">
+    <div id='admin' className='section'>
+      <div id='admin-container' className='page-container'>
         <YoutubeAddSound />
         <YoutubeEditSound />
-        <div id="logout-div">
-          <button className="music-delete-btn sm-text" onClick={logout}>
+        <div id='logout-div'>
+          <button className='music-delete-btn sm-text' onClick={logout}>
             Log Out
           </button>
         </div>
-        <h1 className="bg-text">Add Music</h1>
-        <div id="add-box">
-          <div className="admin-box">
-            <h1 className="sm-text">Title:</h1>
+        <h1 className='bg-text'>Add Music</h1>
+        <div id='add-box'>
+          <div className='admin-box'>
+            <h1 className='sm-text'>Title:</h1>
             <input
-              className="sm-text login-input"
-              name="title"
-              maxLength="64"
+              className='sm-text login-input'
+              name='title'
+              maxLength='255'
               value={newMusic.title}
               onChange={handleChangeAddMusic}
             />
           </div>
-          <div className="admin-box">
-            <h1 className="sm-text">Artist:</h1>
+          <div className='admin-box'>
+            <h1 className='sm-text'>Artist:</h1>
             <input
-              className="sm-text login-input"
-              name="artist"
-              maxLength="64"
+              className='sm-text login-input'
+              name='artist'
+              maxLength='255'
               value={newMusic.artist}
               onChange={handleChangeAddMusic}
             />
           </div>
-          <div className="admin-box">
-            <h1 className="sm-text">Youtube Link:</h1>
+          <div className='admin-box'>
+            <h1 className='sm-text'>Youtube Link:</h1>
             <input
-              className="sm-text login-input"
-              name="url"
-              maxLength="255"
-              value={newMusic.url}
+              className='sm-text login-input'
+              name='music_url'
+              maxLength='255'
+              value={newMusic.music_url}
               onChange={handleChangeAddMusic}
             />
           </div>
         </div>
-        <div id="admin-box-2">
-          <div className="admin-box">
-            <h1 className="sm-text">Category:</h1>
-            <select
-              id="select-cat"
-              className="sm-text cat-select"
-              name="category"
-              value={newMusic.category}
-              onChange={handleChangeAddMusic}
-            >
-              <option defaultValue="Lyrics/Song Writing">
-                Lyrics/Song Writing
-              </option>
-              <option defaultValue="Music Production">Music Production</option>
-              <option defaultValue="Vocal Recording">Vocal Recording</option>
-              <option defaultValue="Music Score">Music Score</option>
-              <option defaultValue="Mixing/Mastering">Mixing/Mastering</option>
-            </select>
-          </div>
-          <div className="admin-box admin-show-box">
-            <h1 className="sm-text">Show Home:</h1>
+        <div id='admin-box-2'>
+          <div className='admin-box'>
+            <h1 className='sm-text'>Cover Link:</h1>
             <input
-              className="sm-text admin-checkbox"
-              name="show_homepage"
-              type="checkbox"
+              className='sm-text login-input'
+              name='cover_url'
+              maxLength='255'
+              value={newMusic.cover_url}
+              onChange={handleChangeAddMusic}
+            />
+          </div>
+          <div className='admin-box admin-show-box'>
+            <h1 className='sm-text'>Show Home:</h1>
+            <input
+              className='sm-text admin-checkbox'
+              name='show_homepage'
+              type='checkbox'
               checked={newMusic.show_homepage}
               onChange={handleChangeAddMusic}
             />
           </div>
         </div>
 
+        <div id='cat-admin'>
+          <div>
+            <h1 className='sm-text'>Category:</h1>
+          </div>
+
+          <div id='cat-list-checkbox'>
+            <div className='cat-checkbox'>
+              <h1 className='sm-text'>Lyrics/Song Writing</h1>
+              <input
+                className='sm-text'
+                name='cat_lyrics_song'
+                type='checkbox'
+                checked={newMusic.cat_lyrics_song}
+                onChange={handleChangeAddMusic}
+              />
+            </div>
+
+            <div className='cat-checkbox'>
+              <h1 className='sm-text'>Music Production</h1>
+              <input
+                className='sm-text'
+                name='cat_music_prod'
+                type='checkbox'
+                checked={newMusic.cat_music_prod}
+                onChange={handleChangeAddMusic}
+              />
+            </div>
+
+            <div className='cat-checkbox'>
+              <h1 className='sm-text'>Vocal Recording</h1>
+              <input
+                className='sm-text'
+                name='cat_vocal_rec'
+                type='checkbox'
+                checked={newMusic.cat_vocal_rec}
+                onChange={handleChangeAddMusic}
+              />
+            </div>
+
+            <div className='cat-checkbox'>
+              <h1 className='sm-text'>Music Score</h1>
+              <input
+                className='sm-text'
+                name='cat_music_score'
+                type='checkbox'
+                checked={newMusic.cat_music_score}
+                onChange={handleChangeAddMusic}
+              />
+            </div>
+
+            <div className='cat-checkbox'>
+              <h1 className='sm-text'>Mixing/Mastering</h1>
+              <input
+                className='sm-text'
+                name='cat_mix_master'
+                type='checkbox'
+                checked={newMusic.cat_mix_master}
+                onChange={handleChangeAddMusic}
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Invalid */}
         <div>
           {addMusicError.show ? (
-            <h1 className="ssm-text grey-text">{addMusicError.message}</h1>
+            <h1 className='ssm-text grey-text'>{addMusicError.message}</h1>
           ) : null}
         </div>
 
-        <div id="music-add-box">
-          <button className="music-add-btn section sm-text" onClick={addMusic}>
+        <div id='music-add-box'>
+          <button className='music-add-btn section sm-text' onClick={addMusic}>
             Add
           </button>
         </div>
 
-        <div id="temp-music" className="section">
-          <div id="temp-music-container">
-            <div className="section">
-              <img src={thumnail(editMusic.url)} alt="" />
+        <div id='temp-music' className='section'>
+          <div id='temp-music-container'>
+            <div id='temp-add-img'>
+              {!editMusic.cover_url ? (
+                <div className='dummy-img-admin' />
+              ) : (
+                <img src={thumnail(editMusic.cover_url)} alt='' />
+              )}
             </div>
 
             <div>
-              <div className="admin-box">
-                <h1 className="sm-text">Title:</h1>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Title:</h1>
                 <input
-                  className="sm-text login-input"
-                  name="title"
-                  maxLength="64"
+                  className='sm-text login-input'
+                  name='title'
+                  maxLength='255'
                   value={editMusic.title}
                   onChange={handleChangeEditMusic}
                 />
               </div>
-              <div className="admin-box">
-                <h1 className="sm-text">Artist:</h1>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Artist:</h1>
                 <input
-                  className="sm-text login-input"
-                  name="artist"
-                  maxLength="64"
+                  className='sm-text login-input'
+                  name='artist'
+                  maxLength='255'
                   value={editMusic.artist}
                   onChange={handleChangeEditMusic}
                 />
               </div>
-              <div className="admin-box">
-                <h1 className="sm-text">Youtube Link:</h1>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Youtube Link:</h1>
                 <input
-                  className="sm-text login-input"
-                  name="url"
-                  maxLength="255"
-                  value={editMusic.url}
+                  className='sm-text login-input'
+                  name='music_url'
+                  maxLength='255'
+                  value={editMusic.music_url}
                   onChange={handleChangeEditMusic}
                 />
               </div>
-              <div className="admin-box">
-                <h1 className="sm-text">Category:</h1>
-                <select
-                  id="select-cat"
-                  className="sm-text cat-select"
-                  name="category"
-                  value={editMusic.category}
-                  onChange={handleChangeEditMusic}
-                >
-                  <option defaultValue="Lyrics/Song Writing">
-                    Lyrics/Song Writing
-                  </option>
-                  <option defaultValue="Music Production">
-                    Music Production
-                  </option>
-                  <option defaultValue="Vocal Recording">
-                    Vocal Recording
-                  </option>
-                  <option defaultValue="Music Score">Music Score</option>
-                  <option defaultValue="Mixing/Mastering">
-                    Mixing/Mastering
-                  </option>
-                </select>
-              </div>
-              <div className="admin-box">
-                <h1 className="sm-text">Show Home:</h1>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Cover Link:</h1>
                 <input
-                  className="sm-text admin-checkbox"
-                  name="show_homepage"
-                  type="checkbox"
+                  className='sm-text login-input'
+                  name='cover_url'
+                  maxLength='255'
+                  value={editMusic.cover_url}
+                  onChange={handleChangeEditMusic}
+                />
+              </div>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Category:</h1>
+                <div id='cat-list-checkbox' className='cat-admin-checkbox'>
+                  <div className='cat-checkbox'>
+                    <h1 className='sm-text'>Lyrics/Song Writing</h1>
+                    <input
+                      className='sm-text'
+                      name='cat_lyrics_song'
+                      type='checkbox'
+                      checked={editMusic.cat_lyrics_song}
+                      onChange={handleChangeEditMusic}
+                    />
+                  </div>
+
+                  <div className='cat-checkbox'>
+                    <h1 className='sm-text'>Music Production</h1>
+                    <input
+                      className='sm-text'
+                      name='cat_music_prod'
+                      type='checkbox'
+                      checked={editMusic.cat_music_prod}
+                      onChange={handleChangeEditMusic}
+                    />
+                  </div>
+
+                  <div className='cat-checkbox'>
+                    <h1 className='sm-text'>Vocal Recording</h1>
+                    <input
+                      className='sm-text'
+                      name='cat_vocal_rec'
+                      type='checkbox'
+                      checked={editMusic.cat_vocal_rec}
+                      onChange={handleChangeEditMusic}
+                    />
+                  </div>
+
+                  <div className='cat-checkbox'>
+                    <h1 className='sm-text'>Music Score</h1>
+                    <input
+                      className='sm-text'
+                      name='cat_music_score'
+                      type='checkbox'
+                      checked={editMusic.cat_music_score}
+                      onChange={handleChangeEditMusic}
+                    />
+                  </div>
+
+                  <div className='cat-checkbox'>
+                    <h1 className='sm-text'>Mixing/Mastering</h1>
+                    <input
+                      className='sm-text'
+                      name='cat_mix_master'
+                      type='checkbox'
+                      checked={editMusic.cat_mix_master}
+                      onChange={handleChangeEditMusic}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='admin-box'>
+                <h1 className='sm-text'>Show Home:</h1>
+                <input
+                  className='sm-text admin-checkbox'
+                  name='show_homepage'
+                  type='checkbox'
                   checked={editMusic.show_homepage}
                   onChange={handleChangeEditMusic}
                 />
@@ -424,20 +571,20 @@ export default function Admin() {
               {/* Invalid */}
               <div>
                 {editMusicError.show ? (
-                  <h1 className="ssm-text grey-text">
+                  <h1 className='ssm-text grey-text'>
                     {editMusicError.message}
                   </h1>
                 ) : null}
               </div>
-              <div id="edit-btn">
+              <div id='edit-btn'>
                 <button
-                  className="music-save-btn sm-text"
+                  className='music-save-btn sm-text'
                   onClick={updateMusic}
                 >
                   Save
                 </button>
                 <button
-                  className="music-delete-btn sm-text"
+                  className='music-delete-btn sm-text'
                   onClick={deleteMusic}
                 >
                   Delete
@@ -447,139 +594,139 @@ export default function Admin() {
           </div>
         </div>
 
-        <div id="music-list">
-          <h1 className="bg-text">Music List</h1>
+        <div id='music-list'>
+          <h1 className='bg-text'>Music List</h1>
 
-          <h1 className="sm-text">Lyrics/Song Writing</h1>
+          <h1 className='sm-text'>Lyrics/Song Writing</h1>
 
-          <div className="cat-list">
+          <div className='cat-list'>
             {musicList &&
               musicList
-                .filter((music) => music.category === "Lyrics/Song Writing")
+                .filter((music) => music.cat_lyrics_song)
                 .map((music, i) => (
                   <div
-                    className="list-box"
+                    className='list-box'
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
                     <div>
                       <img
-                        className="list-pics"
-                        src={thumnail(music.url)}
-                        alt=""
+                        className='list-pics'
+                        src={thumnail(music.cover_url)}
+                        alt=''
                       />
                     </div>
                     <div>
-                      <h1 className="sm-text">{music.title}</h1>
-                      <h1 className="ssm-text">{music.artist}</h1>
+                      <h1 className='sm-text'>{music.title}</h1>
+                      <h1 className='ssm-text'>{music.artist}</h1>
                     </div>
                   </div>
                 ))}
           </div>
 
-          <h1 className="sm-text">Music Production</h1>
+          <h1 className='sm-text'>Music Production</h1>
 
-          <div className="cat-list">
+          <div className='cat-list'>
             {musicList &&
               musicList
-                .filter((music) => music.category === "Music Production")
+                .filter((music) => music.cat_music_prod)
                 .map((music, i) => (
                   <div
-                    className="list-box"
+                    className='list-box'
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
                     <div>
                       <img
-                        className="list-pics"
-                        src={thumnail(music.url)}
-                        alt=""
+                        className='list-pics'
+                        src={thumnail(music.cover_url)}
+                        alt=''
                       />
                     </div>
                     <div>
-                      <h1 className="sm-text">{music.title}</h1>
-                      <h1 className="ssm-text">{music.artist}</h1>
+                      <h1 className='sm-text'>{music.title}</h1>
+                      <h1 className='ssm-text'>{music.artist}</h1>
                     </div>
                   </div>
                 ))}
           </div>
 
-          <h1 className="sm-text">Vocal Recording</h1>
+          <h1 className='sm-text'>Vocal Recording</h1>
 
-          <div className="cat-list">
+          <div className='cat-list'>
             {musicList &&
               musicList
-                .filter((music) => music.category === "Vocal Recording")
+                .filter((music) => music.cat_vocal_rec)
                 .map((music, i) => (
                   <div
-                    className="list-box"
+                    className='list-box'
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
                     <div>
                       <img
-                        className="list-pics"
-                        src={thumnail(music.url)}
-                        alt=""
+                        className='list-pics'
+                        src={thumnail(music.cover_url)}
+                        alt=''
                       />
                     </div>
                     <div>
-                      <h1 className="sm-text">{music.title}</h1>
-                      <h1 className="ssm-text">{music.artist}</h1>
+                      <h1 className='sm-text'>{music.title}</h1>
+                      <h1 className='ssm-text'>{music.artist}</h1>
                     </div>
                   </div>
                 ))}
           </div>
 
-          <h1 className="sm-text">Music Score</h1>
+          <h1 className='sm-text'>Music Score</h1>
 
-          <div className="cat-list">
+          <div className='cat-list'>
             {musicList &&
               musicList
-                .filter((music) => music.category === "Music Score")
+                .filter((music) => music.cat_music_score)
                 .map((music, i) => (
                   <div
-                    className="list-box"
+                    className='list-box'
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
                     <div>
                       <img
-                        className="list-pics"
-                        src={thumnail(music.url)}
-                        alt=""
+                        className='list-pics'
+                        src={thumnail(music.cover_url)}
+                        alt=''
                       />
                     </div>
                     <div>
-                      <h1 className="sm-text">{music.title}</h1>
-                      <h1 className="ssm-text">{music.artist}</h1>
+                      <h1 className='sm-text'>{music.title}</h1>
+                      <h1 className='ssm-text'>{music.artist}</h1>
                     </div>
                   </div>
                 ))}
           </div>
 
-          <h1 className="sm-text">Mixing/Mastering</h1>
+          <h1 className='sm-text'>Mixing/Mastering</h1>
 
-          <div className="cat-list">
+          <div className='cat-list'>
             {musicList &&
               musicList
-                .filter((music) => music.category === "Mixing/Mastering")
+                .filter((music) => music.cat_mix_master)
                 .map((music, i) => (
                   <div
-                    className="list-box"
+                    className='list-box'
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
                     <div>
                       <img
-                        className="list-pics"
-                        src={thumnail(music.url)}
-                        alt=""
+                        className='list-pics'
+                        src={thumnail(music.cover_url)}
+                        alt=''
                       />
                     </div>
                     <div>
-                      <h1 className="sm-text">{music.title}</h1>
-                      <h1 className="ssm-text">{music.artist}</h1>
+                      <h1 className='sm-text'>{music.title}</h1>
+                      <h1 className='ssm-text'>{music.artist}</h1>
                     </div>
                   </div>
                 ))}
