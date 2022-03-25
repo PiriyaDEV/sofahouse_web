@@ -78,8 +78,8 @@
   gap: 15px;
 }
 
-.home-select{
-  background-color:#ea7155;
+.home-select {
+  background-color: #ea7155;
   color: #ffffff;
 }
 
@@ -95,13 +95,28 @@
 }
 
 #temp-music > div > div > img {
-  width: 200px;
+  width: 100%;
+  image-rendering: auto;
 }
 
+#temp-add-img{
+  width: 100%;
+}
+
+
+.dummy-img-admin{
+  width: 100%;
+  height: 280px;
+  border: 1px solid #707070;
+  background-color: #707070;
+}
+
+
 #temp-music-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
 }
 
 #music-list {
@@ -133,6 +148,48 @@
   margin-bottom: 60px;
 }
 
+#cat-list-checkbox {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 10px 7px 10px;
+  margin-top: 10px;
+  border-radius: 24px;
+  gap: 25px;
+  row-gap: 10px;
+  background-color: #ffffff;
+  flex-wrap: wrap;
+}
+
+.cat-admin-checkbox {
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  width: fit-content !important;
+}
+
+#cat-admin {
+  margin-top: 10px;
+}
+
+.cat-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cat-checkbox > input {
+  margin-left: 10px;
+}
+
+.login-input {
+  width: 100%;
+}
+
+@media screen and (max-width: 1220px) {
+  #temp-music-container {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 1110px) {
   #add-box,
   #temp-music-container,
@@ -140,7 +197,7 @@
     display: block;
   }
 
-  .admin-show-box{
+  .admin-show-box {
     margin-left: 0px;
   }
 

@@ -120,7 +120,7 @@ export default function AboutUs() {
             className="about-banner"
             style={{ backgroundImage: `url(${banner2})` }}
           >
-            <h1 className="bg4-text">Mision</h1>
+            <h1 className="bg4-text">Mission</h1>
             <p className="bg2-text skv-text">
               “Our Mission is to understand and enhance brand’s <br /> identity
               through one-stop music service.”

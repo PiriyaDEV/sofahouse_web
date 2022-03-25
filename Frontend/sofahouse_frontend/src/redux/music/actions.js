@@ -15,7 +15,9 @@ export const fetchMusic = () => {
         musicService.getAllMusics()
         .then(response => {
           if (response.length)
-            {dispatch(selectMusic(response[0], 0))}
+            {
+            dispatch(selectMusic(response.find(music => music.show_homepage), 0))
+            }
             dispatch(fetchMusicSuccess(response))
         }
         )

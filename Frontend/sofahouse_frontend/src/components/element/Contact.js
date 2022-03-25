@@ -19,7 +19,7 @@ export default function Contact() {
           className="big-contact"
           src={mail}
           alt=""
-          onClick={() => linkPath("mailto:mail@example.org")}
+          onClick={() => linkPath("mailto:sofahouse.th@gmail.com")}
         />
       )}
       {hover === true && (

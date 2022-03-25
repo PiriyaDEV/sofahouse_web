@@ -20,7 +20,7 @@ import mute from "../../assets/images/play/mute.png";
 export default function PlayConsole(props) {
 
   const musicSelect = useSelector(state => state.music.select)
-  const musicList = useSelector(state => state.music.musics)
+  const musicList = useSelector(state => state.music.musics.filter((list) => list.show_homepage))
   const dispatch = useDispatch()
 
   const [muted, setMuted] = useState(false);
@@ -101,7 +101,7 @@ export default function PlayConsole(props) {
           onDuration={handleDuration}
           onEnded={handleEnded}
           ref={inputRange}
-          url={musicSelect.url}
+          url={musicSelect.music_url}
         />
       )}
       <div id="play-section">

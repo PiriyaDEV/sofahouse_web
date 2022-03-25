@@ -173,7 +173,7 @@
 }
 
 #main-btn::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -202,9 +202,17 @@
 
 #desc-banner {
   border: 1px solid #9aa4b0;
-  border-radius: 142px;
   width: 100%;
+  border-radius: 142px;
   height: 350px;
+}
+
+#desc-banner > img {
+  height: 350px;
+  width: 100%;
+  border-radius: 142px;
+  opacity: 0.9;
+  object-fit: cover;
 }
 
 #desc-abs {
@@ -316,7 +324,7 @@
     border-radius: 20px;
   }
 }
-/* 
+/*
 @media screen and (max-width: 1440px) {
   .home-player {
     width: 280px !important;

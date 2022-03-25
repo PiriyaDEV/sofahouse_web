@@ -15,7 +15,6 @@ import vinylMc from "../../assets/images/vinyl-mc.png";
 import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
-// import centerTemp from "../../assets/images/temp/temp-mid.png";
 import longLogo from "../../assets/images/long-logo.png";
 import bbl from "../../assets/images/bbl.png";
 import bbr from "../../assets/images/bbr.png";
@@ -27,13 +26,15 @@ import desc3 from "../../assets/images/desc/desc3.png";
 // Temp
 import temp1 from "../../assets/images/temp/insecure.png";
 
+import Studio1 from "../../assets/images/IMG_3745.JPG"
+// import Studio2 from "../../assets/images/IMG_3746.JPG"
+
 //Js
 import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  // const [playing, setPlaying] = useState(false);
   const inputRange = useRef(null);
   const [youtubePlay, setYoutubePlay] = useState(false);
 
@@ -45,7 +46,7 @@ export default function Home() {
     },
   ];
 
-  const [play, setPlay] = useState(true);
+  // const [play, setPlay] = useState(true);
   const music = useSelector((state) => state.music);
 
   const skipMusics = (musicSelected) => {
@@ -56,12 +57,9 @@ export default function Home() {
     }
   };
 
-  const thumnail = (url) => {
-    let thumbnail1 = "https://img.youtube.com/vi/";
-    let mediumQuality = "/mqdefault.jpg";
-    // let maxQuality = "/maxresdefault.jpg";
-
-    return thumbnail1 + url.split("v=").pop().split("&")[0] + mediumQuality;
+  const picFromGGDrive = (link) => {
+    let ggsrc = link.split('/');
+    return "https://drive.google.com/uc?export=view&id=" + ggsrc[5];
   };
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export default function Home() {
             {music ? (
               <img
                 className="pointer"
-                src={thumnail(music.musics[i].url)}
+                src={picFromGGDrive(music.musics[i].cover_url)}
                 alt=""
               />
             ) : (
@@ -127,7 +125,7 @@ export default function Home() {
               <img
                 // className="home-vinyl vinyl-disc rotate"
                 className={`home-vinyl vinyl-disc ${
-                  play === true ? "rotate" : null
+                  youtubePlay === true ? "rotate" : null
                 }`}
                 src={vinylDisc}
                 alt=""
@@ -160,15 +158,10 @@ export default function Home() {
               volume={0.1}
               muted={true}
               ref={inputRange}
-              url={music.select.url}
+              url={music.select.music_url}
               className="home-player"
               // controls={false}
             />
-            {/* {music.select ? (
-              <img src={thumnail(music.select.url)} alt="" />
-            ) : (
-              <img src={tempInfo.tempPic} alt="" />
-            )} */}
           </div>
 
           <div id="main-music-section">
@@ -203,7 +196,7 @@ export default function Home() {
           </div>
         </div>
         {/* Play Section */}
-        <PlayConsole func={setPlay} youtubePlay={youtubePlay} />
+        <PlayConsole youtubePlay={youtubePlay} />
         {/* Description Section */}
         <div id="desc-section">
           <p className="skv-bold bg-text">
@@ -216,7 +209,9 @@ export default function Home() {
           </div>
 
           <div id="desc-banner-section">
-            <div id="desc-banner"></div>
+            <div id="desc-banner">
+              <img src={Studio1} alt=""/>
+            </div>
             <div id="desc-abs">
               <div id="banner-flex-section">
                 <img className="banner-disc" src={desc1} alt="" />
