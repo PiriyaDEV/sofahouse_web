@@ -252,7 +252,7 @@ export default function Home() {
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe>
           </div>
-          <div>
+          {/* <div>
             <h1 className="bg-text">OUR LASTEST UPDATES!</h1>
             <div className="bubble-box">
               <div className="update-box btr shadow">
@@ -278,7 +278,7 @@ export default function Home() {
               </div>
               <img className="bbl" src={bbl} alt="" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
