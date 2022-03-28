@@ -123,7 +123,11 @@ export default function Portfolio() {
   useEffect(() => {
     if (musicCategory) {
       const musicList = [];
-      for (let i = 0; i < 5; i++) {
+      let count = 5;
+      if (musicCategory.length < 5) {
+        count = musicCategory.length;
+      }
+      for (let i = 0; i < count; i++) {
         musicList.push(musicCategory[i]);
       }
       setMusicListSelect(musicList);
@@ -292,23 +296,30 @@ export default function Portfolio() {
       const musicList = [];
 
       let count = 0;
-      for (let i = e.realIndex - 2; i < musicCategory.length; i++) {
-        if (count === 5) {
-          break;
-        } else {
-          if (i < 0) {
-            musicList.push(musicCategory[musicCategory.length + i]);
+
+      if (musicCategory.length >= 5) {
+        for (let i = e.realIndex - 2; i < musicCategory.length; i++) {
+          if (count === 5) {
+            break;
           } else {
-            musicList.push(musicCategory[i]);
+            if (i < 0) {
+              musicList.push(musicCategory[musicCategory.length + i]);
+            } else {
+              musicList.push(musicCategory[i]);
+            }
+            count++;
           }
-          count++;
         }
-      }
-      if (count === 3) {
-        musicList.push(musicCategory[0]);
-        musicList.push(musicCategory[1]);
-      } else if (count === 4) {
-        musicList.push(musicCategory[0]);
+        if (count === 3) {
+          musicList.push(musicCategory[0]);
+          musicList.push(musicCategory[1]);
+        } else if (count === 4) {
+          musicList.push(musicCategory[0]);
+        }
+      } else {
+        for (let i = 0; i < musicCategory.length; i++) {
+          musicList.push(musicCategory[i]);
+        }
       }
       setMusicSelect(musicList[0]);
       setMusicListSelect(musicList);
@@ -321,36 +332,73 @@ export default function Portfolio() {
         {/* Work Section */}
         <div id='work-section'>
           <div id='work-menu'>
-            <h1
-              onClick={() => categorySelect('Lyrics/Song Writing')}
-              className={checkCategory('Lyrics/Song Writing')}
-            >
-              Lyrics/ Song Writing
-            </h1>
-            <h1
-              onClick={() => categorySelect('Music Production')}
-              className={checkCategory('Music Production')}
-            >
-              Music Production
-            </h1>
-            <h1
-              onClick={() => categorySelect('Vocal Recording')}
-              className={checkCategory('Vocal Recording')}
-            >
-              Vocal Recording
-            </h1>
-            <h1
-              onClick={() => categorySelect('Music Score')}
-              className={checkCategory('Music Score')}
-            >
-              Music Score
-            </h1>
-            <h1
-              onClick={() => categorySelect('Mixing/Mastering')}
-              className={checkCategory('Mixing/Mastering')}
-            >
-              Mixing & Mastering
-            </h1>
+            {musicList.filter((musicsList) => musicsList.cat_lyrics_song)
+              .length >= 1 ? (
+              <h1
+                onClick={() => categorySelect('Lyrics/Song Writing')}
+                className={checkCategory('Lyrics/Song Writing')}
+              >
+                Lyrics/ Song Writing
+              </h1>
+            ) : (
+              <h1 className={checkCategory('Lyrics/Song Writing')}>
+                Lyrics/ Song Writing
+              </h1>
+            )}
+
+            {musicList.filter((musicsList) => musicsList.cat_music_prod)
+              .length >= 1 ? (
+              <h1
+                onClick={() => categorySelect('Music Production')}
+                className={checkCategory('Music Production')}
+              >
+                Music Production
+              </h1>
+            ) : (
+              <h1 className={checkCategory('Music Production')}>
+                Music Production
+              </h1>
+            )}
+
+            {musicList.filter((musicsList) => musicsList.cat_vocal_rec)
+              .length >= 1 ? (
+              <h1
+                onClick={() => categorySelect('Vocal Recording')}
+                className={checkCategory('Vocal Recording')}
+              >
+                Vocal Recording
+              </h1>
+            ) : (
+              <h1 className={checkCategory('Vocal Recording')}>
+                Vocal Recording
+              </h1>
+            )}
+
+            {musicList.filter((musicsList) => musicsList.cat_music_score)
+              .length >= 1 ? (
+              <h1
+                onClick={() => categorySelect('Music Score')}
+                className={checkCategory('Music Score')}
+              >
+                Music Score
+              </h1>
+            ) : (
+              <h1 className={checkCategory('Music Score')}>Music Score</h1>
+            )}
+
+            {musicList.filter((musicsList) => musicsList.cat_mix_master)
+              .length >= 1 ? (
+              <h1
+                onClick={() => categorySelect('Mixing/Mastering')}
+                className={checkCategory('Mixing/Mastering')}
+              >
+                Mixing & Mastering
+              </h1>
+            ) : (
+              <h1 className={checkCategory('Mixing/Mastering')}>
+                Mixing & Mastering
+              </h1>
+            )}
           </div>
           <div className='section'>
             <div id='work-carousal' className='section'>
@@ -381,8 +429,17 @@ export default function Portfolio() {
               >
                 {music}
               </Swiper>
-              <div className='swiper-button-prev music-prev'></div>
-              <div className='swiper-button-next music-next'></div>
+              {music && music.length >= 5 ? (
+                <div>
+                  <div className='swiper-button-prev music-prev'></div>
+                  <div className='swiper-button-next music-next'></div>
+                </div>
+              ) : (
+                <div>
+                  <div className='swiper-button-prev music-prev block-interact'></div>
+                  <div className='swiper-button-next music-next block-interact'></div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -424,35 +481,39 @@ export default function Portfolio() {
               )}
             </div>
             <div id='port-play-text' className='play-text-mb'>
-              <ReactPlayer
-                id='port-vdo-player'
-                playing={play}
-                volume={0.1}
-                // onProgress={handleProgress}
-                onPlay={handleplay}
-                onPause={handlepause}
-                // onDuration={handleDuration}
-                muted={true}
-                loop={true}
-                ref={inputRange2}
-                url={musicSelect.music_url}
-              />
+              {musicSelect && (
+                <ReactPlayer
+                  id='port-vdo-player'
+                  playing={play}
+                  volume={0.1}
+                  // onProgress={handleProgress}
+                  onPlay={handleplay}
+                  onPause={handlepause}
+                  // onDuration={handleDuration}
+                  muted={true}
+                  loop={true}
+                  ref={inputRange2}
+                  url={musicSelect.music_url}
+                />
+              )}
             </div>
           </div>
 
           <div id='port-play-text' className='section play-text-pc'>
-            <ReactPlayer
-              id='port-vdo-player'
-              playing={play}
-              volume={0.1}
-              onProgress={handleProgress}
-              onDuration={handleDuration}
-              onPlay={handleplay}
-              onPause={handlepause}
-              loop={true}
-              ref={inputRange}
-              url={musicSelect.music_url}
-            />
+            {musicSelect && (
+              <ReactPlayer
+                id='port-vdo-player'
+                playing={play}
+                volume={0.1}
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                onPlay={handleplay}
+                onPause={handlepause}
+                loop={true}
+                ref={inputRange}
+                url={musicSelect.music_url}
+              />
+            )}
           </div>
 
           <div>

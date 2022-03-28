@@ -340,6 +340,22 @@
   }
 } */
 
+@media screen and (max-width: 960px) {
+  #main-section {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  #mid-img {
+    height: 100%;
+  }
+  #main-music-section {
+    display: none;
+  }
+  .home-vinyl {
+    width: 230px;
+  }
+}
+
 @media screen and (max-width: 935px) {
   #update-section > div:nth-child(2) > .bg-text {
     margin-bottom: 25px;
@@ -357,23 +373,6 @@
 @media screen and (max-width: 767px) {
   #home {
     padding-top: 130px;
-  }
-  .home-vinyl {
-    width: 230px;
-  }
-  /* .music-flex > img {
-    width: 100px;
-    height: 100px;
-  } */
-  #mid-img {
-    height: 100%;
-  }
-  #main-music-section {
-    display: none;
-  }
-  #main-section {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
   }
 }
 
