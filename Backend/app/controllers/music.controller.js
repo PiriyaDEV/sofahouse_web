@@ -17,8 +17,13 @@ exports.add = async (req, res) => {
     !music.hasOwnProperty("title") ||
     !music.hasOwnProperty("artist") ||
     !music.hasOwnProperty("duration") ||
-    !music.hasOwnProperty("url") ||
-    !music.hasOwnProperty("category") ||
+    !music.hasOwnProperty("cover_url") ||
+    !music.hasOwnProperty("music_url") ||
+    !music.hasOwnProperty("cat_lyrics_song") ||
+    !music.hasOwnProperty("cat_music_prod") ||
+    !music.hasOwnProperty("cat_vocal_rec") ||
+    !music.hasOwnProperty("cat_music_score") ||
+    !music.hasOwnProperty("cat_mix_master") ||
     !music.hasOwnProperty("show_homepage")
   ) {
     // failed, information not found
@@ -104,8 +109,6 @@ exports.delete = async (req, res) => {
   
   const music = req.body.music;
 
-  music.status = false;
-
   // check music id exists
   if (!music.hasOwnProperty("id")) {
     // failed, information not found
@@ -114,6 +117,8 @@ exports.delete = async (req, res) => {
       message: "Required music id",
     });
   }
+
+  music.status = false;
 
   try {
     // update status
@@ -151,19 +156,3 @@ exports.getMusics = async (req, res) => {
   }
 };
 
-// get all musics by category
-exports.getMusicsByCategory = async (req, res) => {
-  try {
-    // get data
-    const result = await Music.getMusicsByCategory();
-
-    // response the result
-    return res.status(200).json(result);
-  } catch (error) {
-    // return if error
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
