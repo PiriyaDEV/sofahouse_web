@@ -63,6 +63,7 @@ li {
 
 .block-interact{
   pointer-events: none;
+  cursor: default !important;
 }
 
 .swiper-wrapper {
@@ -447,6 +448,10 @@ li {
   #work-carousal,
   #tmn-carousal {
     width: 300px;
+  }
+
+  #work-menu {
+    justify-content: center;
   }
 
   .person-prev,

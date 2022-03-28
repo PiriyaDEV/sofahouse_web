@@ -316,7 +316,8 @@ export default function Portfolio() {
         } else if (count === 4) {
           musicList.push(musicCategory[0]);
         }
-      } else {
+      }
+      else {
         for (let i = 0; i < musicCategory.length; i++) {
           musicList.push(musicCategory[i]);
         }
