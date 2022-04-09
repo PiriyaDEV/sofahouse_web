@@ -605,7 +605,9 @@ export default function Admin() {
                 .filter((music) => music.cat_lyrics_song)
                 .map((music, i) => (
                   <div
-                    className='list-box'
+                    className={`list-box ${
+                      music.show_homepage === 1 ? 'list-home' : null
+                    }`}
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
@@ -632,7 +634,9 @@ export default function Admin() {
                 .filter((music) => music.cat_music_prod)
                 .map((music, i) => (
                   <div
-                    className='list-box'
+                  className={`list-box ${
+                    music.show_homepage === 1 ? "list-home" : null
+                  }`}
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
@@ -659,7 +663,9 @@ export default function Admin() {
                 .filter((music) => music.cat_vocal_rec)
                 .map((music, i) => (
                   <div
-                    className='list-box'
+                  className={`list-box ${
+                    music.show_homepage === 1 ? "list-home" : null
+                  }`}
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
@@ -686,7 +692,9 @@ export default function Admin() {
                 .filter((music) => music.cat_music_score)
                 .map((music, i) => (
                   <div
-                    className='list-box'
+                  className={`list-box ${
+                    music.show_homepage === 1 ? "list-home" : null
+                  }`}
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
@@ -713,7 +721,9 @@ export default function Admin() {
                 .filter((music) => music.cat_mix_master)
                 .map((music, i) => (
                   <div
-                    className='list-box'
+                  className={`list-box ${
+                    music.show_homepage === 1 ? "list-home" : null
+                  }`}
                     key={i}
                     onClick={() => selectMusic(music)}
                   >

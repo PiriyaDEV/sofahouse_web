@@ -141,6 +141,11 @@
   cursor: pointer;
 }
 
+.list-home{
+  background-color: #ea7155 !important;
+  color: #ffffff !important;
+}
+
 .cat-list {
   display: flex;
   flex-wrap: wrap;
