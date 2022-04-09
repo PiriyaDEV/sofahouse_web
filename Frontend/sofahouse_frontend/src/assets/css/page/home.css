@@ -312,10 +312,11 @@
   #desc-abs {
     bottom: -70px;
   }
-  #desc-banner {
+  #desc-banner, #desc-banner > img {
     border-radius: 80px;
     height: 237px;
   }
+  
   #update-section {
     margin-bottom: 100px;
   }
@@ -378,7 +379,7 @@
 
 @media screen and (max-width: 640px) {
   #update-section {
-    display: block;
+    display: flex;
     margin-top: 70px;
   }
 
@@ -394,7 +395,7 @@
     border: 3px solid #ffffff;
   }
 
-  #desc-banner {
+  #desc-banner, #desc-banner > img {
     border-radius: 40px;
   }
 }

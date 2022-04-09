@@ -108,33 +108,39 @@ export default function Service() {
                 </button>
               </div>
               {production === "pre-production" && (
-                <p className="md-text avn-medium">
-                  Music Consulting <br className="sv-br" />
-                  Matching Identity <br className="sv-br" />
-                  Mood Landscape <br className="sv-br" />
-                  Reference & Marketing Techniques Regarding Music
-                </p>
+                <div className="service-1">
+                  <p className="md-text avn-medium">
+                    Music Consulting <br className="sv-br" />
+                    Matching Identity <br className="sv-br" />
+                    Mood Landscape <br className="sv-br" />
+                    Reference & Marketing Techniques Regarding Music
+                  </p>
+                </div>
               )}
               {production === "production" && (
-                <p className="md-text avn-medium">
-                  Instrumental <br className="sv-br" />
-                  Lyrics/Melody (Thai & English) / <br className="sv-br" />
-                  Vocal Demo <br className="sv-br" />
-                  Unlimited Feedbacks
-                </p>
+                <div className="service-2">
+                  <p className="md-text avn-medium">
+                    Instrumental <br className="sv-br" />
+                    Lyrics/Melody (Thai & English) / <br className="sv-br" />
+                    Vocal Demo <br className="sv-br" />
+                    Unlimited Feedbacks
+                  </p>
+                </div>
               )}
               {production === "post-production" && (
-                <p className="md-text avn-medium">
-                  Vocal Recording <br className="sv-br" />
-                  Mix & Master Instrumental <br className="sv-br" />
-                  Sofa streaming service <br className="sv-br" />
-                  <li className="production-li">
-                    Manage your streaming account
-                  </li>
-                  <li className="production-li">
-                    More than 15 streaming platform you can choose
-                  </li>
-                </p>
+                <div className="service-3">
+                  <p className="md-text avn-medium">
+                    Vocal Recording <br className="sv-br" />
+                    Mix & Master Instrumental <br className="sv-br" />
+                    Sofa streaming service <br className="sv-br" />
+                    <li className="production-li">
+                      Manage your streaming account
+                    </li>
+                    <li className="production-li">
+                      More than 15 streaming platform you can choose
+                    </li>
+                  </p>
+                </div>
               )}
             </div>
           </div>
