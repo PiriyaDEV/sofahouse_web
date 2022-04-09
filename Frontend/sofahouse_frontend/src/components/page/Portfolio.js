@@ -41,6 +41,7 @@ export default function Portfolio() {
   const [duration, setDuration] = useState(0);
   const inputRange = useRef(null);
   const inputRange2 = useRef(null);
+  
   const [musicListSelect, setMusicListSelect] = useState([
     {
       id: 0,
@@ -114,10 +115,10 @@ export default function Portfolio() {
   };
 
   useEffect(() => {
-    setMusicCategory(
-      musicList.filter((musicsList) => musicsList.cat_lyrics_song)
-    );
-    setMusicSelect(musicList[0]);
+    let initialStateMusic = [];
+    initialStateMusic = musicList.filter((musicsList) => musicsList.cat_lyrics_song);
+    setMusicCategory(initialStateMusic);
+    setMusicSelect(initialStateMusic[0]);
   }, [musicList]);
 
   useEffect(() => {
@@ -133,6 +134,10 @@ export default function Portfolio() {
       setMusicListSelect(musicList);
     }
   }, [musicCategory]);
+
+  useEffect(() => {
+    setMusicSelect(musicListSelect[0]);
+  },[musicListSelect])
 
   const picFromGGDrive = (link) => {
     let ggsrc = link.split('/');
@@ -322,10 +327,11 @@ export default function Portfolio() {
           musicList.push(musicCategory[i]);
         }
       }
-      setMusicSelect(musicList[0]);
       setMusicListSelect(musicList);
     }
   };
+
+  
 
   return (
     <div id='portfolio' className='section'>
@@ -448,7 +454,7 @@ export default function Portfolio() {
         {/* Play Section */}
         <div id='port-play-section'>
           <div id='vinyl-mb-container'>
-            <div id='port-vinyl'>
+            <div id='port-vinyl-div'>
               <div id='home-vinyl-section'>
                 <img className='port-vinyl vinyl-play' src={vinylPlay} alt='' />
                 {play ? (
@@ -468,9 +474,9 @@ export default function Portfolio() {
                 <img className='port-vinyl vinyl-mc' src={vinylMc} alt='' />
               </div>
               {musicSelect ? (
-                <p className='xm-text truncate'>{musicSelect.title}</p>
+                <h1 className='xm-text truncate'>{musicSelect.title}</h1>
               ) : (
-                <h1 className='xm-text'>Title</h1>
+                <h1 className='xm-text truncate'>Title</h1>
               )}
 
               {musicSelect ? (
