@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Navbar from "./components/element/Navbar";
@@ -82,9 +82,9 @@ function App() {
         <Route path="/admin">
           <Admin />
         </Route>
-        {/* <Route path="/:id">
-          <p>ไม่มี pathนี้</p>
-        </Route> */}
+        <Route path="/:id">
+          <Redirect to="/" /> :
+        </Route>
       </Switch>
     </div>
   );

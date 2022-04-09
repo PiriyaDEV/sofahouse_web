@@ -61,6 +61,11 @@ li {
   list-style: none;
 }
 
+.block-interact{
+  pointer-events: none;
+  cursor: default !important;
+}
+
 .swiper-wrapper {
   padding-inline-start: 0;
   display: flex;
@@ -443,6 +448,10 @@ li {
   #work-carousal,
   #tmn-carousal {
     width: 300px;
+  }
+
+  #work-menu {
+    justify-content: center;
   }
 
   .person-prev,
