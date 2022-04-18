@@ -1,5 +1,31 @@
 const Music = require("../models/music.model");
 
+// clear its priority if the category doesn't exist
+const clearCategoryPriority = (musicData) => {
+  let music = musicData;
+
+  if (music.hasOwnProperty("cat_lyrics_song") && !music.cat_lyrics_song) {
+    music.pri_lyrics_song = null;
+  }
+  if (music.hasOwnProperty("cat_music_prod") && !music.cat_music_prod) {
+    music.pri_music_prod = null;
+  }
+  if (music.hasOwnProperty("cat_vocal_rec") && !music.cat_vocal_rec) {
+    music.pri_vocal_rec = null;
+  }
+  if (music.hasOwnProperty("cat_music_score") && !music.cat_music_score) {
+    music.pri_music_score = null;
+  }
+  if (music.hasOwnProperty("cat_mix_master") && !music.cat_mix_master) {
+    music.pri_mix_master = null;
+  }
+  if (music.hasOwnProperty("show_homepage") && !music.show_homepage) {
+    music.pri_homepage = null;
+  }
+
+  return music;
+};
+
 // add new music
 exports.add = async (req, res) => {
   if (!req.body.hasOwnProperty("music")) {
@@ -10,7 +36,7 @@ exports.add = async (req, res) => {
     });
   }
 
-  const music = req.body.music;
+  let music = req.body.music;
 
   // check all information exists
   if (
@@ -32,6 +58,9 @@ exports.add = async (req, res) => {
       message: "Required information",
     });
   }
+
+  // clear category's priority
+  music = clearCategoryPriority(music);
 
   try {
     // add new music
@@ -62,7 +91,7 @@ exports.update = async (req, res) => {
     });
   }
 
-  const music = req.body.music;
+  let music = req.body.music;
 
   // check music id exists
   if (!music.hasOwnProperty("id")) {
@@ -77,6 +106,9 @@ exports.update = async (req, res) => {
   if (music.hasOwnProperty("status")) {
     delete music.status;
   }
+
+  // clear category's priority
+  music = clearCategoryPriority(music);
 
   try {
     // update music
@@ -106,8 +138,8 @@ exports.delete = async (req, res) => {
       message: "Required information",
     });
   }
-  
-  const music = req.body.music;
+
+  let music = req.body.music;
 
   // check music id exists
   if (!music.hasOwnProperty("id")) {
@@ -118,7 +150,14 @@ exports.delete = async (req, res) => {
     });
   }
 
+  // set deleted status and clear category's priority
   music.status = false;
+  music.pri_lyrics_song = null;
+  music.pri_music_prod = null;
+  music.pri_vocal_rec = null;
+  music.pri_music_score = null;
+  music.pri_mix_master = null;
+  music.pri_homepage = null;
 
   try {
     // update status
@@ -155,4 +194,3 @@ exports.getMusics = async (req, res) => {
     });
   }
 };
-

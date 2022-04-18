@@ -56,6 +56,12 @@ exports.getMusics = async () => {
         cat_music_score,
         cat_mix_master,
         show_homepage,
+        pri_lyrics_song,
+        pri_music_prod,
+        pri_vocal_rec,
+        pri_music_score,
+        pri_mix_master,
+        pri_homepage,
         created_at
       FROM
         musics
