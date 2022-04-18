@@ -16,8 +16,8 @@ import vinylPlay from "../../assets/images/vinyl-play.png";
 import vinylDisc from "../../assets/images/vinyl-disc.png";
 import headset from "../../assets/images/vinyl-hp.png";
 import longLogo from "../../assets/images/long-logo.png";
-import bbl from "../../assets/images/bbl.png";
-import bbr from "../../assets/images/bbr.png";
+// import bbl from "../../assets/images/bbl.png";
+// import bbr from "../../assets/images/bbr.png";
 
 import desc1 from "../../assets/images/desc/desc1.png";
 import desc2 from "../../assets/images/desc/desc2.png";
@@ -119,7 +119,7 @@ export default function Home() {
       <div className="page-container">
         {/* Main Section */}
         <div id="main-section">
-          <div>
+          <div id="main-section-play-box">
             <div id="home-vinyl-section">
               <img className="home-vinyl vinyl-play" src={vinylPlay} alt="" />
               <img
@@ -134,16 +134,16 @@ export default function Home() {
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
             {music.select ? (
-              <h1 className="bg-text">{music.select.title}</h1>
+              <h1 className="bg-text home-play-text truncate">{music.select.title}</h1>
             ) : (
-              <h1 className="bg-text">{tempInfo.title}</h1>
+              <h1 className="bg-text home-play-text truncate">{tempInfo.title}</h1>
             )}
             {music.select ? (
-              <h1 className="sm-text avn-medium grey-text">
+              <h1 className="sm-text home-play-text avn-medium grey-text truncate">
                 {music.select.artist}
               </h1>
             ) : (
-              <h1 className="sm-text avn-medium grey-text">
+              <h1 className="sm-text home-play-text avn-medium grey-text truncate">
                 {tempInfo.artist}
               </h1>
             )}
@@ -181,6 +181,7 @@ export default function Home() {
                   loopAdditionalSlides={100}
                   centeredSlides={false}
                   allowTouchMove={false}
+                  spaceBetween={10}
                   autoplay={{
                     delay: 3500,
                   }}

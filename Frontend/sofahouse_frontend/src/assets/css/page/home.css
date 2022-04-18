@@ -9,6 +9,18 @@
   position: relative;
 }
 
+#main-section-play-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home-play-text{
+  width: 250px;
+  text-align: center;
+}
+
 .home-vinyl {
   width: 260px;
   position: relative;

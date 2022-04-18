@@ -45,17 +45,28 @@
   object-fit: cover;
 }
 
-.truncate{
+.vinyl-play-truncate{
   width: 220px;
   text-align: center;
 }
+
+/* .port-truncate-div{
+  width: 120px;
+} */
 
 .port-truncate {
   width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* word-break: break-all; */
+
+  /* transition:text-indent 7s linear; */
 }
+/* 
+.port-truncate:hover {
+  text-indent:-340px;
+} */
 
 .swiper-container {
   width: 100%;
@@ -74,7 +85,7 @@ li {
 .swiper-wrapper {
   padding-inline-start: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .swiper-button-prev,
@@ -91,14 +102,14 @@ li {
 .swiper-slide-prev > .carousal-music,
 .swiper-slide-next > .carousal-music,
 .swiper-slide-active > .carousal-music {
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 .swiper-slide-prev > .carousal-music > img,
 .swiper-slide-next > .carousal-music > img,
 .swiper-slide-active > .carousal-music > img {
-  width: 100px;
-  height: 100px;
+  /* width: 100px;
+  height: 100px; */
 }
 
 .swiper-button-prev:after,
@@ -150,6 +161,8 @@ li {
   padding: 5px 20px;
   background-color: #fffbfa;
   border-radius: 50px;
+
+
 }
 
 .port-play-box:not(:last-child) {

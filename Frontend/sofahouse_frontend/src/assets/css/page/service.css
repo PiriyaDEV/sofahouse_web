@@ -19,6 +19,8 @@
   position: absolute;
   z-index: 3;
   top: -80px;
+  padding: 0px 5px;
+  left: 0px;
 }
 
 #music-main-section > div {
@@ -50,8 +52,10 @@
 }
 
 #production-btn-section {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 10px;
 }
@@ -64,6 +68,7 @@
   border-radius: 12px;
   padding: 2px 15px;
   width: 100%;
+  height: 100%;
 }
 
 .production-active {
@@ -106,9 +111,10 @@
 .service-box {
   position: relative;
   background-color: #ffffff;
-  padding: 20px 0px 20px 50px;
+  padding: 20px 0px 20px 60px;
   margin-left: 100px;
   border-radius: 15px;
+  justify-content: flex-start;
 }
 
 .service-1{

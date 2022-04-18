@@ -12,6 +12,37 @@ export default function AboutUs() {
   return (
     <div id="aboutus" className="section">
       <div className="page-container">
+        
+        {/* Vision Section */}
+        <div id="vision-section">
+          <div
+            className="about-banner"
+            style={{ backgroundImage: `url(${banner1})` }}
+          >
+            <h1 className="bg4-text">Vision</h1>
+            <p className="bg2-text skv-text">
+              “In the next decade, we want to be recognised as <br />
+              innovators within the music industry in Thailand.”
+            </p>
+          </div>
+        </div>
+
+        <hr className="about-hr"></hr>
+
+        {/* Mission Section */}
+        <div id="mission-section">
+          <div
+            className="about-banner"
+            style={{ backgroundImage: `url(${banner2})` }}
+          >
+            <h1 className="bg4-text">Mission</h1>
+            <p className="bg2-text skv-text">
+              “Our Mission is to understand and enhance brand’s <br /> identity
+              through one-stop music service.”
+            </p>
+          </div>
+        </div>
+
         {/* Info Section */}
         <div id="about-info-section">
           <div id="headphone-container">
@@ -98,35 +129,6 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Vision Section */}
-        <div id="vision-section">
-          <div
-            className="about-banner"
-            style={{ backgroundImage: `url(${banner1})` }}
-          >
-            <h1 className="bg4-text">Vision</h1>
-            <p className="bg2-text skv-text">
-              “In the next decade, we want to be recognised as <br />
-              innovators within the music industry in Thailand.”
-            </p>
-          </div>
-        </div>
-
-        <hr className="about-hr"></hr>
-
-        {/* Mission Section */}
-        <div id="mission-section">
-          <div
-            className="about-banner"
-            style={{ backgroundImage: `url(${banner2})` }}
-          >
-            <h1 className="bg4-text">Mission</h1>
-            <p className="bg2-text skv-text">
-              “Our Mission is to understand and enhance brand’s <br /> identity
-              through one-stop music service.”
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

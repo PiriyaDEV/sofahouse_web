@@ -109,11 +109,27 @@ export default function Service() {
               </div>
               {production === "pre-production" && (
                 <div className="service-1">
-                  <p className="md-text avn-medium">
-                    Music Consulting <br className="sv-br" />
-                    Matching Identity <br className="sv-br" />
-                    Mood Landscape <br className="sv-br" />
+                  <p className="md-text avn-bold">
+                    Music Consulting{" "}
+                    <span className="skv-medium">
+                      - ปรึกษาด้านดนตรีและแนวเพลงที่สนใจทำ
+                    </span>
+                    <br className="sv-br" />
+                    Matching Identity{" "}
+                    <span className="skv-medium">
+                      -
+                      การสร้างเสียงและจุดเด่นด้านดนตรีจากความเป็นตัวเองของเราให้แตกต่างจากคนอื่น
+                    </span>
+                    <br className="sv-br" />
+                    Mood Landscape{" "}
+                    <span className="skv-medium">
+                      - จับแนวเพลงที่ชอบกับวิธีการร้องของเราให้ออกมาเป็นเพลงใหม่
+                    </span>
+                    <br className="sv-br" />
                     Reference & Marketing Techniques Regarding Music
+                    <span className="skv-medium">
+                      - วิธีเลือกใช้เสียง แต่งเพลง และร้องให้เพลงติดหูและติดตลาด
+                    </span>
                   </p>
                 </div>
               )}

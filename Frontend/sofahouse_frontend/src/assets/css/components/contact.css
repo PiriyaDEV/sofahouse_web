@@ -1,6 +1,10 @@
 #contact {
   z-index: 9999;
+  position: fixed;
+  bottom: 70px;
+  right: 50px;
 }
+
 #contact-main-btn {
   padding: 5px;
   background-color: #ffffff;
@@ -11,7 +15,71 @@
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   cursor: pointer;
   position: relative;
+  -webkit-animation: breathing 5s ease-out infinite normal;
+    animation: breathing 5s ease-out infinite normal;
 }
+
+#contact-bubble{
+  position: absolute;
+  right: 90px;
+  top: -95px;
+  animation: dropdown 0.5s ease-in-out;
+}
+
+#contact-bubble-box{
+  width: 300px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 15px;
+  text-align: center;
+  font-weight: 900;
+  color: #2d435b;
+  position: relative;
+  border-radius: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#contact-bubble-box:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #fff;
+  border-top: 10px solid #fff;
+  border-bottom: 10px solid transparent;
+  right: 19px;
+  bottom: -15px;
+}
+
+.contact-close {
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  z-index: 99;
+  cursor: pointer;
+}
+.contact-close:hover {
+  opacity: 1;
+}
+.contact-close:before, .contact-close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 20px;
+  width: 2px;
+  background-color: #333;
+}
+.contact-close:before {
+  transform: rotate(45deg);
+}
+.contact-close:after {
+  transform: rotate(-45deg);
+}
+
 
 #paperplane {
   width: 50px;
@@ -65,22 +133,60 @@
   cursor: pointer;
 }
 
-#contact {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
+#contact-tiktok {
+  right: 35px;
+  bottom: -45px;
+  animation: dropdown 2s ease-in-out;
+  cursor: pointer;
+}
+
+@-webkit-keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  50% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 }
 
 @media screen and (max-width: 935px) {
   #contact {
-    bottom: 30px;
+    bottom: 60px;
     right: 30px;
   }
 }
 
 @media screen and (max-width: 767px) {
   #contact {
-    bottom: 25px;
+    bottom: 60px;
     right: 20px;
   }
 
@@ -102,6 +208,10 @@
 
   #contact-ig {
     right: 69px;
+  }
+
+  #contact-tiktok {
+    right: 35px;
   }
 
   #contact-main-btn {

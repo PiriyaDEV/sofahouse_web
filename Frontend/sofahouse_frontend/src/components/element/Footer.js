@@ -18,10 +18,10 @@ export default function Footer() {
         <h1
           className="xm-text avn-book darkgrey-text pointer"
           onClick={() =>
-            linkNewTab("https://g.page/ideo-chula-samyan-01?share")
+            linkNewTab("https://www.facebook.com/sofahouse.th/")
           }
         >
-          Location: https://g.page/ideo-chula-samyan-01?share
+          Facebook: https://www.facebook.com/sofahouse.th/
         </h1>
         <div className="vl"></div>
         <h1 className="xm-text avn-book darkgrey-text">Phone: +66 92-456-4055</h1>

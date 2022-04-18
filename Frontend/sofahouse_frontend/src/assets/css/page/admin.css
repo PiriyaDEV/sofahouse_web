@@ -129,6 +129,7 @@
 
 .list-pics {
   width: 100px;
+  height: 50px;
 }
 
 .list-box {
@@ -139,6 +140,7 @@
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
+  width: 100%;
 }
 
 .list-home{
@@ -187,6 +189,15 @@
 
 .login-input {
   width: 100%;
+}
+
+.pri-input{
+  max-width: 50px;
+  background-color: #ea7155;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
 }
 
 @media screen and (max-width: 1220px) {
@@ -239,5 +250,6 @@
 
   .list-pics {
     width: 80px;
+    height: 40px;
   }
 }

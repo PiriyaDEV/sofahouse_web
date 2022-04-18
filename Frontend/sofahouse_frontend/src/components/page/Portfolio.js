@@ -118,7 +118,11 @@ export default function Portfolio() {
     let initialStateMusic = [];
     initialStateMusic = musicList.filter((musicsList) => musicsList.cat_lyrics_song);
     setMusicCategory(initialStateMusic);
-    setMusicSelect(initialStateMusic[0]);
+    if(initialStateMusic.length >= 3) {
+      setMusicSelect(initialStateMusic[2]);
+    } else {
+      setMusicSelect(initialStateMusic[0]);
+    } 
   }, [musicList]);
 
   useEffect(() => {
@@ -136,7 +140,11 @@ export default function Portfolio() {
   }, [musicCategory]);
 
   useEffect(() => {
-    setMusicSelect(musicListSelect[0]);
+    if(musicListSelect.length >= 3) {
+      setMusicSelect(musicListSelect[2]);
+    } else {
+      setMusicSelect(musicListSelect[0]);
+    } 
   },[musicListSelect])
 
   const picFromGGDrive = (link) => {
@@ -419,9 +427,11 @@ export default function Portfolio() {
                   nextEl: '.music-next',
                 }}
                 slidesPerView={1}
-                loop
+                // loop
+                spaceBetween={10}
                 loopAdditionalSlides={100}
-                centeredSlides={true}
+                allowTouchMove={false}
+                // centeredSlides={true}
                 initialSlide={2}
                 onSlideChange={slideChange}
                 breakpoints={{
@@ -474,9 +484,9 @@ export default function Portfolio() {
                 <img className='port-vinyl vinyl-mc' src={vinylMc} alt='' />
               </div>
               {musicSelect ? (
-                <h1 className='xm-text truncate'>{musicSelect.title}</h1>
+                <h1 className='xm-text vinyl-play-truncate'>{musicSelect.title}</h1>
               ) : (
-                <h1 className='xm-text truncate'>Title</h1>
+                <h1 className='xm-text vinyl-play-truncate'>Title</h1>
               )}
 
               {musicSelect ? (
@@ -542,7 +552,7 @@ export default function Portfolio() {
                       alt=''
                     />
                   )}
-                  <div>
+                  <div className='port-truncate-div'>
                     {music ? (
                       <h1 className='xm-text port-truncate'>{music.title}</h1>
                     ) : (

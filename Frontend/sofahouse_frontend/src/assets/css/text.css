@@ -149,9 +149,12 @@ option {
 
 .truncate {
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* word-wrap: break-word; */
+  /* text-overflow: ellipsis; */
+  /* overflow-wrap: break-word; */
+  word-break: break-all;
 }
 
 .pointer {
