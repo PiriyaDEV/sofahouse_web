@@ -134,18 +134,18 @@ export default function Home() {
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
             {music.select ? (
-              <h1 className="bg-text home-play-text truncate">{music.select.title}</h1>
+              <p className="bg-text home-play-text truncate">{music.select.title}</p>
             ) : (
-              <h1 className="bg-text home-play-text truncate">{tempInfo.title}</h1>
+              <p className="bg-text home-play-text truncate">{tempInfo.title}</p>
             )}
             {music.select ? (
-              <h1 className="sm-text home-play-text avn-medium grey-text truncate">
+              <p className="sm-text home-play-text avn-medium grey-text truncate">
                 {music.select.artist}
-              </h1>
+              </p>
             ) : (
-              <h1 className="sm-text home-play-text avn-medium grey-text truncate">
+              <p className="sm-text home-play-text avn-medium grey-text truncate">
                 {tempInfo.artist}
-              </h1>
+              </p>
             )}
           </div>
 

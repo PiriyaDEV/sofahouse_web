@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -7,8 +7,13 @@ import "../../assets/css/page/aboutUs.css";
 import aboutHeadphone from "../../assets/images/about-us/headphone.png";
 import banner1 from "../../assets/images/about-us/headphones-connected-music-mixer-laptop-music-studio-with-studio-light-close-up.png";
 import banner2 from "../../assets/images/about-us/man-recording-studio-music-production.png";
+import chevron from "../../assets/images/about-us/icons8-chevron-down-96.png"
 
 export default function AboutUs() {
+  const [underStand, setUnderStand] = useState(false);
+  const [flexible, setFlexible] = useState(false);
+  const [professional, setProfessional] = useState(false);
+
   return (
     <div id="aboutus" className="section">
       <div className="page-container">
@@ -53,15 +58,19 @@ export default function AboutUs() {
 
           <div id="about-description">
             <div>
-              <div className="about-orange-box">
+              <div className="about-orange-box" onClick={() => setUnderStand(!underStand)}>
                 <h1 className="md-text">UNDERSTANDING</h1>
+                <img className="chevron" src={chevron} alt=""/>
               </div>
-              <h1 className="xm-text skv-medium">
-                เรา<span className="skv-bold">เข้าใจ</span>
+              { underStand === true && (
+                <h1 className={underStand? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
+                เรา<span className='skv-bold'>เข้าใจ</span>
                 และพร้อมสร้างผลงานตวาม
                 <span className="skv-bold">ความต้องการของคุณ</span>
               </h1>
-              <p className="xm-text skv-medium">
+              )}
+              { underStand === true && (
+              <p className={underStand? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
                 พวกเราพร้อมที่จะเป็นพาร์ทเนอร์ในการช่วย
                 <span className="skv-bold">
                   ดึงเอกลักษณ์และตัวตนของแบรนด์
@@ -70,39 +79,52 @@ export default function AboutUs() {
                 <span className="skv-bold">เข้าใจ</span>
                 และมอบความ<span className="skv-bold">สบายใจ</span> เพื่อผลงานที่
                 <span className="skv-bold">ดีและตอบโจทย์คุณมากที่สุด</span>
-              </p>
+              </p> 
+              )}
             </div>
             <div>
-              <div className="about-orange-box">
+              <div className="about-orange-box" onClick={() => setFlexible(!flexible)}>
                 <h1 className="md-text">FLEXIBLE</h1>
+                <img className="chevron" src={chevron} alt=""/>
               </div>
-              <h1 className="xm-text skv-medium">
+              { flexible === true && (
+                <h1 className={flexible? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
                 เรา<span className="skv-bold">ปรับเปลี่ยน</span>
                 การทำงานไปพร้อมกับคุณ
-              </h1>
-              <p className="xm-text skv-medium">
+                </h1>
+              )}
+              
+              { flexible === true && (
+                <p className={flexible? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
                 พวกเรามีความยืดหยุ่นและสามารถ
                 <span className="skv-bold">ปรับตัวเข้ากับตัวตนของแบรนด์</span>
                 และ<span className="skv-bold">แนวดนตรีที่หลากหลาย</span>
                 ในแต่ละงานและสถานการณ์ ด้วยทีมงานรุ่นใหม่
                 ที่ไม่มีข้อจำกัดด้านแนวดนตรี
-              </p>
+                </p>
+              )}
             </div>
             <div>
-              <div className="about-orange-box">
+              <div className="about-orange-box" onClick={() => setProfessional(!professional)}>
                 <h1 className="md-text">PROFESSIONAL</h1>
+                <img className="chevron" src={chevron} alt=""/>
               </div>
-              <h1 className="xm-text skv-medium">
+              { professional === true && (
+                <h1 className={professional? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
                 เราสร้างสรรค์ผลงาน
                 <span className="skv-bold">อย่างมืออาชีพ</span>
-              </h1>
-              <p className="xm-text skv-medium">
-                ด้วยทีมงานที่มากประสบการณ์เรื่องดนตรีและเนื้อร้อง
-                ทำให้โซฟาเฮ้าส์สามารถเป็นที่ปรึกษา ช่วยวิเคราะห์
-                และให้คำแนะนำเพื่อสร้างสรรค์ เพลงที่
-                <span className="skv-bold">ตอบโจทย์ความต้องการ</span>
-                ของคุณมากที่สุด
-              </p>
+                </h1>
+              )}
+
+              { professional === true && ( 
+                 <p className={professional? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
+                 ด้วยทีมงานที่มากประสบการณ์เรื่องดนตรีและเนื้อร้อง
+                 ทำให้โซฟาเฮ้าส์สามารถเป็นที่ปรึกษา ช่วยวิเคราะห์
+                 และให้คำแนะนำเพื่อสร้างสรรค์ เพลงที่
+                 <span className="skv-bold">ตอบโจทย์ความต้องการ</span>
+                 ของคุณมากที่สุด
+                </p>
+              )}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 #contact {
   z-index: 9999;
   position: fixed;
-  bottom: 70px;
+  bottom: 55px;
   right: 50px;
 }
 
@@ -182,6 +182,21 @@
     bottom: 60px;
     right: 30px;
   }
+
+  #contact-bubble-box{
+    width: 250px;
+    margin: 50px auto;
+    padding: 15px;
+    right: -15px;
+    bottom: -15px;
+  }
+
+  .contact-close {
+    left: 25px;
+    top: 65px;
+    width: 32px;
+    height: 32px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -217,5 +232,27 @@
   #contact-main-btn {
     width: 50px;
     height: 50px;
+  }
+}
+
+
+@media screen and (max-width: 414px) {
+#contact-bubble-box{
+  width: 150px;
+  margin: 50px auto;
+  padding: 10px 15px;
+  right: -30px;
+  bottom: -15px;
+}
+
+.contact-close {
+  left: 28px;
+  top: 65px;
+  width: 15px;
+  height: 15px;
+  }
+
+  .contact-close:before, .contact-close:after {
+    height: 15px;
   }
 }

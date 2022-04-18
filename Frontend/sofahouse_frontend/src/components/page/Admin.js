@@ -49,7 +49,12 @@ export default function Admin() {
     cat_music_score: false,
     cat_mix_master: false,
     show_homepage: false,
-    pri_homepage: null,
+    pri_lyrics_song: 1,
+    pri_music_prod: 1,
+    pri_vocal_rec: 1,
+    pri_music_score: 1,
+    pri_mix_master: 1,
+    pri_homepage: 1,
   };
 
   const initialEditMusicState = {
@@ -65,6 +70,12 @@ export default function Admin() {
     cat_music_score: false,
     cat_mix_master: false,
     show_homepage: false,
+    pri_lyrics_song: 1,
+    pri_music_prod: 1,
+    pri_vocal_rec: 1,
+    pri_music_score: 1,
+    pri_mix_master: 1,
+    pri_homepage: 1,
   };
 
   const checkboxField = [
@@ -176,28 +187,6 @@ export default function Admin() {
     }
 
     return true;
-  };
-
-  // clear its priority if the category doesn't exist
-  const clearCategoryPriority = (music) => {
-    if (!music.cat_lyrics_song) {
-      music.pri_lyrics_song = null;
-    }
-    if (!music.cat_music_prod) {
-      music.pri_music_prod = null;
-    }
-    if (!music.cat_vocal_rec) {
-      music.pri_vocal_rec = null;
-    }
-    if (!music.cat_music_score) {
-      music.pri_music_score = null;
-    }
-    if (!music.cat_mix_master) {
-      music.pri_mix_master = null;
-    }
-    if (!music.show_homepage) {
-      music.pri_homepage = null;
-    }
   };
 
   const addMusic = async () => {
@@ -421,9 +410,11 @@ export default function Admin() {
               />
               <input
                 className="sm-text pri-input"
-                name="cover_url"
-                maxLength="255"
-                value="null"
+                name="pri_lyrics_song"
+                type="number"
+                min="1"
+                value={newMusic.pri_lyrics_song}
+                disabled={!newMusic.cat_lyrics_song}
                 onChange={handleChangeAddMusic}
               />
             </div>
@@ -439,9 +430,11 @@ export default function Admin() {
               />
               <input
                 className="sm-text pri-input"
-                name="cover_url"
-                maxLength="255"
-                value="null"
+                name="pri_music_prod"
+                type="number"
+                min="1"
+                value={newMusic.pri_music_prod}
+                disabled={!newMusic.cat_music_prod}
                 onChange={handleChangeAddMusic}
               />
             </div>
@@ -457,9 +450,11 @@ export default function Admin() {
               />
               <input
                 className="sm-text pri-input"
-                name="cover_url"
-                maxLength="255"
-                value="null"
+                name="pri_vocal_rec"
+                type="number"
+                min="1"
+                value={newMusic.pri_vocal_rec}
+                disabled={!newMusic.cat_vocal_rec}
                 onChange={handleChangeAddMusic}
               />
             </div>
@@ -475,9 +470,11 @@ export default function Admin() {
               />
               <input
                 className="sm-text pri-input"
-                name="cover_url"
-                maxLength="255"
-                value="null"
+                name="pri_music_score"
+                type="number"
+                min="1"
+                value={newMusic.pri_music_score}
+                disabled={!newMusic.cat_music_score}
                 onChange={handleChangeAddMusic}
               />
             </div>
@@ -493,9 +490,11 @@ export default function Admin() {
               />
               <input
                 className="sm-text pri-input"
-                name="cover_url"
-                maxLength="255"
-                value="null"
+                name="pri_mix_master"
+                type="number"
+                min="1"
+                value={newMusic.pri_mix_master}
+                disabled={!newMusic.cat_mix_master}
                 onChange={handleChangeAddMusic}
               />
             </div>
@@ -580,10 +579,12 @@ export default function Admin() {
                     />
                     <input
                       className="sm-text pri-input"
-                      name="cover_url"
-                      maxLength="255"
-                      value="null"
-                      onChange={handleChangeAddMusic}
+                      name="pri_lyrics_song"
+                      type="number"
+                      min="1"
+                      value={editMusic.pri_lyrics_song}
+                      disabled={!editMusic.cat_lyrics_song}
+                      onChange={handleChangeEditMusic}
                     />
                   </div>
 
@@ -598,10 +599,12 @@ export default function Admin() {
                     />
                     <input
                       className="sm-text pri-input"
-                      name="cover_url"
-                      maxLength="255"
-                      value="null"
-                      onChange={handleChangeAddMusic}
+                      name="pri_music_prod"
+                      type="number"
+                      min="1"
+                      value={editMusic.pri_music_prod}
+                      disabled={!editMusic.cat_music_prod}
+                      onChange={handleChangeEditMusic}
                     />
                   </div>
 
@@ -616,10 +619,12 @@ export default function Admin() {
                     />
                     <input
                       className="sm-text pri-input"
-                      name="cover_url"
-                      maxLength="255"
-                      value="null"
-                      onChange={handleChangeAddMusic}
+                      name="pri_vocal_rec"
+                      type="number"
+                      min="1"
+                      value={editMusic.pri_vocal_rec}
+                      disabled={!editMusic.cat_vocal_rec}
+                      onChange={handleChangeEditMusic}
                     />
                   </div>
 
@@ -634,10 +639,12 @@ export default function Admin() {
                     />
                     <input
                       className="sm-text pri-input"
-                      name="cover_url"
-                      maxLength="255"
-                      value="null"
-                      onChange={handleChangeAddMusic}
+                      name="pri_music_score"
+                      type="number"
+                      min="1"
+                      value={editMusic.pri_music_score}
+                      disabled={!editMusic.cat_music_score}
+                      onChange={handleChangeEditMusic}
                     />
                   </div>
 
@@ -652,10 +659,12 @@ export default function Admin() {
                     />
                     <input
                       className="sm-text pri-input"
-                      name="cover_url"
-                      maxLength="255"
-                      value="null"
-                      onChange={handleChangeAddMusic}
+                      name="pri_mix_master"
+                      type="number"
+                      min="1"
+                      value={editMusic.pri_mix_master}
+                      disabled={!editMusic.cat_mix_master}
+                      onChange={handleChangeEditMusic}
                     />
                   </div>
                 </div>
@@ -671,10 +680,12 @@ export default function Admin() {
                 />
                 <input
                   className="sm-text pri-input"
-                  name="cover_url"
-                  maxLength="255"
-                  value="null"
-                  onChange={handleChangeAddMusic}
+                  name="pri_homepage"
+                  type="number"
+                  min="1"
+                  value={editMusic.pri_homepage}
+                  disabled={!editMusic.pri_homepage}
+                  onChange={handleChangeEditMusic}
                 />
               </div>
               {/* Invalid */}
@@ -721,7 +732,7 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">1</h1>
+                      <h1 className="sm-text">{music.pri_lyrics_song}</h1>
                     </div>
                     <div>
                       <img
@@ -753,6 +764,9 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
+                      <h1 className="sm-text">{music.pri_music_prod}</h1>
+                    </div>
+                    <div>
                       <img
                         className="list-pics"
                         src={thumnail(music.cover_url)}
@@ -781,6 +795,9 @@ export default function Admin() {
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
+                    <div>
+                      <h1 className="sm-text">{music.pri_vocal_rec}</h1>
+                    </div>
                     <div>
                       <img
                         className="list-pics"
@@ -811,6 +828,9 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
+                      <h1 className="sm-text">{music.pri_music_score}</h1>
+                    </div>
+                    <div>
                       <img
                         className="list-pics"
                         src={thumnail(music.cover_url)}
@@ -839,6 +859,9 @@ export default function Admin() {
                     key={i}
                     onClick={() => selectMusic(music)}
                   >
+                    <div>
+                      <h1 className="sm-text">{music.pri_mix_master}</h1>
+                    </div>
                     <div>
                       <img
                         className="list-pics"
