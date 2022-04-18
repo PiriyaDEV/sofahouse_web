@@ -416,6 +416,13 @@
   .home-vinyl {
     width: 170px;
   }
+  #home-vinyl-section{
+    display: none !important;
+  }
+  #main-section{
+    display: flex;
+    flex-direction: column-reverse;
+  }
   br {
     display: none;
   }
@@ -425,8 +432,8 @@
   }
 
   .home-player {
-    width: 80% !important;
-    height: 80% !important;
+    width: 90% !important;
+    height: 90% !important;
   }
 
   #update-section {
@@ -435,12 +442,17 @@
 
   #mid-img {
     height: 70%;
+    padding: 10px;
   }
 }
 
 @media screen and (max-width: 414px) {
   .home-vinyl {
     width: 140px;
+  }
+
+  .home-play-text{
+    width: 80%;
   }
 
   .fb-iframe {

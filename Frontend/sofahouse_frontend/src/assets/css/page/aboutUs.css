@@ -23,8 +23,9 @@
 #about-description {
   display: flex;
   justify-content: space-between;
-  gap: 50px;
+  gap: 30px;
   margin-top: 40px;
+  flex-direction: column;
 }
 
 .about-orange-box {
@@ -34,13 +35,23 @@
   padding: 7px 15px;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   height: fit-content;
+  position: relative;
+  cursor: pointer;
+}
+
+.chevron{
+  width: 20px;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 27%;
 }
 
 #about-description > div {
   text-align: center;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr 0.5fr 1fr;
+  /* grid-template-rows: 1fr 0.5fr 1fr; */
 }
 
 #about-description > div > h1 {
@@ -91,9 +102,31 @@
   margin-bottom: 55px;
 }
 
+.answer {
+  display: none;
+}
+
+.answer.active {
+  display: block;
+  padding-top: 20px;
+  height: 0%;
+  animation: slidein 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0.3;
+    transform: translateY(-20%)
+  } to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
 @media screen and (max-width: 980px) {
   #about-description > div {
-    grid-template-rows: 0.8fr 0.5fr 1fr;
+    /* grid-template-rows: 0.8fr 0.5fr 1fr; */
   }
 
   #why-box {
@@ -114,11 +147,23 @@
     padding: 80px 30px 30px 30px;
     margin-bottom: 40px;
   }
+
+  .chevron{
+    right: 20px;
+  }
 }
 
 @media screen and (max-width: 700px) {
   #about-description {
     display: block;
+  }
+
+  .answer.active {
+    padding-top: 15px;
+  }
+
+  #about-info-section{
+    border-radius: 20px;
   }
 
   .about-banner {
@@ -131,7 +176,7 @@
   }
 
   .about-orange-box {
-    margin: 20px 0px;
+    margin-top: 20px;
   }
 }
 
@@ -144,8 +189,16 @@
     border-radius: 34px;
   }
 
+  .answer.active {
+    padding-top: 10px;
+  }
+
   .about-banner{
     border-radius: 30px;
+  }
+
+  .chevron{
+    right: 10px;
   }
 
   #why-box {
