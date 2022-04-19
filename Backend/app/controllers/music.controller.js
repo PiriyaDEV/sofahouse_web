@@ -5,22 +5,22 @@ const clearCategoryPriority = (musicData) => {
   let music = musicData;
 
   if (music.hasOwnProperty("cat_lyrics_song") && !music.cat_lyrics_song) {
-    music.pri_lyrics_song = null;
+    music.pri_lyrics_song = 0;
   }
   if (music.hasOwnProperty("cat_music_prod") && !music.cat_music_prod) {
-    music.pri_music_prod = null;
+    music.pri_music_prod = 0;
   }
   if (music.hasOwnProperty("cat_vocal_rec") && !music.cat_vocal_rec) {
-    music.pri_vocal_rec = null;
+    music.pri_vocal_rec = 0;
   }
   if (music.hasOwnProperty("cat_music_score") && !music.cat_music_score) {
-    music.pri_music_score = null;
+    music.pri_music_score = 0;
   }
   if (music.hasOwnProperty("cat_mix_master") && !music.cat_mix_master) {
-    music.pri_mix_master = null;
+    music.pri_mix_master = 0;
   }
   if (music.hasOwnProperty("show_homepage") && !music.show_homepage) {
-    music.pri_homepage = null;
+    music.pri_homepage = 0;
   }
 
   return music;
@@ -50,7 +50,13 @@ exports.add = async (req, res) => {
     !music.hasOwnProperty("cat_vocal_rec") ||
     !music.hasOwnProperty("cat_music_score") ||
     !music.hasOwnProperty("cat_mix_master") ||
-    !music.hasOwnProperty("show_homepage")
+    !music.hasOwnProperty("show_homepage") ||
+    !music.hasOwnProperty("pri_lyrics_song") ||
+    !music.hasOwnProperty("pri_music_prod") ||
+    !music.hasOwnProperty("pri_vocal_rec") ||
+    !music.hasOwnProperty("pri_music_score") ||
+    !music.hasOwnProperty("pri_mix_master") ||
+    !music.hasOwnProperty("pri_homepage")
   ) {
     // failed, information not found
     return res.status(200).json({
@@ -139,7 +145,7 @@ exports.delete = async (req, res) => {
     });
   }
 
-  let music = req.body.music;
+  const music = req.body.music;
 
   // check music id exists
   if (!music.hasOwnProperty("id")) {
@@ -152,12 +158,12 @@ exports.delete = async (req, res) => {
 
   // set deleted status and clear category's priority
   music.status = false;
-  music.pri_lyrics_song = null;
-  music.pri_music_prod = null;
-  music.pri_vocal_rec = null;
-  music.pri_music_score = null;
-  music.pri_mix_master = null;
-  music.pri_homepage = null;
+  music.pri_lyrics_song = 0;
+  music.pri_music_prod = 0;
+  music.pri_vocal_rec = 0;
+  music.pri_music_score = 0;
+  music.pri_mix_master = 0;
+  music.pri_homepage = 0;
 
   try {
     // update status

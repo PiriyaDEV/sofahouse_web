@@ -49,12 +49,12 @@ export default function Admin() {
     cat_music_score: false,
     cat_mix_master: false,
     show_homepage: false,
-    pri_lyrics_song: 1,
-    pri_music_prod: 1,
-    pri_vocal_rec: 1,
-    pri_music_score: 1,
-    pri_mix_master: 1,
-    pri_homepage: 1,
+    pri_lyrics_song: 0,
+    pri_music_prod: 0,
+    pri_vocal_rec: 0,
+    pri_music_score: 0,
+    pri_mix_master: 0,
+    pri_homepage: 0,
   };
 
   const initialEditMusicState = {
@@ -70,12 +70,12 @@ export default function Admin() {
     cat_music_score: false,
     cat_mix_master: false,
     show_homepage: false,
-    pri_lyrics_song: 1,
-    pri_music_prod: 1,
-    pri_vocal_rec: 1,
-    pri_music_score: 1,
-    pri_mix_master: 1,
-    pri_homepage: 1,
+    pri_lyrics_song: 0,
+    pri_music_prod: 0,
+    pri_vocal_rec: 0,
+    pri_music_score: 0,
+    pri_mix_master: 0,
+    pri_homepage: 0,
   };
 
   const checkboxField = [
@@ -168,7 +168,13 @@ export default function Admin() {
       !music.hasOwnProperty("cat_vocal_rec") ||
       !music.hasOwnProperty("cat_music_score") ||
       !music.hasOwnProperty("cat_mix_master") ||
-      !music.hasOwnProperty("show_homepage")
+      !music.hasOwnProperty("show_homepage") ||
+      !music.hasOwnProperty("pri_lyrics_song") ||
+      !music.hasOwnProperty("pri_music_prod") ||
+      !music.hasOwnProperty("pri_vocal_rec") ||
+      !music.hasOwnProperty("pri_music_score") ||
+      !music.hasOwnProperty("pri_mix_master") ||
+      !music.hasOwnProperty("pri_homepage")
     ) {
       return false;
     }
@@ -189,6 +195,27 @@ export default function Admin() {
     return true;
   };
 
+  const validateCategoryPriority = (music) => {
+    if (
+      music.pri_lyrics_song === "" ||
+      music.pri_lyrics_song < 0 ||
+      music.pri_music_prod === "" ||
+      music.pri_music_prod < 0 ||
+      music.pri_vocal_rec === "" ||
+      music.pri_vocal_rec < 0 ||
+      music.pri_music_score === "" ||
+      music.pri_music_score < 0 ||
+      music.pri_mix_master === "" ||
+      music.pri_mix_master < 0 ||
+      music.pri_homepage === "" ||
+      music.pri_homepage < 0
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
   const addMusic = async () => {
     Object.keys(newMusic).forEach((key) => {
       if (typeof newMusic[key] === "string") {
@@ -200,6 +227,8 @@ export default function Admin() {
       return showAddMusicError("Please fill all required information!");
     } else if (!validateCategory(newMusic)) {
       return showAddMusicError("Require at least one category!");
+    } else if (!validateCategoryPriority(newMusic)) {
+      return showAddMusicError("Priority must be 0 or higher!");
     }
 
     await musicService
@@ -231,6 +260,8 @@ export default function Admin() {
       return showEditMusicError("Please fill all required information!");
     } else if (!validateCategory(editMusic)) {
       return showEditMusicError("Require at least one category!");
+    } else if (!validateCategoryPriority(editMusic)) {
+      return showEditMusicError("Priority must be 0 or higher!");
     }
 
     let musicToUpdate = {
@@ -385,7 +416,7 @@ export default function Admin() {
               className="sm-text pri-input"
               name="pri_homepage"
               type="number"
-              min="1"
+              min="0"
               value={newMusic.pri_homepage}
               disabled={!newMusic.show_homepage}
               onChange={handleChangeAddMusic}
@@ -412,7 +443,7 @@ export default function Admin() {
                 className="sm-text pri-input"
                 name="pri_lyrics_song"
                 type="number"
-                min="1"
+                min="0"
                 value={newMusic.pri_lyrics_song}
                 disabled={!newMusic.cat_lyrics_song}
                 onChange={handleChangeAddMusic}
@@ -432,7 +463,7 @@ export default function Admin() {
                 className="sm-text pri-input"
                 name="pri_music_prod"
                 type="number"
-                min="1"
+                min="0"
                 value={newMusic.pri_music_prod}
                 disabled={!newMusic.cat_music_prod}
                 onChange={handleChangeAddMusic}
@@ -452,7 +483,7 @@ export default function Admin() {
                 className="sm-text pri-input"
                 name="pri_vocal_rec"
                 type="number"
-                min="1"
+                min="0"
                 value={newMusic.pri_vocal_rec}
                 disabled={!newMusic.cat_vocal_rec}
                 onChange={handleChangeAddMusic}
@@ -472,7 +503,7 @@ export default function Admin() {
                 className="sm-text pri-input"
                 name="pri_music_score"
                 type="number"
-                min="1"
+                min="0"
                 value={newMusic.pri_music_score}
                 disabled={!newMusic.cat_music_score}
                 onChange={handleChangeAddMusic}
@@ -492,7 +523,7 @@ export default function Admin() {
                 className="sm-text pri-input"
                 name="pri_mix_master"
                 type="number"
-                min="1"
+                min="0"
                 value={newMusic.pri_mix_master}
                 disabled={!newMusic.cat_mix_master}
                 onChange={handleChangeAddMusic}
@@ -581,7 +612,7 @@ export default function Admin() {
                       className="sm-text pri-input"
                       name="pri_lyrics_song"
                       type="number"
-                      min="1"
+                      min="0"
                       value={editMusic.pri_lyrics_song}
                       disabled={!editMusic.cat_lyrics_song}
                       onChange={handleChangeEditMusic}
@@ -601,7 +632,7 @@ export default function Admin() {
                       className="sm-text pri-input"
                       name="pri_music_prod"
                       type="number"
-                      min="1"
+                      min="0"
                       value={editMusic.pri_music_prod}
                       disabled={!editMusic.cat_music_prod}
                       onChange={handleChangeEditMusic}
@@ -621,7 +652,7 @@ export default function Admin() {
                       className="sm-text pri-input"
                       name="pri_vocal_rec"
                       type="number"
-                      min="1"
+                      min="0"
                       value={editMusic.pri_vocal_rec}
                       disabled={!editMusic.cat_vocal_rec}
                       onChange={handleChangeEditMusic}
@@ -641,7 +672,7 @@ export default function Admin() {
                       className="sm-text pri-input"
                       name="pri_music_score"
                       type="number"
-                      min="1"
+                      min="0"
                       value={editMusic.pri_music_score}
                       disabled={!editMusic.cat_music_score}
                       onChange={handleChangeEditMusic}
@@ -661,7 +692,7 @@ export default function Admin() {
                       className="sm-text pri-input"
                       name="pri_mix_master"
                       type="number"
-                      min="1"
+                      min="0"
                       value={editMusic.pri_mix_master}
                       disabled={!editMusic.cat_mix_master}
                       onChange={handleChangeEditMusic}
@@ -682,9 +713,9 @@ export default function Admin() {
                   className="sm-text pri-input"
                   name="pri_homepage"
                   type="number"
-                  min="1"
+                  min="0"
                   value={editMusic.pri_homepage}
-                  disabled={!editMusic.pri_homepage}
+                  disabled={!editMusic.show_homepage}
                   onChange={handleChangeEditMusic}
                 />
               </div>
