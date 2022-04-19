@@ -113,32 +113,52 @@ export default function Admin() {
   };
 
   const handleChangeAddMusic = (event) => {
+    let updatedMusic = newMusic;
     let value = event.target.value;
     let name = event.target.name;
 
     if (checkboxField.includes(name)) {
       value = event.target.checked;
+      if (!value) updatedMusic[name.replace(/cat|show/, "pri")] = 0;
     }
 
-    setNewMusic({ ...newMusic, [name]: value });
+    updatedMusic[name] = value;
+    setNewMusic(updatedMusic);
     setAddMusicError(initialErrorState);
   };
 
   const handleChangeEditMusic = (event) => {
+    let updatedMusic = editMusic;
     let value = event.target.value;
     let name = event.target.name;
 
     if (checkboxField.includes(name)) {
       value = event.target.checked;
+      if (!value) updatedMusic[name.replace(/cat|show/, "pri")] = 0;
     }
 
-    setEditMusic({ ...editMusic, [name]: value });
+    updatedMusic[name] = value;
+    setEditMusic(updatedMusic);
     if (editMusic.id !== 0) {
       setEditMusicError(initialErrorState);
     }
   };
 
   const selectMusic = (music) => {
+    if (music.pri_lyrics_song === 2147483647) {
+      music.pri_lyrics_song = 0;
+    } else if (music.pri_music_prod === 2147483647) {
+      music.pri_music_prod = 0;
+    } else if (music.pri_vocal_rec === 2147483647) {
+      music.pri_vocal_rec = 0;
+    } else if (music.pri_music_score === 2147483647) {
+      music.pri_music_score = 0;
+    } else if (music.pri_mix_master === 2147483647) {
+      music.pri_mix_master = 0;
+    } else if (music.pri_homepage === 2147483647) {
+      music.pri_homepage = 0;
+    }
+
     setEditMusic(music);
     setTempMusic(music);
     setEditMusicError(initialErrorState);
@@ -199,16 +219,22 @@ export default function Admin() {
     if (
       music.pri_lyrics_song === "" ||
       music.pri_lyrics_song < 0 ||
+      music.pri_lyrics_song > 2147483647 ||
       music.pri_music_prod === "" ||
       music.pri_music_prod < 0 ||
+      music.pri_music_prod > 2147483647 ||
       music.pri_vocal_rec === "" ||
       music.pri_vocal_rec < 0 ||
+      music.pri_vocal_rec > 2147483647 ||
       music.pri_music_score === "" ||
       music.pri_music_score < 0 ||
+      music.pri_music_score > 2147483647 ||
       music.pri_mix_master === "" ||
       music.pri_mix_master < 0 ||
+      music.pri_mix_master > 2147483647 ||
       music.pri_homepage === "" ||
-      music.pri_homepage < 0
+      music.pri_homepage < 0 ||
+      music.pri_homepage > 2147483647
     ) {
       return false;
     }
@@ -413,10 +439,13 @@ export default function Admin() {
               onChange={handleChangeAddMusic}
             />
             <input
-              className="sm-text pri-input"
+              className={`sm-text pri-input ${
+                !newMusic.show_homepage ? "pri-disabled" : null
+              }`}
               name="pri_homepage"
               type="number"
               min="0"
+              max="2147483647"
               value={newMusic.pri_homepage}
               disabled={!newMusic.show_homepage}
               onChange={handleChangeAddMusic}
@@ -440,10 +469,13 @@ export default function Admin() {
                 onChange={handleChangeAddMusic}
               />
               <input
-                className="sm-text pri-input"
+                className={`sm-text pri-input ${
+                  !newMusic.cat_lyrics_song ? "pri-disabled" : null
+                }`}
                 name="pri_lyrics_song"
                 type="number"
                 min="0"
+                max="2147483647"
                 value={newMusic.pri_lyrics_song}
                 disabled={!newMusic.cat_lyrics_song}
                 onChange={handleChangeAddMusic}
@@ -460,10 +492,13 @@ export default function Admin() {
                 onChange={handleChangeAddMusic}
               />
               <input
-                className="sm-text pri-input"
+                className={`sm-text pri-input ${
+                  !newMusic.cat_music_prod ? "pri-disabled" : null
+                }`}
                 name="pri_music_prod"
                 type="number"
                 min="0"
+                max="2147483647"
                 value={newMusic.pri_music_prod}
                 disabled={!newMusic.cat_music_prod}
                 onChange={handleChangeAddMusic}
@@ -480,10 +515,13 @@ export default function Admin() {
                 onChange={handleChangeAddMusic}
               />
               <input
-                className="sm-text pri-input"
+                className={`sm-text pri-input ${
+                  !newMusic.cat_vocal_rec ? "pri-disabled" : null
+                }`}
                 name="pri_vocal_rec"
                 type="number"
                 min="0"
+                max="2147483647"
                 value={newMusic.pri_vocal_rec}
                 disabled={!newMusic.cat_vocal_rec}
                 onChange={handleChangeAddMusic}
@@ -500,10 +538,13 @@ export default function Admin() {
                 onChange={handleChangeAddMusic}
               />
               <input
-                className="sm-text pri-input"
+                className={`sm-text pri-input ${
+                  !newMusic.cat_music_score ? "pri-disabled" : null
+                }`}
                 name="pri_music_score"
                 type="number"
                 min="0"
+                max="2147483647"
                 value={newMusic.pri_music_score}
                 disabled={!newMusic.cat_music_score}
                 onChange={handleChangeAddMusic}
@@ -520,10 +561,13 @@ export default function Admin() {
                 onChange={handleChangeAddMusic}
               />
               <input
-                className="sm-text pri-input"
+                className={`sm-text pri-input ${
+                  !newMusic.cat_mix_master ? "pri-disabled" : null
+                }`}
                 name="pri_mix_master"
                 type="number"
                 min="0"
+                max="2147483647"
                 value={newMusic.pri_mix_master}
                 disabled={!newMusic.cat_mix_master}
                 onChange={handleChangeAddMusic}
@@ -547,7 +591,7 @@ export default function Admin() {
 
         <div id="temp-music" className="section">
           <div id="temp-music-container">
-            <div id="temp-add-img">
+            <div id="temp-add-img" className="section">
               {!editMusic.cover_url ? (
                 <div className="dummy-img-admin" />
               ) : (
@@ -609,10 +653,13 @@ export default function Admin() {
                       onChange={handleChangeEditMusic}
                     />
                     <input
-                      className="sm-text pri-input"
+                      className={`sm-text pri-input ${
+                        !editMusic.cat_lyrics_song ? "pri-disabled" : null
+                      }`}
                       name="pri_lyrics_song"
                       type="number"
                       min="0"
+                      max="2147483647"
                       value={editMusic.pri_lyrics_song}
                       disabled={!editMusic.cat_lyrics_song}
                       onChange={handleChangeEditMusic}
@@ -629,10 +676,13 @@ export default function Admin() {
                       onChange={handleChangeEditMusic}
                     />
                     <input
-                      className="sm-text pri-input"
+                      className={`sm-text pri-input ${
+                        !editMusic.cat_music_prod ? "pri-disabled" : null
+                      }`}
                       name="pri_music_prod"
                       type="number"
                       min="0"
+                      max="2147483647"
                       value={editMusic.pri_music_prod}
                       disabled={!editMusic.cat_music_prod}
                       onChange={handleChangeEditMusic}
@@ -649,10 +699,13 @@ export default function Admin() {
                       onChange={handleChangeEditMusic}
                     />
                     <input
-                      className="sm-text pri-input"
+                      className={`sm-text pri-input ${
+                        !editMusic.cat_vocal_rec ? "pri-disabled" : null
+                      }`}
                       name="pri_vocal_rec"
                       type="number"
                       min="0"
+                      max="2147483647"
                       value={editMusic.pri_vocal_rec}
                       disabled={!editMusic.cat_vocal_rec}
                       onChange={handleChangeEditMusic}
@@ -669,10 +722,13 @@ export default function Admin() {
                       onChange={handleChangeEditMusic}
                     />
                     <input
-                      className="sm-text pri-input"
+                      className={`sm-text pri-input ${
+                        !editMusic.cat_music_score ? "pri-disabled" : null
+                      }`}
                       name="pri_music_score"
                       type="number"
                       min="0"
+                      max="2147483647"
                       value={editMusic.pri_music_score}
                       disabled={!editMusic.cat_music_score}
                       onChange={handleChangeEditMusic}
@@ -689,10 +745,13 @@ export default function Admin() {
                       onChange={handleChangeEditMusic}
                     />
                     <input
-                      className="sm-text pri-input"
+                      className={`sm-text pri-input ${
+                        !editMusic.cat_mix_master ? "pri-disabled" : null
+                      }`}
                       name="pri_mix_master"
                       type="number"
                       min="0"
+                      max="2147483647"
                       value={editMusic.pri_mix_master}
                       disabled={!editMusic.cat_mix_master}
                       onChange={handleChangeEditMusic}
@@ -710,10 +769,13 @@ export default function Admin() {
                   onChange={handleChangeEditMusic}
                 />
                 <input
-                  className="sm-text pri-input"
+                  className={`sm-text pri-input ${
+                    !editMusic.show_homepage ? "pri-disabled" : null
+                  }`}
                   name="pri_homepage"
                   type="number"
                   min="0"
+                  max="2147483647"
                   value={editMusic.pri_homepage}
                   disabled={!editMusic.show_homepage}
                   onChange={handleChangeEditMusic}
@@ -748,12 +810,18 @@ export default function Admin() {
         <div id="music-list">
           <h1 className="bg-text">Music List</h1>
 
-          <h1 className="sm-text">Lyrics/Song Writing</h1>
+          <h1 className="sm-text">Homepage</h1>
 
           <div className="cat-list">
             {musicList &&
               musicList
-                .filter((music) => music.cat_lyrics_song)
+                .filter((music) => music.show_homepage)
+                .map((music) =>
+                  music.pri_homepage === 0
+                    ? { ...music, pri_homepage: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_homepage - b.pri_homepage)
                 .map((music, i) => (
                   <div
                     className={`list-box ${
@@ -763,7 +831,53 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">{music.pri_lyrics_song}</h1>
+                      {music.pri_homepage === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_homepage}</h1>
+                      )}
+                    </div>
+                    <div>
+                      <img
+                        className="list-pics"
+                        src={thumnail(music.cover_url)}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h1 className="sm-text">{music.title}</h1>
+                      <h1 className="ssm-text">{music.artist}</h1>
+                    </div>
+                  </div>
+                ))}
+          </div>
+
+          <h1 className="sm-text">Lyrics/Song Writing</h1>
+
+          <div className="cat-list">
+            {musicList &&
+              musicList
+                .filter((music) => music.cat_lyrics_song)
+                .map((music) =>
+                  music.pri_lyrics_song === 0
+                    ? { ...music, pri_lyrics_song: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_lyrics_song - b.pri_lyrics_song)
+                .map((music, i) => (
+                  <div
+                    className={`list-box ${
+                      music.show_homepage === 1 ? "list-home" : null
+                    }`}
+                    key={i}
+                    onClick={() => selectMusic(music)}
+                  >
+                    <div>
+                      {music.pri_lyrics_song === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_lyrics_song}</h1>
+                      )}
                     </div>
                     <div>
                       <img
@@ -786,6 +900,12 @@ export default function Admin() {
             {musicList &&
               musicList
                 .filter((music) => music.cat_music_prod)
+                .map((music) =>
+                  music.pri_music_prod === 0
+                    ? { ...music, pri_music_prod: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_music_prod - b.pri_music_prod)
                 .map((music, i) => (
                   <div
                     className={`list-box ${
@@ -795,7 +915,11 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">{music.pri_music_prod}</h1>
+                      {music.pri_music_prod === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_music_prod}</h1>
+                      )}
                     </div>
                     <div>
                       <img
@@ -818,6 +942,12 @@ export default function Admin() {
             {musicList &&
               musicList
                 .filter((music) => music.cat_vocal_rec)
+                .map((music) =>
+                  music.pri_vocal_rec === 0
+                    ? { ...music, pri_vocal_rec: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_vocal_rec - b.pri_vocal_rec)
                 .map((music, i) => (
                   <div
                     className={`list-box ${
@@ -827,7 +957,11 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">{music.pri_vocal_rec}</h1>
+                      {music.pri_vocal_rec === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_vocal_rec}</h1>
+                      )}
                     </div>
                     <div>
                       <img
@@ -850,6 +984,12 @@ export default function Admin() {
             {musicList &&
               musicList
                 .filter((music) => music.cat_music_score)
+                .map((music) =>
+                  music.pri_music_score === 0
+                    ? { ...music, pri_music_score: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_music_score - b.pri_music_score)
                 .map((music, i) => (
                   <div
                     className={`list-box ${
@@ -859,7 +999,11 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">{music.pri_music_score}</h1>
+                      {music.pri_music_score === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_music_score}</h1>
+                      )}
                     </div>
                     <div>
                       <img
@@ -882,6 +1026,12 @@ export default function Admin() {
             {musicList &&
               musicList
                 .filter((music) => music.cat_mix_master)
+                .map((music) =>
+                  music.pri_mix_master === 0
+                    ? { ...music, pri_mix_master: 2147483647 }
+                    : music
+                )
+                .sort((a, b) => a.pri_mix_master - b.pri_mix_master)
                 .map((music, i) => (
                   <div
                     className={`list-box ${
@@ -891,7 +1041,11 @@ export default function Admin() {
                     onClick={() => selectMusic(music)}
                   >
                     <div>
-                      <h1 className="sm-text">{music.pri_mix_master}</h1>
+                      {music.pri_mix_master === 2147483647 ? (
+                        <h1 className="sm-text">0</h1>
+                      ) : (
+                        <h1 className="sm-text">{music.pri_mix_master}</h1>
+                      )}
                     </div>
                     <div>
                       <img

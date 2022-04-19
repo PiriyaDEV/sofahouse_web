@@ -95,7 +95,9 @@
 }
 
 #temp-music > div > div > img {
-  width: 100%;
+  width: 70%;
+  height: 250px;
+  object-fit: cover;
   image-rendering: auto;
 }
 
@@ -130,6 +132,7 @@
 .list-pics {
   width: 100px;
   height: 50px;
+  object-fit: cover;
 }
 
 .list-box {
@@ -198,6 +201,10 @@
   border: none;
   border-radius: 20px;
   text-align: center;
+}
+
+.pri-disabled{
+  background-color: #707070 !important;
 }
 
 @media screen and (max-width: 1220px) {

@@ -16,7 +16,8 @@ export const fetchMusic = () => {
         .then(response => {
           if (response.length)
             {
-            dispatch(selectMusic(response.find(music => music.show_homepage), 0))
+            let musicSort = response.map((music) =>music.pri_homepage === 0? { ...music, pri_homepage: 2147483647 }: music).sort((a, b) => a.pri_homepage - b.pri_homepage)
+            dispatch(selectMusic(musicSort.find(music => music.show_homepage), 0))
             }
             dispatch(fetchMusicSuccess(response))
         }

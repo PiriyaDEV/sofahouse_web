@@ -257,7 +257,7 @@
 }
 
 /* Update Section */
-.fb-iframe {
+.fb-iframe, .ig-iframe {
   border: none;
   overflow: hidden;
   width: 340px;
@@ -387,6 +387,10 @@
   #home {
     padding-top: 130px;
   }
+  #update-section{
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -455,7 +459,7 @@
     width: 80%;
   }
 
-  .fb-iframe {
+  .fb-iframe, .ig-iframe {
     width: 100%;
     height: 450px;
   }

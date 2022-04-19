@@ -26,7 +26,7 @@ import desc3 from "../../assets/images/desc/desc3.png";
 // Temp
 import temp1 from "../../assets/images/temp/insecure.png";
 
-import Studio1 from "../../assets/images/IMG_3745.JPG"
+import Studio1 from "../../assets/images/IMG_3745.JPG";
 // import Studio2 from "../../assets/images/IMG_3746.JPG"
 
 //Js
@@ -48,17 +48,26 @@ export default function Home() {
 
   // const [play, setPlay] = useState(true);
   const music = useSelector((state) => state.music);
+  const musicSort = useSelector((state) =>
+    state.music.musics
+      .map((music) =>
+        music.pri_homepage === 0
+          ? { ...music, pri_homepage: 2147483647 }
+          : music
+      )
+      .sort((a, b) => a.pri_homepage - b.pri_homepage)
+  );
 
   const skipMusics = (musicSelected) => {
-    for (let i = 0; i < music.musics.length; i++) {
-      if (music.musics[i].id === musicSelected.id) {
-        dispatch(skipMusic(i, music.musics));
+    for (let i = 0; i < musicSort.length; i++) {
+      if (musicSort[i].id === musicSelected.id) {
+        dispatch(skipMusic(i, musicSort));
       }
     }
   };
 
   const picFromGGDrive = (link) => {
-    let ggsrc = link.split('/');
+    let ggsrc = link.split("/");
     return "https://drive.google.com/uc?export=view&id=" + ggsrc[5];
   };
 
@@ -77,33 +86,30 @@ export default function Home() {
   };
 
   const homeDisplay = [];
-  for (let i = 0; i < music.musics.length; i += 1) {
-    if (music.musics[i].show_homepage) {
+  for (let i = 0; i < musicSort.length; i += 1) {
+    if (musicSort[i].show_homepage) {
       homeDisplay.push(
         <SwiperSlide key={`home-slide-${i}`} tag="li">
-          <div
-            onClick={() => skipMusics(music.musics[i])}
-            className="music-flex"
-          >
-            {music ? (
+          <div onClick={() => skipMusics(musicSort[i])} className="music-flex">
+            {musicSort ? (
               <img
                 className="pointer"
-                src={picFromGGDrive(music.musics[i].cover_url)}
+                src={picFromGGDrive(musicSort[i].cover_url)}
                 alt=""
               />
             ) : (
               <img src={tempInfo.tempPic} alt="" />
             )}
-            {music ? (
+            {musicSort ? (
               <h1 className="ssm-text truncate pointer">
-                {music.musics[i].title}
+                {musicSort[i].title}
               </h1>
             ) : (
               <h1 className="ssm-text">Title</h1>
             )}
-            {music ? (
+            {musicSort ? (
               <h1 className="xm-text avn-medium grey-text truncate pointer">
-                {music.musics[i].artist}
+                {musicSort[i].artist}
               </h1>
             ) : (
               <h1 className="xm-text avn-medium grey-text">Artist</h1>
@@ -134,9 +140,13 @@ export default function Home() {
               <img className="home-vinyl vinyl-mc" src={vinylMc} alt="" />
             </div>
             {music.select ? (
-              <p className="bg-text home-play-text truncate">{music.select.title}</p>
+              <p className="bg-text home-play-text truncate">
+                {music.select.title}
+              </p>
             ) : (
-              <p className="bg-text home-play-text truncate">{tempInfo.title}</p>
+              <p className="bg-text home-play-text truncate">
+                {tempInfo.title}
+              </p>
             )}
             {music.select ? (
               <p className="sm-text home-play-text avn-medium grey-text truncate">
@@ -211,7 +221,7 @@ export default function Home() {
 
           <div id="desc-banner-section">
             <div id="desc-banner">
-              <img src={Studio1} alt=""/>
+              <img src={Studio1} alt="" />
             </div>
             <div id="desc-abs">
               <div id="banner-flex-section">
@@ -248,6 +258,17 @@ export default function Home() {
               title="sofaFB"
               className="fb-iframe"
               scrolling="no"
+              frameBorder="0"
+              allowFullScreen={true}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe>
+          </div>
+          <div>
+            <iframe
+              title="sofaIG"
+              className="ig-iframe"
+              scrolling="no"
+              src="https://www.instagram.com/p/CW5cX7ut9B8/embed"
               frameBorder="0"
               allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"

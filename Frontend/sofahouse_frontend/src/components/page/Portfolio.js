@@ -80,24 +80,29 @@ export default function Portfolio() {
   const categorySelect = (categoryName) => {
     setCategory(categoryName);
     if (categoryName === "Lyrics/Song Writing") {
+      let musicSort = musicList.map((music) =>music.pri_lyrics_song === 0? { ...music, pri_lyrics_song: 2147483647 }: music).sort((a, b) => a.pri_lyrics_song - b.pri_lyrics_song)
       setMusicCategory(
-        musicList.filter((musicsList) => musicsList.cat_lyrics_song)
+        musicSort.filter((musicsList) => musicsList.cat_lyrics_song)
       );
     } else if (categoryName === "Music Production") {
+      let musicSort = musicList.map((music) =>music.pri_music_prod === 0? { ...music, pri_music_prod: 2147483647 }: music).sort((a, b) => a.pri_music_prod - b.pri_music_prod)
       setMusicCategory(
-        musicList.filter((musicsList) => musicsList.cat_music_prod)
+        musicSort.filter((musicsList) => musicsList.cat_music_prod)
       );
     } else if (categoryName === "Vocal Recording") {
+      let musicSort = musicList.map((music) =>music.pri_vocal_rec === 0? { ...music, pri_vocal_rec: 2147483647 }: music).sort((a, b) => a.pri_vocal_rec - b.pri_vocal_rec)
       setMusicCategory(
-        musicList.filter((musicsList) => musicsList.cat_vocal_rec)
+        musicSort.filter((musicsList) => musicsList.cat_vocal_rec)
       );
     } else if (categoryName === "Music Score") {
+      let musicSort = musicList.map((music) =>music.pri_music_score === 0? { ...music, pri_music_score: 2147483647 }: music).sort((a, b) => a.pri_music_score - b.pri_music_score)
       setMusicCategory(
-        musicList.filter((musicsList) => musicsList.cat_music_score)
+        musicSort.filter((musicsList) => musicsList.cat_music_score)
       );
     } else {
+      let musicSort = musicList.map((music) =>music.pri_mix_master === 0? { ...music, pri_mix_master: 2147483647 }: music).sort((a, b) => a.pri_mix_master - b.pri_mix_master)
       setMusicCategory(
-        musicList.filter((musicsList) => musicsList.cat_mix_master)
+        musicSort.filter((musicsList) => musicsList.cat_mix_master)
       );
     }
 
@@ -135,7 +140,24 @@ export default function Portfolio() {
         count = musicCategory.length;
       }
       for (let i = 0; i < count; i++) {
-        musicList.push(musicCategory[i]);
+        if(window.innerWidth <= 414) {
+          if(i === 1) {
+            break;
+          } else {
+            musicList.push(musicCategory[i]);
+          }
+        }
+        else if(window.innerWidth <= 700) {
+          if(i === 3) {
+            break;
+          } else {
+            musicList.push(musicCategory[i]);
+          }
+        }
+        else {
+          musicList.push(musicCategory[i]);
+        }
+       
       }
       setMusicListSelect(musicList);
     }
@@ -315,23 +337,49 @@ export default function Portfolio() {
 
       if (musicCategory.length >= 5) {
         for (let i = e.realIndex; i < musicCategory.length; i++) {
-          if (count === 5) {
-            break;
-          } else {
-            if (i < 0) {
-              musicList.push(musicCategory[musicCategory.length + i]);
+          if(window.innerWidth <= 414) {
+            if (count === 1) {
+              break;
             } else {
-              musicList.push(musicCategory[i]);
+              if (i < 0) {
+                musicList.push(musicCategory[musicCategory.length + i]);
+              } else {
+                musicList.push(musicCategory[i]);
+              }
+              count++;
             }
-            count++;
+          } else if (window.innerWidth <= 700) {
+            if (count === 3) {
+              break;
+            } else {
+              if (i < 0) {
+                musicList.push(musicCategory[musicCategory.length + i]);
+              } else {
+                musicList.push(musicCategory[i]);
+              }
+              count++;
+            }
+          } else {
+            if (count === 5) {
+              break;
+            } else {
+              if (i < 0) {
+                musicList.push(musicCategory[musicCategory.length + i]);
+              } else {
+                musicList.push(musicCategory[i]);
+              }
+              count++;
+            }
           }
+          
         }
-        if (count === 3) {
-          musicList.push(musicCategory[0]);
-          musicList.push(musicCategory[1]);
-        } else if (count === 4) {
-          musicList.push(musicCategory[0]);
-        }
+        //window.innerWidth
+        // if (count === 3) {
+        //   musicList.push(musicCategory[0]);
+        //   musicList.push(musicCategory[1]);
+        // } else if (count === 4) {
+        //   musicList.push(musicCategory[0]);
+        // }
       } else {
         for (let i = 0; i < musicCategory.length; i++) {
           musicList.push(musicCategory[i]);
@@ -432,7 +480,7 @@ export default function Portfolio() {
                 loopAdditionalSlides={100}
                 allowTouchMove={false}
                 // centeredSlides={true}
-                initialSlide={2}
+                initialSlide={0}
                 onSlideChange={slideChange}
                 breakpoints={{
                   // when window width is >= 700px
