@@ -21,11 +21,13 @@
 }
 
 #about-description {
-  display: flex;
+  /* display: flex; */
+  /* flex-direction: column; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between;
   gap: 30px;
   margin-top: 40px;
-  flex-direction: column;
 }
 
 .about-orange-box {
@@ -124,6 +126,17 @@
   }
 }
 
+@media screen and (max-width: 1100px) {
+#about-description {
+  display: block;
+  margin-top: 20px;
+}
+
+.about-orange-box {
+  margin-top: 20px;
+}
+}
+
 @media screen and (max-width: 980px) {
   #about-description > div {
     /* grid-template-rows: 0.8fr 0.5fr 1fr; */
@@ -154,9 +167,6 @@
 }
 
 @media screen and (max-width: 700px) {
-  #about-description {
-    display: block;
-  }
 
   .answer.active {
     padding-top: 15px;
@@ -169,14 +179,6 @@
   .about-banner {
     padding: 20px;
     border-radius: 80px;
-  }
-
-  #about-description {
-    margin-top: 20px;
-  }
-
-  .about-orange-box {
-    margin-top: 20px;
   }
 }
 

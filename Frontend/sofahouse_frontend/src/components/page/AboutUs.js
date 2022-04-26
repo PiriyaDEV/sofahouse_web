@@ -65,7 +65,7 @@ export default function AboutUs() {
               { underStand === true && (
                 <h1 className={underStand? 'answer active xm-text skv-medium' : 'answer xm-text skv-medium'}>
                 เรา<span className='skv-bold'>เข้าใจ</span>
-                และพร้อมสร้างผลงานตวาม
+                และพร้อมสร้างผลงานตาม
                 <span className="skv-bold">ความต้องการของคุณ</span>
               </h1>
               )}
