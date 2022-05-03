@@ -210,14 +210,26 @@ export default function Home() {
         <PlayConsole youtubePlay={youtubePlay} />
         {/* Description Section */}
         <div id="desc-section">
-          <p className="skv-bold bg-text">
-            บริการ One Stop Service ที่ทำให้การทำเพลงของคุณครบจบที่นี่ที่เดียว
-            <br />
-            ตั้งแต่ pre-production ถึง post production
-          </p>
           <div>
             <img id="desc-logo" src={longLogo} alt="" />
           </div>
+
+          <p className="skv-medium bg-text">
+            พวกเราเป็น One-stop music service
+            ที่ผลิตงานเพลงและดนตรีครบจบในที่เดียวอย่างเป็นกันเอง <br />
+            โดยทีมงานรุ่นใหม่ไฟแรงมากประสบการณ์ และมีแพชชั่นในการทำเพลง
+            ที่พร้อมจะรับฟัง <br /> และสร้างสรรค์ผลงานไปพร้อมกับคุณ ตั้งแต่
+            pre-production ไปจนถึง post-production
+            <br />
+            <div className="p-spacing" />
+            โดยทีมงานจะไม่มีการจำกัดจำนวนครั้งการแก้ แต่เป็น
+            <span className="skv-bold">“Unlimited Feedback”</span>
+            <br />
+            เพื่อให้ผลงานออกมาดีที่สุด
+            <span className="home-link" onClick={() => linkPath("/contact")}>
+              ปรึกษา Sofahouse ตอนนี้ (Click!)
+            </span>
+          </p>
 
           <div id="desc-banner-section">
             <div id="desc-banner">
@@ -232,7 +244,7 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="skv-medium sm-text opa-text">
+          {/* <p className="skv-medium sm-text opa-text">
             “เรา <span className="skv-bold">‘เข้าใจ’</span>{" "}
             ว่าในการสร้างแบรนด์ของคุณนั้น จำเป็นต้องมีจุดประสงค์ รวมทั้ง Mood
             and Tone ที่ชัดเจน <br />
@@ -241,24 +253,59 @@ export default function Home() {
 
           <div className="section">
             <hr className="blue-line"></hr>
-          </div>
+          </div> */}
 
-          <p className="skv-bold bg-text">
-            ในทุกขั้นตอนการสร้างสรรค์เพลงของ SOFA HOUSE
-            เราจะช่วยพัฒนาและนำเสนอความโดดเด่น <br />
-            และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
-            เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
+          <p className="skv-bold">
+            <span className="sm-text">
+              จากประสบการณ์ที่เราได้ผลิตผลงานให้ศิลปิน, นักร้อง-นักดนตรีอิสระ,
+              องค์กร และแบรนด์สินค้าต่างๆ
+            </span>
+            <br />
+            <div className="p-spacing" />
+            <span className="bg-text">
+              ทุกขั้นตอนของ SOFA HOUSE มี 3 Values
+              ข้างต้นที่จะช่วยนำเสนอความโดดเด่น <br />
+              และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
+              เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
+            </span>
           </p>
         </div>
+
+        <h1 className="home-follow-title bg-text">
+          <span className="sm-text">Follow our channels</span>
+        </h1>
+
         {/* Update Section */}
         <div id="update-section">
           <div>
-            <iframe
+            {/* <iframe
               src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=366483168240868"
               title="sofaFB"
               className="fb-iframe"
               scrolling="no"
               frameBorder="0"
+              allowFullScreen={true}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe> */}
+
+            {/* <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2Fposts%2F204726498206111&width=500&show_text=true&appId=2449916458614199&height=737"
+              width="500"
+              height="737"
+              scrolling="no"
+              frameborder="0"
+              allowFullScreen={true}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            ></iframe> */}
+
+            <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2Fposts%2F122500963095332&width=500&show_text=true&appId=2449916458614199&height=721"
+              title="sofaFB"
+              className="fb-iframe"
+              // width="500"
+              // height="721"
+              scrolling="no"
+              frameborder="0"
               allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe>

@@ -12,6 +12,7 @@ import Contact from "./components/element/Contact";
 import Login from "./components/page/Login";
 import Admin from "./components/page/Admin";
 import Hamburger from "./components/element/Hamburger";
+import ContactUs from "./components/page/ContactUs"
 import { fetchMusic } from "./redux";
 
 function App() {
@@ -73,6 +74,19 @@ function App() {
           <div id="app-aboutus-content">
             <Contact />
             <AboutUs />
+            <Footer />
+          </div>
+        </Route>
+        <Route path="/contact" id="app-contactus">
+          <Hamburger
+            path={"contactus"}
+            pageWrapId={"app-contactus-content"}
+            outerContainerId={"app-contactus"}
+          />
+          <Navbar path={"contactus"} />
+          <div id="app-contactus-content">
+            <Contact />
+            <ContactUs />
             <Footer />
           </div>
         </Route>

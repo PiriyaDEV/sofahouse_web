@@ -50,6 +50,14 @@ export default function Navbar(props) {
           >
             About Us
           </h1>
+          <h1
+            onClick={() => linkPath("contact")}
+            className={`bg-text ${
+              props.path === "contactus" ? "bg-text nav-active" : null
+            }`}
+          >
+            Contact Us
+          </h1>
         </div>
       </div>
     </div>

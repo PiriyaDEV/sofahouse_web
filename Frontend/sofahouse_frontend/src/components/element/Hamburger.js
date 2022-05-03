@@ -33,6 +33,12 @@ export default function Hamburger(props) {
     }`} onClick={() => linkPath("/about")}>
         <h1 className="sm-text">About Us</h1>
       </div>
+
+      <div className={`menu-item hamburger-text hamburger-last ${
+      props.path === "contactus" ? "hamburger-active" : null
+    }`} onClick={() => linkPath("/contact")}>
+        <h1 className="sm-text">Contact Us</h1>
+      </div>
     </Menu>
   );
 }

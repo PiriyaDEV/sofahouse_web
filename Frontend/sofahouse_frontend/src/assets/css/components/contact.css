@@ -1,7 +1,7 @@
 #contact {
   z-index: 9999;
   position: fixed;
-  bottom: 55px;
+  bottom: 65px;
   right: 50px;
 }
 
@@ -89,11 +89,13 @@
 .big-contact {
   width: 45px;
   position: absolute;
+  cursor: pointer;
 }
 
 .small-contact {
   width: 35px;
   position: absolute;
+  cursor: pointer;
 }
 
 @keyframes dropdown {
@@ -137,7 +139,14 @@
 #contact-tiktok {
   right: 35px;
   bottom: -45px;
-  animation: dropdown 2s ease-in-out;
+  animation: dropdown 2.5s ease-in-out;
+  cursor: pointer;
+}
+
+#contact-linkedin {
+  right: -10px;
+  bottom: -43px;
+  animation: dropdown 3s ease-in-out;
   cursor: pointer;
 }
 

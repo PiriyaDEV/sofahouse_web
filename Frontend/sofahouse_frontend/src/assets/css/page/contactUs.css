@@ -1,0 +1,26 @@
+#contactus{
+    /* padding-top: 45px; */
+}
+
+#contact-picture {
+    width: 100%;
+    position: relative;
+}
+
+#contact-picture > img{
+    width: fit-content;
+    object-fit: cover;
+    max-height: 150px;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+#contact-picture > h1{
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-size: 5em;
+}

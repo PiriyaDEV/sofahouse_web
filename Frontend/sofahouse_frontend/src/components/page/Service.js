@@ -34,33 +34,29 @@ export default function Service() {
           <div id="music-main-section">
             <div>
               <img className="music-main-pics" src={serviceMain1} alt="" />
-              <p className="xm-text skv-medium">
-                SOFA HOUSE จะช่วยคุณหา
-                <span className="skv-bold">เอกลักษณ์</span>
-                ผ่านการพูดคุยและทำการวิเคราะห์ เพื่อเข้าถึง
-                <span className="skv-bold">ความต้องการของคุณ</span>
-                รวมถึงกลุ่มเป้าหมาย ก่อนที่จะเริ่มสร้างสรรค์เพลง
+              <p className="xm-text skv-bold">
+                บริการให้คำปรึกษาเกี่ยวกับเพลงฟรี <br />
+                <div />
+                <span
+                  className="service-link"
+                  onClick={() => linkPath("/contact")}
+                >
+                  Free Consult (Click!)
+                </span>
               </p>
             </div>
             <div>
               <img className="music-main-pics" src={serviceMain2} alt="" />
-              <p className="xm-text skv-medium">
-                นำเสนอ<span className="skv-bold">เอกลักษณ์ของศิลปิน</span>
-                ผ่านเสียงดนตรี ให้มีความ
-                <span className="skv-bold">เป็นตัวของตัวเองมากที่สุด</span>
-                รวมถึงการทำงานของ{" "}
-                <span className="skv-bold">Guide Vocalists</span>
-                เพราะเนื้อเสียงและสไตล์ของแต่ละคนนั้น ล้วนมีความแตกต่างกัน
+              <p className="xm-text skv-bold">
+                ดึงเอกลักษณ์ของศิลปิน ผ่านเสียงดนตรี, <br /> เนื้อเสียง
+                และสไตล์การร้องของแต่ละคน
               </p>
             </div>
             <div>
               <img className="music-main-pics" src={serviceMain3} alt="" />
-              <p className="xm-text skv-medium">
-                นำเสนอแนวทางต่างๆ พร้อมให้คำแนะนำ รวมทั้งเสนอ{" "}
-                <span className="skv-bold">Mood and Tone</span>
-                เพื่อภาพคอนเซปที่ชัดเจน และสามารถ
-                <span className="skv-bold">ต่อยอดกับแผนของลูกค้าในอนาคต</span>
-                ให้ไปในทิศทางเดียวกัน
+              <p className="xm-text skv-bold">
+                กำหนดแนวทาง Mood & Tone และกราฟอารมณ์ของ <br />
+                เพลงให้เข้ากับคอนเซ็ปต์โดยรวม
               </p>
             </div>
           </div>
@@ -112,48 +108,78 @@ export default function Service() {
                   <p className="md-text avn-bold">
                     Music Consulting{" "}
                     <span className="skv-medium">
-                      - ปรึกษาด้านดนตรีและแนวเพลงที่สนใจทำ
+                      - ให้คำปรึกษาด้านดนตรีและแนวเพลงที่สนใจจะทำ
+                      รวมถึงความต้องการ
                     </span>
                     <br className="sv-br" />
                     Matching Identity{" "}
                     <span className="skv-medium">
                       -
-                      การสร้างเสียงและจุดเด่นด้านดนตรีจากความเป็นตัวเองของเราให้แตกต่างจากคนอื่น
+                      สร้างเอกลักษณ์ผ่านเสียงและจุดเด่นด้านดนตรีจากตัวตนของเราให้แตกต่างจากคนอื่น
                     </span>
                     <br className="sv-br" />
                     Mood Landscape{" "}
                     <span className="skv-medium">
-                      - จับแนวเพลงที่ชอบกับวิธีการร้องของเราให้ออกมาเป็นเพลงใหม่
+                      - จับแนว mood & tone
+                      ผ่านกราฟและสีของเพลงโดยรวมให้มีสตอรี่และความรู้สึกร่วม
                     </span>
                     <br className="sv-br" />
-                    Reference & Marketing Techniques Regarding Music
+                    Reference & Marketing Techniques Regarding Music{" "}
                     <span className="skv-medium">
-                      - วิธีเลือกใช้เสียง แต่งเพลง และร้องให้เพลงติดหูและติดตลาด
+                      - วิธีเลือกใช้เสียง ในการแต่งเพลง ให้ติดหูและติดตลาด
                     </span>
                   </p>
                 </div>
               )}
               {production === "production" && (
                 <div className="service-2">
-                  <p className="md-text avn-medium">
-                    Instrumental <br className="sv-br" />
-                    Lyrics/Melody (Thai & English) / <br className="sv-br" />
-                    Vocal Demo <br className="sv-br" />
-                    Unlimited Feedbacks
+                  <p className="md-text avn-bold">
+                    Instrumental Arrangement{" "}
+                    <span className="skv-medium">
+                      - แต่งทำนอง และแนวดนตรีให้เพลงของคุณออกมาถูกใจ
+                    </span>
+                    <br className="sv-br" />
+                    Lyrics/Melody (Thai & English){" "}
+                    <span className="skv-medium">
+                      - เนื้อเพลงในรูปแบบเวอร์ชั่นภาษาไทยและอังกฤษ
+                    </span>
+                    <br className="sv-br" />
+                    Vocal Demo{" "}
+                    <span className="skv-medium">
+                      - ตัวอย่างเดโม่เป็นแนวทางในการร้อง
+                    </span>
                   </p>
                 </div>
               )}
               {production === "post-production" && (
                 <div className="service-3">
-                  <p className="md-text avn-medium">
-                    Vocal Recording <br className="sv-br" />
-                    Mix & Master Instrumental <br className="sv-br" />
-                    Sofa streaming service <br className="sv-br" />
+                  <p className="md-text avn-bold">
+                    Vocal Recording{" "}
+                    <span className="skv-medium">
+                      - บริการอัดเสียงนักร้องด้วยอุปกรณ์ระดับพรีเมี่ยม
+                    </span>
+                    <br className="sv-br" />
+                    Mix & Master Instrumental{" "}
+                    <span className="skv-medium">
+                      - บริการมิกซ์เสียงให้เพลงของคุณกลมกล่อมยิ่งขึ้น
+                    </span>
+                    <br className="sv-br" />
+                    Sofa streaming service{" "}
+                    <span className="skv-medium">
+                      - บริการสตรีมเพลงลงบนช่องทางต่างๆ
+                    </span>
+                    <br className="sv-br" />
                     <li className="production-li">
-                      Manage your streaming account
+                      Manage your streaming account{" "}
+                      <span className="skv-medium">
+                        - บริการดูแลบัญชีผู้ใช้ของคุณ
+                      </span>
                     </li>
                     <li className="production-li">
-                      More than 15 streaming platform you can choose
+                      More than 15 streaming platform you can choose{" "}
+                      <span className="skv-medium">
+                        - ช่องทางสตรีมมิ่งมากกว่า 15 ช่องทาง
+                      </span>
                     </li>
                   </p>
                 </div>
@@ -235,3 +261,7 @@ export default function Service() {
     </div>
   );
 }
+
+let linkPath = (value) => {
+  window.location.href = value;
+};
