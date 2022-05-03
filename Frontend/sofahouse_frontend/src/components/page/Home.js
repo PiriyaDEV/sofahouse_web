@@ -34,7 +34,9 @@ import PlayConsole from "../element/PlayConsole";
 
 export default function Home() {
   const dispatch = useDispatch();
-
+  const [underStand, setUnderStand] = useState(false);
+  const [flexible, setFlexible] = useState(false);
+  const [professional, setProfessional] = useState(false);
   const inputRange = useRef(null);
   const [youtubePlay, setYoutubePlay] = useState(false);
 
@@ -237,9 +239,9 @@ export default function Home() {
             </div>
             <div id="desc-abs">
               <div id="banner-flex-section">
-                <img className="banner-disc" src={desc1} alt="" />
-                <img className="banner-disc" src={desc2} alt="" />
-                <img className="banner-disc" src={desc3} alt="" />
+                <img className="banner-disc" src={desc1} alt="" onClick={() => setUnderStand(!underStand)}/>
+                <img className="banner-disc" src={desc2} alt="" onClick={() => setFlexible(!flexible)}/>
+                <img className="banner-disc" src={desc3} alt="" onClick={() => setProfessional(!professional)}/>
               </div>
             </div>
           </div>
@@ -269,6 +271,34 @@ export default function Home() {
               เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
             </span>
           </p>
+
+          <div id="about-description">
+            <div>
+            { underStand === true && (
+                <h1 className={underStand? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
+                  {/* <span className='skv-bold'></span> */}
+                  พวกเรา 'เข้าใจ'
+                  <span className="skv-medium"> ว่าการสร้างสรรค์ผลงานทุกชิ้น ต้องมีจุดประสงค์ร่วมของแบรนด์และผู้ฟัง เราจึงพร้อมเป็นพาร์ทเนอร์ให้คำแนะนำคุณตลอดทุกขั้นตอน เพื่อให้คุณสบายใจ เเม้คุณจะไม่มีประสบการณ์มาก่อน</span>
+                </h1>
+            )}
+            </div>
+            <div>
+              { flexible === true && (
+                <h1 className={underStand? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
+                พวกเรา “ยืดหยุ่นและเร็ว”
+                <span className="skv-medium"> ต่อการทำงานและสไตล์ดนตรีที่หลากหลาย ในโปรเจค หนึ่งเราจะทำงานและพร้อมปรับเปลี่ยนไปกับคุณ โดยไม่จำกัดจำนวนครั้งในการแก้ เพื่อให้ผลงานออกมาตอบโจทย์ที่สุด</span>
+              </h1>
+              )}
+            </div>
+            <div>
+              { professional === true && (
+                <h1 className={professional? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
+                พวกเราทำงานอย่าง “มืออาชีพ”
+                <span className="skv-medium"> ด้วยทีมงานที่มีประสบการณ์และเชี่ยวชาญในแต่ละขั้นตอนของการทำเพลงตั้งแต่การรับบรีฟ แต่งเนื้อ ทำดนตรี mix & master อัดเสียง ทำscore และบริการด้านเพลงอื่นๆ ไปจนถึงการเผยแพร่เพลงสู่ตลาด</span>
+                </h1>
+              )}
+            </div>
+          </div>
         </div>
 
         <h1 className="home-follow-title bg-text">
@@ -288,17 +318,17 @@ export default function Home() {
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe> */}
 
-            {/* <iframe
+            <iframe
               src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2Fposts%2F204726498206111&width=500&show_text=true&appId=2449916458614199&height=737"
-              width="500"
-              height="737"
+              title="sofaFB"
+              className="fb-iframe"
               scrolling="no"
               frameborder="0"
               allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            ></iframe> */}
+            ></iframe>
 
-            <iframe
+            {/* <iframe
               src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsofahouse.th%2Fposts%2F122500963095332&width=500&show_text=true&appId=2449916458614199&height=721"
               title="sofaFB"
               className="fb-iframe"
@@ -308,7 +338,7 @@ export default function Home() {
               frameborder="0"
               allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            ></iframe>
+            ></iframe> */}
           </div>
           <div>
             <iframe

@@ -196,29 +196,37 @@ export default function Service() {
             <div className="service-box-section">
               <div className="service-box section">
                 <img className="service-pics" src={service1} alt="" />
-                <p className="sm-text avn-medium">
-                  Beat/Instrumental <br className="sv-br" />
-                  from scratch
+                <p className="sm-text avn-bold">
+                  Beat/Instrumental from scratch{" "}
+                  <span className="skv-medium">
+                    - บริการสตรีมเพลงลงบนช่องทางต่างๆ
+                  </span>
                 </p>
               </div>
               <div className="service-box section">
                 <img className="service-pics" src={service2} alt="" />
-                <p className="sm-text avn-medium">
-                  Films OST
+                <p className="sm-text avn-bold">
+                  Films OST{" "}
+                  <span className="skv-medium">- เพลงประกอบภาพยนตร์</span>
                   <br className="sv-br" />
-                  Series OST
+                  Series OST{" "}
+                  <span className="skv-medium">- เพลงประกอบซีรีส์</span>
                   <br className="sv-br" />
-                  TV program OST
+                  TV program OST{" "}
+                  <span className="skv-medium">- เพลงประกอบรายการโทรทัศน์</span>
                   <br className="sv-br" />
-                  Documentary OST
+                  Documentary OST{" "}
+                  <span className="skv-medium">- เพลงประกอบสื่อสารคดี</span>
                 </p>
               </div>
               <div className="service-box section">
                 <img className="service-pics" src={service3} alt="" />
-                <p className="sm-text avn-medium">
-                  Advertisement jingle
+                <p className="sm-text avn-bold">
+                  Advertisement jingle{" "}
+                  <span className="skv-medium">- จิงเกิลสำหรับโฆษณา</span>
                   <br className="sv-br" />
-                  Radio jingle
+                  Radio jingle{" "}
+                  <span className="skv-medium">- จิงเกิลสำหรับวิทยุ</span>
                 </p>
               </div>
             </div>
@@ -226,35 +234,56 @@ export default function Service() {
             <div className="service-box-section">
               <div className="service-box section">
                 <img className="service-pics" src={service4} alt="" />
-                <p className="sm-text avn-medium">
-                  Radio spot <br className="sv-br" />
-                  Songs for advertisements
+                <p className="sm-text avn-bold">
+                  Radio spot <span className="skv-medium">- สปอตวิทยุ</span>
                   <br className="sv-br" />
-                  TV program media’s station theme song
+                  Songs for advertisements{" "}
+                  <span className="skv-medium">- เพลงประกอบโฆษณา</span>
+                  <br className="sv-br" />
+                  TV program media’s station theme song{" "}
+                  <span className="skv-medium">
+                    - เพลงประกอบสถานีวิทยุ/โทรทัศน์/ช่อง
+                  </span>
                 </p>
               </div>
               <div className="service-box section">
                 <img className="service-pics" src={service5} alt="" />
-                <p className="sm-text avn-medium">
-                  Musical
+                <p className="sm-text avn-bold">
+                  Musical{" "}
+                  <span className="skv-medium">
+                    - เพลงสำหรับละครเวทีมิวสิคัล
+                  </span>
                   <br className="sv-br" />
-                  Dance Music
+                  Dance Music{" "}
+                  <span className="skv-medium">- เพลงสำหรับเต้น</span>
                   <br className="sv-br" />
-                  Event’s theme song
+                  Event’s theme song{" "}
+                  <span className="skv-medium">
+                    - เพลงสำหรับงานนิทรรศการและอีเวนต์
+                  </span>
                 </p>
               </div>
               <div className="service-box section">
                 <img className="service-pics" src={service6} alt="" />
-                <p className="sm-text avn-medium">
-                  Remix Version <br className="sv-br" />
-                  Remake Version
+                <p className="sm-text avn-bold">
+                  Remix Version{" "}
+                  <span className="skv-medium">- รีมิกซ์เพลง</span>
                   <br className="sv-br" />
-                  Streaming Version
+                  Remake Version{" "}
+                  <span className="skv-medium">- ดัดแปลงเพลง</span>
                   <br className="sv-br" />
-                  Live Version
+                  Streaming Version{" "}
+                  <span className="skv-medium">- ทำเพลงสำหรับสตรีมมิ่ง</span>
+                  <br className="sv-br" />
+                  Live Version{" "}
+                  <span className="skv-medium">- ทำเพลงสำหรับร้องสด</span>
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="contact-btn" onClick={() => linkPath("/contact")}>
+            <button className="bg2-text">Contact for more Info</button>
           </div>
         </div>
       </div>
