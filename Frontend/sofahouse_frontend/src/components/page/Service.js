@@ -1,4 +1,14 @@
 import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Controller,
+  Thumbs,
+  EffectFade,
+} from "swiper";
+import "swiper/swiper-bundle.css";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -23,8 +33,54 @@ import service4 from "../../assets/images/service/service-4.png";
 import service5 from "../../assets/images/service/service-5.png";
 import service6 from "../../assets/images/service/service-6.png";
 
+// Studio
+
+import studioLogo from "../../assets/images/รูปภาพ studio/pocket-logo.png";
+
+import studio1 from "../../assets/images/รูปภาพ studio/เน้นรูปสตู1.png";
+import studio2 from "../../assets/images/รูปภาพ studio/เน้นรูปสตู2.png";
+import studio3 from "../../assets/images/รูปภาพ studio/เน้นรูปสตู3.png";
+
+import user1 from "../../assets/images/รูปภาพ studio/1E4F8EA8-86EC-4168-996A-5949232D54C1_1_105_c.jpeg";
+import user2 from "../../assets/images/รูปภาพ studio/30B69988-8C1D-46DB-9D94-5DABEF43EC5A_1_105_c.jpeg";
+import user3 from "../../assets/images/รูปภาพ studio/4459DD96-45E1-4156-B945-2BC6A11C0F03_1_105_c.jpeg";
+import user4 from "../../assets/images/รูปภาพ studio/97BD8E3E-843B-45D9-A3D7-5308DD0224B6_1_105_c.jpeg";
+import user5 from "../../assets/images/รูปภาพ studio/BB9CE826-C84A-4A92-94B9-62F0392D1532_1_105_c.jpeg";
+import user6 from "../../assets/images/รูปภาพ studio/C91A0C91-0407-40CE-BCFC-6D30EDD45612_1_105_c.jpeg";
+
+SwiperCore.use([
+  EffectFade,
+  Navigation,
+  Pagination,
+  Controller,
+  Thumbs,
+  Autoplay,
+]);
+
 export default function Service() {
   const [production, setProduction] = useState("pre-production");
+  const studioImg = [studio1, studio2, studio3];
+  const userImg = [user1, user2, user3, user4, user5, user6];
+
+  const studio = [];
+
+  for (let i = 0; i < studioImg.length; i += 1) {
+    studio.push(
+      <SwiperSlide key={`slide-studio-img-${i}`} tag="li">
+        <img class="studio-img" src={studioImg[i]} alt="" />
+      </SwiperSlide>
+    );
+  }
+
+  const user = [];
+
+  for (let i = 0; i < userImg.length; i += 1) {
+    user.push(
+      <SwiperSlide key={`slide-studio-user-${i}`} tag="li">
+        <img class="studio-user" src={userImg[i]} alt="" />
+      </SwiperSlide>
+    );
+  }
 
   return (
     <div id="service" className="section">
@@ -188,6 +244,112 @@ export default function Service() {
           </div>
         </div>
 
+        <div id="service-studio">
+          <h1 className="bg2-text">Our studio</h1>
+          <div id="service-studio-section">
+            <div id="studio-info" className="bg2-text">
+              <div>
+                <p className="avn-bold">Recording:</p>
+                <p className="skv-medium">Apollo Twin X</p>
+                <p className="skv-medium">Scarlett 18i20</p>
+              </div>
+
+              <div>
+                <p className="avn-bold">Monitors:</p>
+                <p className="skv-medium">Genelec 8040</p>
+                <p className="skv-medium">Beyerdynamic DT990</p>
+                <p className="skv-medium">Audio Technica m40x</p>
+                <p className="skv-medium">Audio Technica m30x</p>
+              </div>
+
+              <div>
+                <p className="avn-bold">Microphones:</p>
+                <p className="skv-medium">Neumann TLM 103</p>
+                <p className="skv-medium">Shure SM7B</p>
+                <p className="skv-medium">Rode Procaster</p>
+              </div>
+            </div>
+            <div id="studio-image-section">
+              <div>
+                <div
+                  onClick={() =>
+                    linkNewTab("https://www.facebook.com/pockethouse.studio/")
+                  }
+                >
+                  <img id="studio-logo" src={studioLogo} alt="" />
+                </div>
+
+                <Swiper
+                  id="studio-img-swiper"
+                  effect={"fade"}
+                  navigation={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  loop
+                  autoplay={{
+                    delay: 5000,
+                  }}
+                  modules={[EffectFade, Navigation, Pagination]}
+                  // breakpoints={{
+                  //   // when window width is >= 700px
+                  //   700: {
+                  //     slidesPerView: 5,
+                  //   },
+                  //   414: {
+                  //     slidesPerView: 3,
+                  //   },
+                  // }}
+                >
+                  {studio}
+                </Swiper>
+              </div>
+              <div>
+                <div id="studio-grid">
+                  <Swiper
+                    id="studio-user-swiper"
+                    effect={"fade"}
+                    navigation={true}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    loop
+                    autoplay={{
+                      delay: 5000,
+                    }}
+                    modules={[EffectFade, Navigation, Pagination]}
+                    // breakpoints={{
+                    //   // when window width is >= 700px
+                    //   700: {
+                    //     slidesPerView: 5,
+                    //   },
+                    //   414: {
+                    //     slidesPerView: 3,
+                    //   },
+                    // }}
+                  >
+                    {user}
+                  </Swiper>
+                  <div id="studio-fb">
+                    <iframe
+                      title="studio-fb-iframe"
+                      src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D114291557570692%26id%3D112373771095804&width=500&show_text=false&appId=2449916458614199&height=498"
+                      scrolling="no"
+                      frameborder="0"
+                      allowfullscreen="true"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="contact-btn" onClick={() => linkPath("/contact")}>
+          <button className="bg2-text">Contact Us Now</button>
+        </div>
+
         {/* Service Type */}
         <div id="service-type-section">
           <h1 className="bg2-text">Music Genre and service type</h1>
@@ -293,4 +455,8 @@ export default function Service() {
 
 let linkPath = (value) => {
   window.location.href = value;
+};
+
+let linkNewTab = (path) => {
+  window.open(path, "_blank");
 };

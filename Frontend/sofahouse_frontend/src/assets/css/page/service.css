@@ -30,6 +30,7 @@
   border-radius: 24px;
   border: none;
   padding: 5px 15px;
+  cursor: pointer;
 }
 
 /* Main Section */
@@ -56,6 +57,94 @@
 
 .music-main-pics {
   width: 180px;
+}
+
+/* Studio Section */
+#service-studio{
+  margin-top: 40px;
+}
+
+#service-studio > h1{
+  text-transform: uppercase;
+}
+
+#service-studio > div{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 30px;
+}
+
+#service-studio-section > div:first-child > div > p{
+  margin: 3px;
+}
+
+#service-studio-section > div:first-child > div > .avn-bold{
+  margin-top: 20px;
+}
+
+#studio-logo {
+  width: 300px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+#studio-image-section{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.studio-img{
+  width: 100%;
+  object-fit: cover;
+  height: 300px;
+}
+
+#studio-image-section > div:first-child{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#studio-fb > iframe{
+  width: 100%;
+  height: 500px;
+}
+
+#studio-fb{
+  width: 300px;
+  height: 300px;
+}
+
+#studio-img-swiper{
+  width: 800px;
+  object-fit: cover;
+  max-height: 300px;
+}
+
+#studio-user-swiper{
+  width: 470px;
+  object-fit: cover;
+  max-height: 300px;
+}
+
+.studio-user{
+  width: 100%;
+  object-fit: cover;
+  height: 300px;
+}
+
+#studio-grid{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+#studio-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Middle Section */
@@ -221,6 +310,38 @@
   }
 }
 
+@media screen and (max-width: 1100px) {
+  #service-studio > div{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  #studio-info{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  #studio-logo{
+    margin-top: 30px;
+  }
+
+  #studio-fb{
+    width: 260px;
+    height: 300px;
+  }
+  
+  #studio-img-swiper{
+    width: 560px;
+    max-height: 300px;
+  }
+  
+  #studio-user-swiper{
+    width: 270px;
+    max-height: 260px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .contact-btn{
     justify-content: center;
@@ -279,6 +400,25 @@
   .production-btn {
     width: 100%;
   }
+
+  #studio-logo{
+    width: 250px;
+  }
+
+  #studio-fb{
+    width: 200px;
+    height: 230px;
+  }
+  
+  #studio-img-swiper{
+    width: 460px;
+    max-height: 300px;
+  }
+  
+  #studio-user-swiper{
+    width: 230px;
+    max-height: 200px;
+  }
 }
 
 @media screen and (max-width: 580px) {
@@ -297,6 +437,41 @@
   }
 
   #service-type-section {
+    text-align: center;
+  }
+
+  #studio-grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #studio-logo{
+    width: 200px;
+  }
+
+  #studio-fb{
+    width: 360px;
+    height: 230px;
+  }
+  
+  #studio-img-swiper{
+    width: 360px;
+    max-height: 300px;
+  }
+  
+  #studio-user-swiper{
+    width: 360px;
+    max-height: 200px;
+  }
+
+  #service-studio > div{
+    gap: 0px;
+  }
+
+  #studio-info{
+    flex-direction: column;
     text-align: center;
   }
 }
@@ -318,11 +493,74 @@
   #service {
     margin-top: 90px;
   }
+
+  #studio-fb{
+    width: 300px;
+    height: 230px;
+  }
+  
+  #studio-img-swiper{
+    width: 300px;
+    max-height: 230px;
+  }
+  
+  #studio-user-swiper{
+    width: 300px;
+    max-height: 230px;
+  }
+
+  #studio-fb > iframe{
+    height: 300px;
+  }
+
+  #service-studio > div{
+    gap: 80px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #studio-fb{
+    width: 250px;
+    height: 230px;
+  }
+  
+  #studio-img-swiper{
+    width: 250px;
+    max-height: 230px;
+  }
+  
+  #studio-user-swiper{
+    width: 250px;
+    max-height: 230px;
+  }
+
+  #service-studio > div{
+    gap: 50px;
+  }
 }
 
 @media screen and (max-width: 300px) {
   .service-pics,
   .music-main-pics {
     width: 80px;
+  }
+
+  #studio-fb{
+    width: 210px;
+    height: 230px;
+  }
+  
+  #studio-img-swiper{
+    width: 210px;
+    max-height: 230px;
+  }
+  
+  #studio-user-swiper{
+    width: 210px;
+    max-height: 230px;
+  }
+
+  #service-studio > div{
+    gap: 0px;
   }
 }
