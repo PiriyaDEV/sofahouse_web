@@ -63,8 +63,8 @@
 /* Why Section */
 #why-box {
   background-color: #fff9f7;
-  padding: 30px 50px 30px 330px;
-  margin-bottom: 40px;
+  padding: 30px 50px 30px 530px;
+  margin-bottom: 150px;
   border-radius: 80px;
   position: relative;
 }
@@ -116,6 +116,74 @@
   animation-fill-mode: forwards;
 }
 
+#activity-carousal{
+  margin-bottom: 100px;
+}
+
+#activity-swiper{
+  height: 500px;
+  width: 80%;
+  object-fit: cover;
+  /* object-position: center; */
+}
+
+.activity-img{
+  width: 100%;
+  object-fit: cover;
+  /* object-position: center; */
+  height: 500px;
+}
+
+/* Team Section */
+#team-section{
+  margin-bottom: 50px;
+  flex-direction: column;
+}
+
+.team-clr{
+  width: 250px;
+  height: 250px;
+  margin-bottom: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#team-clr-section{
+  margin: 60px 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  row-gap: 30px;
+}
+
+#team-clr-section > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.about-spacing{
+  margin-top: 5px;
+}
+
+.p-aboutus{
+  margin-top: 15px;
+  max-width: 80%;
+  text-align: justify;
+}
+
+#why-sofa-img{
+  width: 650px;
+  position: absolute;
+  left: 5px;
+  bottom: -120px;
+}
+
 @keyframes slidein {
   from {
     opacity: 0.3;
@@ -124,6 +192,14 @@
     opacity: 1;
     transform: translateY(0%);
   }
+}
+
+@media screen and (max-width: 1280px) {
+#why-sofa-img{
+  width: 650px;
+  left: -20px;
+  bottom: -70px;
+}
 }
 
 @media screen and (max-width: 1100px) {
@@ -135,11 +211,39 @@
 .about-orange-box {
   margin-top: 20px;
 }
+
+#activity-swiper{
+  width: 800px;
+}
+
+.activity-img, #activity-swiper{
+  height: 500px;
+}
+
+}
+
+@media screen and (max-width: 1024px) {
+  #why-sofa-img{
+    width: 650px;
+    left: -50px;
+    bottom: -20px;
+  }
 }
 
 @media screen and (max-width: 980px) {
   #about-description > div {
     /* grid-template-rows: 0.8fr 0.5fr 1fr; */
+  }
+
+  #why-box{
+    margin-top: 50px;
+  }
+
+  #why-sofa-img{
+    width: 530px;
+    top: -205px;
+    right: -80px;
+    left: inherit;
   }
 
   #why-box {
@@ -150,11 +254,32 @@
   #sofa-why {
     top: -40px;
   }
+
+  #activity-swiper{
+    width: 700px;
+  }
+  
+  .activity-img, #activity-swiper{
+    height: 500px;
+  }
 }
 
 @media screen and (max-width: 767px) {
   #aboutus {
     margin-top: 80px;
+  }
+  #activity-swiper{
+    width: 500px;
+  }
+
+  #why-sofa-img{
+    width: 430px;
+    top: -175px;
+    right: -80px;
+  }
+  
+  .activity-img, #activity-swiper{
+    height: 350px;
   }
   #why-box {
     padding: 80px 30px 30px 30px;
@@ -180,15 +305,84 @@
     padding: 20px;
     border-radius: 80px;
   }
+
+  .team-clr{
+    width: 200px;
+    height: 200px;
+  }
+
+
+#team-clr-section{
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  row-gap: 25px;
+}
+}
+
+@media screen and (max-width: 590px) {
+#activity-swiper{
+  width: 350px;
+}
+
+#why-sofa-img{
+  width: 100%;
+  position: initial;
+  margin-top: 20px;
+}
+
+#why-box{
+  padding-top: 0px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.activity-img, #activity-swiper{
+  height: 200px;
+}
+
+.team-clr{
+  width: 170px;
+  height: 170px;
+}
+
+.p-aboutus{
+  text-align: center;
+}
+
+#team-clr-section{
+grid-template-columns: 1fr;
+gap: 10px;
+row-gap: 30px;
+}
 }
 
 @media screen and (max-width: 414px) {
+  #activity-swiper{
+    width: 250px;
+  }
+
+  .team-clr{
+    width: 150px;
+    height: 150px;
+  }
+  
+  .activity-img, #activity-swiper{
+    height: 150px;
+  }
+  #activity-carousal{
+    margin-bottom: 60px;
+  }
   #sofa-why {
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
     border-radius: 34px;
+  }
+  #why-box > p{
+    margin-top: 30px;
   }
 
   .answer.active {
@@ -227,7 +421,7 @@
   }
 
   #why-section {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 
   #about-info-section {
@@ -246,5 +440,10 @@
 
   #sofa-why > h1 {
     text-align: center;
+  }
+
+  .team-clr{
+    width: 120px;
+    height: 120px;
   }
 }

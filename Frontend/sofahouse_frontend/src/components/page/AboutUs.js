@@ -1,4 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Controller,
+  Thumbs,
+  EffectFade,
+} from "swiper";
+import "swiper/swiper-bundle.css";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -7,17 +17,59 @@ import "../../assets/css/page/aboutUs.css";
 import aboutHeadphone from "../../assets/images/about-us/headphone.png";
 import banner1 from "../../assets/images/about-us/headphones-connected-music-mixer-laptop-music-studio-with-studio-light-close-up.png";
 import banner2 from "../../assets/images/about-us/man-recording-studio-music-production.png";
-import chevron from "../../assets/images/about-us/icons8-chevron-down-96.png"
+import chevron from "../../assets/images/about-us/icons8-chevron-down-96.png";
+
+// import activity1 from "../../assets/images/slideshow_ activity/customer journey-03.png";
+import activity2 from "../../assets/images/slideshow_ activity/IMG_0385.JPG";
+import activity3 from "../../assets/images/slideshow_ activity/IMG_4360.JPG";
+import activity4 from "../../assets/images/slideshow_ activity/production-thumbnail-2.png";
+import activity5 from "../../assets/images/slideshow_ activity/PTR04310.JPG";
+import whySofa from "../../assets/images/slideshow_ activity/reviews character-01.png";
+import activity7 from "../../assets/images/slideshow_ activity/S__32317446.jpg";
+import activity8 from "../../assets/images/slideshow_ activity/S__32317448.jpg";
+import activity9 from "../../assets/images/slideshow_ activity/S__32333864.jpg";
+import activity10 from "../../assets/images/slideshow_ activity/S__47120389.jpg";
+
+SwiperCore.use([
+  EffectFade,
+  Navigation,
+  Pagination,
+  Controller,
+  Thumbs,
+  Autoplay,
+]);
 
 export default function AboutUs() {
-  const [underStand, setUnderStand] = useState(false);
-  const [flexible, setFlexible] = useState(false);
-  const [professional, setProfessional] = useState(false);
+  // const [underStand, setUnderStand] = useState(false);
+  // const [flexible, setFlexible] = useState(false);
+  // const [professional, setProfessional] = useState(false);
+
+  const activityImg = [
+    // activity1,
+    activity2,
+    activity3,
+    activity4,
+    activity5,
+    // activity6,
+    activity7,
+    activity8,
+    activity9,
+    activity10,
+  ];
+
+  const activity = [];
+
+  for (let i = 0; i < activityImg.length; i += 1) {
+    activity.push(
+      <SwiperSlide key={`slide-activity-img-${i}`} tag="li">
+        <img class="activity-img" src={activityImg[i]} alt="" />
+      </SwiperSlide>
+    );
+  }
 
   return (
     <div id="aboutus" className="section">
       <div className="page-container">
-        
         {/* Vision Section */}
         <div id="vision-section">
           <div
@@ -49,7 +101,7 @@ export default function AboutUs() {
         </div>
 
         {/* Info Section */}
-        <div id="about-info-section">
+        {/* <div id="about-info-section">
           <div id="headphone-container">
             <img id="about-headphone" src={aboutHeadphone} alt="" />
           </div>
@@ -127,11 +179,110 @@ export default function AboutUs() {
               )}
             </div>
           </div>
+        </div> */}
+        <div id="activity-carousal" className="section">
+          <Swiper
+            id="activity-swiper"
+            effect={"fade"}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            loop
+            autoplay={{
+              delay: 5000,
+            }}
+            modules={[EffectFade, Navigation, Pagination]}
+          >
+            {activity}
+          </Swiper>
+        </div>
+
+        <div id="team-section" className="section">
+          <h1 className="bg4-text">Sofa Production Team</h1>
+
+          <div id="team-clr-section">
+            <div>
+              <div>
+                <img className="team-clr" src={activity2} alt="" />
+              </div>
+              <h1 className="bg-text avn-bold text-center">
+                Ratimas (Ploycal) Jirapongsananuruk
+              </h1>
+              <div className="about-spacing text-center" />
+              <h1 className="bg-text avn-bold text-center">
+                CEO & Song writer : Sofa House
+              </h1>
+              <p className="sm-text avn-medium p-aboutus">
+                “I love how our team is so strong and passionate on producing
+                every single pieces of music. That’s why we understand and enjoy
+                every path our clients are taking. We are here to help them
+                achieve their goals”
+              </p>
+            </div>
+
+            <div>
+              <div>
+                <img className="team-clr" src={activity2} alt="" />
+              </div>
+              <h1 className="bg-text avn-bold text-center">
+                Natchanon (Parm) Neovakul
+              </h1>
+              <div className="about-spacing text-center" />
+              <h1 className="bg-text avn-bold text-center">
+                CEO & Producer : Pocket Studio
+              </h1>
+              <p className="sm-text avn-medium p-aboutus">
+                “I am satisfied when the customer is satisfied, or occasionally,
+                unsatisfied even though the customer is satisfied - some things
+                can always be tweaked.”
+              </p>
+            </div>
+
+            <div>
+              <div>
+                <img className="team-clr" src={activity2} alt="" />
+              </div>
+              <h1 className="bg-text avn-bold text-center">
+                Chayada (Euy) Jirapongsananuruk
+              </h1>
+              <div className="about-spacing text-center" />
+              <h1 className="bg-text avn-bold text-center">
+                Song writer : Sofa House
+              </h1>
+              <p className="sm-text avn-medium p-aboutus">
+                “I love how our team is so strong and passionate on producing
+                every single pieces of music. That’s why we understand and enjoy
+                every path our clients are taking. We are here to help them
+                achieve their goals”
+              </p>
+            </div>
+
+            <div>
+              <div>
+                <img className="team-clr" src={activity2} alt="" />
+              </div>
+              <h1 className="bg-text avn-bold text-center">
+                Chananet (Moodang) Sinjanakom
+              </h1>
+              <div className="about-spacing text-center" />
+              <h1 className="bg-text avn-bold text-center">
+                Producer : Sofa House
+              </h1>
+              <p className="sm-text avn-medium p-aboutus">
+                “I love how our team is so strong and passionate on producing
+                every single pieces of music. That’s why we understand and enjoy
+                every path our clients are taking. We are here to help them
+                achieve their goals”
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Why Section */}
         <div id="why-section">
           <div id="why-box">
+            <img id="why-sofa-img" src={whySofa} alt=""/>
             <div id="sofa-why">
               <h1 className="bg2-text">Why SOFA HOUSE?</h1>
               <h1 className="bg2-text skv-medium">ทำไมต้องเป็นโซฟาเฮ้าส์</h1>
@@ -150,7 +301,6 @@ export default function AboutUs() {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );
