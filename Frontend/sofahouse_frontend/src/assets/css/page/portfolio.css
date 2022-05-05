@@ -96,7 +96,7 @@ li {
   height: 15px;
   width: 15px;
   position: absolute;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .swiper-slide-prev > .carousal-music,
@@ -359,10 +359,13 @@ li {
   } */
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 920px) {
   #work-section {
     margin-top: 80px;
   }
+}
+
+@media screen and (max-width: 767px) {
 
   .carousal-music > img {
     width: 75px;

@@ -85,7 +85,7 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 920px) {
   .bm-burger-button {
     display: block;
     z-index: 10000 !important;

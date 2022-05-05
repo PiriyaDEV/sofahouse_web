@@ -178,10 +178,10 @@
 }
 
 #why-sofa-img{
-  width: 650px;
+  width: 400px;
   position: absolute;
-  left: 5px;
-  bottom: -120px;
+  left: 107px;
+  bottom: -116px;
 }
 
 @keyframes slidein {
@@ -196,9 +196,9 @@
 
 @media screen and (max-width: 1280px) {
 #why-sofa-img{
-  width: 650px;
-  left: -20px;
-  bottom: -70px;
+  width: 420px;
+  left: 67px;
+  bottom: -58px;
 }
 }
 
@@ -224,9 +224,9 @@
 
 @media screen and (max-width: 1024px) {
   #why-sofa-img{
-    width: 650px;
-    left: -50px;
-    bottom: -20px;
+    width: 380px;
+    left: 88px;
+    bottom: 13px;
   }
 }
 
@@ -240,9 +240,9 @@
   }
 
   #why-sofa-img{
-    width: 530px;
-    top: -205px;
-    right: -80px;
+    width: 300px;
+    top: -116px;
+    right: 7px;
     left: inherit;
   }
 
@@ -264,18 +264,22 @@
   }
 }
 
+@media screen and (max-width: 920px) {
+#aboutus {
+  margin-top: 80px;
+}
+
+}
+
 @media screen and (max-width: 767px) {
-  #aboutus {
-    margin-top: 80px;
-  }
   #activity-swiper{
     width: 500px;
   }
 
   #why-sofa-img{
-    width: 430px;
-    top: -175px;
-    right: -80px;
+    width: 250px;
+    top: -98px;
+    right: 20px;
   }
   
   .activity-img, #activity-swiper{
@@ -325,9 +329,10 @@
 }
 
 #why-sofa-img{
-  width: 100%;
+  width: 50%;
   position: initial;
-  margin-top: 20px;
+  margin-top: 80px;
+  margin-bottom: 30px;
 }
 
 #why-box{

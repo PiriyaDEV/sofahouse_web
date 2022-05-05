@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
   Autoplay,
@@ -14,17 +14,17 @@ import "../../assets/css/text.css";
 import "../../assets/css/page.css";
 import "../../assets/css/page/aboutUs.css";
 
-import aboutHeadphone from "../../assets/images/about-us/headphone.png";
+// import aboutHeadphone from "../../assets/images/about-us/headphone.png";
 import banner1 from "../../assets/images/about-us/headphones-connected-music-mixer-laptop-music-studio-with-studio-light-close-up.png";
 import banner2 from "../../assets/images/about-us/man-recording-studio-music-production.png";
-import chevron from "../../assets/images/about-us/icons8-chevron-down-96.png";
+// import chevron from "../../assets/images/about-us/icons8-chevron-down-96.png";
 
 // import activity1 from "../../assets/images/slideshow_ activity/customer journey-03.png";
 import activity2 from "../../assets/images/slideshow_ activity/IMG_0385.JPG";
 import activity3 from "../../assets/images/slideshow_ activity/IMG_4360.JPG";
 import activity4 from "../../assets/images/slideshow_ activity/production-thumbnail-2.png";
 import activity5 from "../../assets/images/slideshow_ activity/PTR04310.JPG";
-import whySofa from "../../assets/images/slideshow_ activity/reviews character-01.png";
+import whySofa from "../../assets/images/slideshow_ activity/team-img.png";
 import activity7 from "../../assets/images/slideshow_ activity/S__32317446.jpg";
 import activity8 from "../../assets/images/slideshow_ activity/S__32317448.jpg";
 import activity9 from "../../assets/images/slideshow_ activity/S__32333864.jpg";

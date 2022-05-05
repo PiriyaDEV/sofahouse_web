@@ -2,25 +2,150 @@
     /* padding-top: 45px; */
 }
 
-#contact-picture {
+#about-info-section{
+    padding-bottom: 25px;
+    margin-bottom: 50px;
+}
+
+#contact-form-section{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+#contact-img{
+    width: 80%;
+}
+
+.contact-input{
+    padding: 10px 25px;
+    border: 1px solid #7c7c7c;
+    border-radius: 5px;
+    width: calc(100% - 55px);
+}
+
+.contact-form-info-column{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    row-gap: 10px;
+}
+
+.error-text{
+    color: #ea7155;
+}
+
+.contact-radio{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contact-radio > h1{
+    margin: 5px 0px;
+}
+
+.contact-btn{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  #contact-form-info > div, .contact-form-info-column > div{
+      margin-bottom: 20px;
+  }
+  
+.contact-btn > button{
+background-color: #ea7155;
+color: #ffffff;
+border-radius: 24px;
+border: none;
+padding: 5px 75px;
+cursor: pointer;
+}
+
+#ggmap-studio{
     width: 100%;
-    position: relative;
+    height: 320px;
 }
 
-#contact-picture > img{
-    width: fit-content;
-    object-fit: cover;
-    max-height: 150px;
-    opacity: 0.9;
-    z-index: 1;
+#studio-contact{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 50px 0px 70px 0px;
 }
 
-#contact-picture > h1{
-    color: #ffffff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    font-size: 5em;
+#map-info{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.follow-text{
+    color: #ea7155;
+}
+
+#contact-social{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-social-img{
+    width: 30px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+    #contact-form-section{
+        display: block;
+    }
+
+    #contact-form-section > div:first-child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #contact-img{
+        width: 30%;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+#contactus{
+    margin-top: 50px;
+}
+
+#contact-img{
+    width: 40%;
+    margin-bottom: 40px;
+}
+}
+
+@media screen and (max-width: 767px) {
+    #studio-contact{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 30px;
+    }
+
+    .contact-form-info-column{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    #contact-img{
+        width: 50%;
+    }
+
+    #ggmap-studio{
+        height: 250px;
+    }
 }

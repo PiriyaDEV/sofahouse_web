@@ -259,6 +259,13 @@
   border: 7px solid #ffffff;
   border-radius: 50%;
   background-color: white;
+  cursor: pointer;
+  transition: transform .2s; /* Animation */
+}
+
+.banner-disc:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .opa-text {
@@ -403,7 +410,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 920px) {
   #home {
     padding-top: 130px;
   }
