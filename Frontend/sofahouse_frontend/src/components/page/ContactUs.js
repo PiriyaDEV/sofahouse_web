@@ -15,6 +15,11 @@ import tiktok from "../../assets/images/contact/tiktok.png";
 import linkedin from "../../assets/images/contact/linkedin.png";
 
 export default function AboutUs() {
+  const data = {
+    name: "",
+    email: "",
+  };
+
   return (
     <div id="contactus" className="section">
       <div className="page-container">

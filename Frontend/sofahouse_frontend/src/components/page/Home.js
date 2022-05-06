@@ -284,7 +284,7 @@ export default function Home() {
             </div>
             <div>
               { flexible === true && (
-                <h1 className={underStand? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
+                <h1 className={flexible? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
                 พวกเรา “ยืดหยุ่นและเร็ว”
                 <span className="skv-medium"> ต่อการทำงานและสไตล์ดนตรีที่หลากหลาย ในโปรเจค หนึ่งเราจะทำงานและพร้อมปรับเปลี่ยนไปกับคุณ โดยไม่จำกัดจำนวนครั้งในการแก้ เพื่อให้ผลงานออกมาตอบโจทย์ที่สุด</span>
               </h1>

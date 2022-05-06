@@ -54,7 +54,7 @@
     cursor: pointer;
   }
 
-  #contact-form-info > div, .contact-form-info-column > div{
+  #contact-form-info > div{
       margin-bottom: 20px;
   }
   

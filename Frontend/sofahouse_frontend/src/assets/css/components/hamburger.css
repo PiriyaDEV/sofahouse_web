@@ -81,6 +81,10 @@
   padding: 15px 25px;
 }
 
+.hamburger-text > h1{
+  cursor: pointer;
+}
+
 .hamburger-last {
   border-bottom: 1px solid #e5e5e5;
 }
