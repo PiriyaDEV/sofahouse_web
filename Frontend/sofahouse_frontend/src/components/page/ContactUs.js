@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -15,9 +15,155 @@ import tiktok from "../../assets/images/contact/tiktok.png";
 import linkedin from "../../assets/images/contact/linkedin.png";
 
 export default function AboutUs() {
-  const data = {
+  const initialErrorState = {
+    show: false,
+    message: "",
+  };
+
+  const initialContactFormState = {
     name: "",
     email: "",
+    work: "",
+    work_other: "",
+    service: "",
+    service_other: "",
+    top_up: "",
+    brief: "",
+    reference: "",
+  };
+
+  // contact form
+  const [contactForm, setContactForm] = useState(initialContactFormState);
+
+  // error message
+  const [nameError, setNameError] = useState(initialErrorState);
+  const [emailError, setEmailError] = useState(initialErrorState);
+  const [workError, setWorkError] = useState(initialErrorState);
+  const [serviceError, setServiceError] = useState(initialErrorState);
+  const [topUpError, setTopUpError] = useState(initialErrorState);
+  const [briefError, setBriefError] = useState(initialErrorState);
+
+  const showNameError = (text) => {
+    setNameError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const showEmailError = (text) => {
+    setEmailError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const showWorkError = (text) => {
+    setWorkError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const showServiceError = (text) => {
+    setServiceError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const showTopUpError = (text) => {
+    setTopUpError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const showBriefError = (text) => {
+    setBriefError({
+      show: true,
+      message: text,
+    });
+  };
+
+  const handleChangeContactForm = (event) => {
+    let value = event.target.value;
+    let name = event.target.name;
+
+    setContactForm({ ...contactForm, [name]: value });
+
+    if (name === "name") {
+      setNameError(initialErrorState);
+    } else if (name === "email") {
+      setEmailError(initialErrorState);
+    } else if (name === "work" || name === "work_other") {
+      setWorkError(initialErrorState);
+    } else if (name === "service" || name === "service_other") {
+      setServiceError(initialErrorState);
+    } else if (name === "top_up") {
+      setTopUpError(initialErrorState);
+    } else if (name === "brief") {
+      setBriefError(initialErrorState);
+    }
+  };
+
+  const validateForm = () => {
+    let valid = true;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (contactForm.work === "Others") {
+      contactForm.work = contactForm.work_other;
+    }
+    if (contactForm.service === "Others") {
+      contactForm.service = contactForm.service_other;
+    }
+
+    if (!contactForm.name) {
+      valid = false;
+      showNameError("Please fill your name!");
+    }
+    if (!contactForm.email) {
+      valid = false;
+      showEmailError("Please fill your email!");
+    } else if (!emailRegex.test(contactForm.email)) {
+      valid = false;
+      showEmailError("Please fill your email correctly!");
+    }
+    if (!contactForm.work) {
+      valid = false;
+      showWorkError("Please select your work type!");
+    }
+    if (!contactForm.service) {
+      valid = false;
+      showServiceError("Please select your service type!");
+    }
+    if (!contactForm.top_up) {
+      valid = false;
+      showTopUpError("Please select your top up service!");
+    }
+    if (!contactForm.brief) {
+      valid = false;
+      showBriefError("Please write your brief!");
+    }
+
+    return valid;
+  };
+
+  const sendForm = async () => {
+    Object.keys(contactForm).forEach(
+      (key) => (contactForm[key] = contactForm[key].trim())
+    );
+
+    if (!validateForm()) return;
+
+    const mailData = {
+      ...contactForm,
+      reference: !contactForm.reference ? "-" : contactForm.reference,
+    };
+
+    delete mailData.work_other;
+    delete mailData.service_other;
+
+    console.log(mailData);
   };
 
   return (
@@ -41,17 +187,39 @@ export default function AboutUs() {
                 <h1 className="avn-bold md-text">
                   Name (First Name / Last Name)
                 </h1>
-                <input className="contact-input" />
-                <h1 className="avn-medium md-text error-text">
-                  Invalid Message
-                </h1>
+                <input
+                  className="contact-input"
+                  name="name"
+                  maxLength="255"
+                  value={contactForm.name}
+                  onChange={handleChangeContactForm}
+                />
+                {/* Invalid */}
+                <div>
+                  {nameError.show ? (
+                    <h1 className="avn-medium md-text error-text">
+                      {nameError.message}
+                    </h1>
+                  ) : null}
+                </div>
               </div>
               <div>
                 <h1 className="avn-bold md-text">Email</h1>
-                <input className="contact-input" />
-                <h1 className="avn-medium md-text error-text">
-                  Invalid Message
-                </h1>
+                <input
+                  className="contact-input"
+                  name="email"
+                  maxLength="64"
+                  value={contactForm.email}
+                  onChange={handleChangeContactForm}
+                />
+                {/* Invalid */}
+                <div>
+                  {emailError.show ? (
+                    <h1 className="avn-medium md-text error-text">
+                      {emailError.message}
+                    </h1>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -62,8 +230,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="work"
+                  value="Full Song"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Full Song
@@ -74,8 +243,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="work"
+                  value="Ad Jingle"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Ad Jingle
@@ -86,8 +256,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="work"
+                  value="Music Scores"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Music Scores
@@ -98,15 +269,27 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="work"
+                  value="Others"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Others
                 </h1>
-                <input className="contact-input" />
+                <input
+                  className="contact-input"
+                  name="work_other"
+                  onChange={handleChangeContactForm}
+                />
               </div>
-              <h1 className="avn-medium md-text error-text">Invalid Message</h1>
+              {/* Invalid */}
+              <div>
+                {workError.show ? (
+                  <h1 className="avn-medium md-text error-text">
+                    {workError.message}
+                  </h1>
+                ) : null}
+              </div>
             </div>
 
             <div>
@@ -116,8 +299,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Lyrics / song writing (Thai & English version)"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Lyrics / song writing (Thai & English version)
@@ -128,8 +312,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Music production"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Music production
@@ -140,8 +325,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Vocal recording"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Vocal recording
@@ -152,8 +338,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Music score"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Music score
@@ -164,8 +351,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Mixing & mastering"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Mixing & mastering
@@ -176,8 +364,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Streaming service"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Streaming service
@@ -188,15 +377,27 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="service"
+                  value="Others"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Others
                 </h1>
-                <input className="contact-input" />
+                <input
+                  className="contact-input"
+                  name="service_other"
+                  onChange={handleChangeContactForm}
+                />
               </div>
-              <h1 className="avn-medium md-text error-text">Invalid Message</h1>
+              {/* Invalid */}
+              <div>
+                {serviceError.show ? (
+                  <h1 className="avn-medium md-text error-text">
+                    {serviceError.message}
+                  </h1>
+                ) : null}
+              </div>
             </div>
             <div>
               <h1 className="avn-bold md-text">Top up service</h1>
@@ -205,8 +406,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="top_up"
+                  value="Remix version"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Remix version
@@ -217,8 +419,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="top_up"
+                  value="Remake version"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Remake version
@@ -229,8 +432,9 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="top_up"
+                  value="Streaming version"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Streaming version
@@ -241,14 +445,22 @@ export default function AboutUs() {
                 <input
                   type="radio"
                   id="html"
-                  name="fav_language"
-                  value="HTML"
+                  name="top_up"
+                  value="Live version"
+                  onChange={handleChangeContactForm}
                 />
                 <h1 for="html" className="avn-medium md-text">
                   Live version
                 </h1>
               </div>
-              <h1 className="avn-medium md-text error-text">Invalid Message</h1>
+              {/* Invalid */}
+              <div>
+                {topUpError.show ? (
+                  <h1 className="avn-medium md-text error-text">
+                    {topUpError.message}
+                  </h1>
+                ) : null}
+              </div>
             </div>
 
             <div>
@@ -256,19 +468,38 @@ export default function AboutUs() {
                 Song's objective, mood & tone and other things you want us to
                 know more
               </h1>
-              <input className="contact-input" />
-              <h1 className="avn-medium md-text error-text">Invalid Message</h1>
+              <input
+                className="contact-input"
+                name="brief"
+                value={contactForm.brief}
+                onChange={handleChangeContactForm}
+              />
+              {/* Invalid */}
+              <div>
+                {briefError.show ? (
+                  <h1 className="avn-medium md-text error-text">
+                    {briefError.message}
+                  </h1>
+                ) : null}
+              </div>
             </div>
 
             <div>
               <h1 className="avn-bold md-text">Reference:</h1>
-              <input className="contact-input" />
-              <h1 className="avn-medium md-text error-text">Invalid Message</h1>
+              <input
+                className="contact-input"
+                name="reference"
+                value={contactForm.reference}
+                onChange={handleChangeContactForm}
+              />
+              {/* <h1 className="avn-medium md-text error-text">Invalid Message</h1> */}
             </div>
           </div>
         </div>
         <div className="contact-btn">
-          <button className="bg2-text">Send</button>
+          <button className="bg2-text" onClick={sendForm}>
+            Send
+          </button>
         </div>
 
         <div id="studio-contact">
