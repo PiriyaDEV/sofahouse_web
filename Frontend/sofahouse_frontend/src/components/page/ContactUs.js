@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 
 import "../../assets/css/text.css";
 import "../../assets/css/page.css";
@@ -108,39 +109,40 @@ export default function AboutUs() {
 
   const validateForm = () => {
     let valid = true;
+    let form = { ...contactForm };
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (contactForm.work === "Others") {
-      contactForm.work = contactForm.work_other;
+    if (form.work === "Others") {
+      form.work = form.work_other;
     }
-    if (contactForm.service === "Others") {
-      contactForm.service = contactForm.service_other;
+    if (form.service === "Others") {
+      form.service = form.service_other;
     }
 
-    if (!contactForm.name) {
+    if (!form.name) {
       valid = false;
       showNameError("Please fill your name!");
     }
-    if (!contactForm.email) {
+    if (!form.email) {
       valid = false;
       showEmailError("Please fill your email!");
-    } else if (!emailRegex.test(contactForm.email)) {
+    } else if (!emailRegex.test(form.email)) {
       valid = false;
       showEmailError("Please fill your email correctly!");
     }
-    if (!contactForm.work) {
+    if (!form.work) {
       valid = false;
       showWorkError("Please select your work type!");
     }
-    if (!contactForm.service) {
+    if (!form.service) {
       valid = false;
       showServiceError("Please select your service type!");
     }
-    if (!contactForm.top_up) {
+    if (!form.top_up) {
       valid = false;
       showTopUpError("Please select your top up service!");
     }
-    if (!contactForm.brief) {
+    if (!form.brief) {
       valid = false;
       showBriefError("Please write your brief!");
     }
@@ -148,7 +150,7 @@ export default function AboutUs() {
     return valid;
   };
 
-  const sendForm = async () => {
+  const sendEmail = () => {
     Object.keys(contactForm).forEach(
       (key) => (contactForm[key] = contactForm[key].trim())
     );
@@ -157,13 +159,38 @@ export default function AboutUs() {
 
     const mailData = {
       ...contactForm,
+      work:
+        contactForm.work === "Others"
+          ? (contactForm.work = contactForm.work_other)
+          : contactForm.work,
+      service:
+        contactForm.service === "Others"
+          ? (contactForm.service = contactForm.service_other)
+          : contactForm.service,
       reference: !contactForm.reference ? "-" : contactForm.reference,
     };
 
     delete mailData.work_other;
     delete mailData.service_other;
 
-    console.log(mailData);
+    const emailjs_key = process.env.REACT_APP_EMAILJS_KEY;
+
+    emailjs
+      .send(
+        "service_gmail_sofahouse",
+        "template_contact",
+        mailData,
+        emailjs_key
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setContactForm(initialContactFormState);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
   return (
@@ -176,7 +203,6 @@ export default function AboutUs() {
 
           <h1 className="bg3-text">CONTACT US</h1>
         </div>
-
         <div id="contact-form-section">
           <div>
             <img id="contact-img" src={contactImg} alt="" />
@@ -497,7 +523,7 @@ export default function AboutUs() {
           </div>
         </div>
         <div className="contact-btn">
-          <button className="bg2-text" onClick={sendForm}>
+          <button className="bg2-text" onClick={sendEmail}>
             Send
           </button>
         </div>
