@@ -7,6 +7,11 @@
     margin-bottom: 50px;
 }
 
+.tow-text{
+    color: #ea7155;
+    margin: 10px 0px;
+}
+
 #contact-form-section{
     display: grid;
     justify-content: center;
@@ -20,10 +25,17 @@
 }
 
 .contact-input{
-    padding: 10px 25px;
+    padding: 5px;
     border: 1px solid #7c7c7c;
     border-radius: 5px;
-    width: calc(100% - 55px);
+    width: calc(100% - 15px);
+}
+
+#success-message > div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .contact-form-info-column{
@@ -89,7 +101,15 @@ cursor: pointer;
     color: #ea7155;
 }
 
-#contact-social{
+#success-social{
+    margin-top: 30px;
+}
+
+#success-message > div > h1{
+    text-align: center;
+}
+
+#success-social, #contact-social{
     display: flex;
     align-items: center;
     gap: 15px;
