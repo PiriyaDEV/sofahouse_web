@@ -88,10 +88,10 @@ export default function Contact() {
         <img id="paperplane" src={paperPlane} alt="" />
       </div>
       {closeContact === false &&  (  
-      <div id="contact-bubble">
+      <div id="contact-bubble" onClick={() => setCloseContact(true)}>
         {/* eslint-disable-next-line */}
-        <h1 onClick={() => setCloseContact(true)} className="contact-close"/>
-        <div id="contact-bubble-box" className="section bg-text" onClick={() => setHover(!hover)}>
+        <h1 className="contact-close"/>
+        <div id="contact-bubble-box" className="section bg-text">
           Contact us Here!
         </div>
       </div>
