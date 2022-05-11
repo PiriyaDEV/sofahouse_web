@@ -257,21 +257,6 @@ export default function Home() {
             <hr className="blue-line"></hr>
           </div> */}
 
-          <p className="skv-bold">
-            <span className="sm-text">
-              จากประสบการณ์ที่เราได้ผลิตผลงานให้ศิลปิน, นักร้อง-นักดนตรีอิสระ,
-              องค์กร และแบรนด์สินค้าต่างๆ
-            </span>
-            <br />
-            <div className="p-spacing" />
-            <span className="bg-text">
-              ทุกขั้นตอนของ SOFA HOUSE มี 3 Values
-              ข้างต้นที่จะช่วยนำเสนอความโดดเด่น <br />
-              และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
-              เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
-            </span>
-          </p>
-
           <div id="about-description">
             <div>
             { underStand === true && (
@@ -299,6 +284,21 @@ export default function Home() {
               )}
             </div>
           </div>
+
+          <p className="skv-bold">
+            <span className="sm-text">
+              จากประสบการณ์ที่เราได้ผลิตผลงานให้ศิลปิน, นักร้อง-นักดนตรีอิสระ,
+              องค์กร และแบรนด์สินค้าต่างๆ
+            </span>
+            <br />
+            <div className="p-spacing" />
+            <span className="bg-text">
+              ทุกขั้นตอนของ SOFA HOUSE มี 3 Values
+              ข้างต้นที่จะช่วยนำเสนอความโดดเด่น <br />
+              และเอกลักษณ์ของคุณออกมาให้ดีที่สุด
+              เพื่อตอบโจทย์กลุ่มเป้าหมายที่คุณวางไว้
+            </span>
+          </p>
         </div>
 
         <h1 className="home-follow-title bg-text">

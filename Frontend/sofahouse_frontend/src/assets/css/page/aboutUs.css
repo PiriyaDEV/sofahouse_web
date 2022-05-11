@@ -28,6 +28,7 @@
   justify-content: space-between;
   gap: 30px;
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .about-orange-box {
@@ -206,6 +207,7 @@
 #about-description {
   display: block;
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .about-orange-box {

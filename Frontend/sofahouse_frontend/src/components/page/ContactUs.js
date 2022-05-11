@@ -333,7 +333,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="work"
                     value="Full Song"
@@ -346,7 +346,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="work"
                     value="Ad Jingle"
@@ -359,7 +359,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="work"
                     value="Music Scores"
@@ -372,7 +372,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="work"
                     value="Others"
@@ -402,7 +402,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Lyrics / song writing (Thai & English version)"
@@ -415,7 +415,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Music production"
@@ -428,7 +428,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Vocal recording"
@@ -441,7 +441,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Music score"
@@ -454,7 +454,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Mixing & mastering"
@@ -467,7 +467,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Streaming service"
@@ -480,7 +480,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="service"
                     value="Others"
@@ -509,7 +509,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="top_up"
                     value="Remix version"
@@ -522,7 +522,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="top_up"
                     value="Remake version"
@@ -535,7 +535,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="top_up"
                     value="Streaming version"
@@ -548,7 +548,7 @@ export default function AboutUs() {
 
                 <div className="contact-radio">
                   <input
-                    type="radio"
+                    type="checkbox"
                     id="html"
                     name="top_up"
                     value="Live version"
