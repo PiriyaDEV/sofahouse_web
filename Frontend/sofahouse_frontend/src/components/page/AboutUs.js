@@ -30,6 +30,11 @@ import activity8 from "../../assets/images/slideshow_ activity/S__32317448.jpg";
 import activity9 from "../../assets/images/slideshow_ activity/S__32333864.jpg";
 import activity10 from "../../assets/images/slideshow_ activity/S__47120389.jpg";
 
+import euy from "../../assets/images/about-us/team/Euy.jpg"
+import parm from "../../assets/images/about-us/team/Parm.jpg"
+import ploycal from "../../assets/images/about-us/team/Ploycal.png"
+import md from "../../assets/images/about-us/team/Redpig.jpg"
+
 SwiperCore.use([
   EffectFade,
   Navigation,
@@ -204,7 +209,7 @@ export default function AboutUs() {
           <div id="team-clr-section">
             <div>
               <div>
-                <img className="team-clr" src={activity2} alt="" />
+                <img className="team-clr" src={ploycal} alt="" />
               </div>
               <h1 className="bg-text avn-bold text-center">
                 Ratimas (Ploycal) Jirapongsananuruk
@@ -223,7 +228,7 @@ export default function AboutUs() {
 
             <div>
               <div>
-                <img className="team-clr" src={activity2} alt="" />
+                <img className="team-clr" src={parm} alt="" />
               </div>
               <h1 className="bg-text avn-bold text-center">
                 Natchanon (Parm) Neovakul
@@ -241,7 +246,7 @@ export default function AboutUs() {
 
             <div>
               <div>
-                <img className="team-clr" src={activity2} alt="" />
+                <img className="team-clr" src={euy} alt="" />
               </div>
               <h1 className="bg-text avn-bold text-center">
                 Chayada (Euy) Jirapongsananuruk
@@ -251,16 +256,15 @@ export default function AboutUs() {
                 Song writer : Sofa House
               </h1>
               <p className="sm-text avn-medium p-aboutus">
-                “I love how our team is so strong and passionate on producing
-                every single pieces of music. That’s why we understand and enjoy
-                every path our clients are taking. We are here to help them
-                achieve their goals”
+                “Cannot wait to contribute for the Thai music industry. We hope
+                that Sofa House team are a part to drive this growth together in
+                the next 5 to 10 to 20 years!”
               </p>
             </div>
 
             <div>
               <div>
-                <img className="team-clr" src={activity2} alt="" />
+                <img className="team-clr" src={md} alt="" />
               </div>
               <h1 className="bg-text avn-bold text-center">
                 Chananet (Moodang) Sinjanakom
@@ -270,10 +274,9 @@ export default function AboutUs() {
                 Producer : Sofa House
               </h1>
               <p className="sm-text avn-medium p-aboutus">
-                “I love how our team is so strong and passionate on producing
-                every single pieces of music. That’s why we understand and enjoy
-                every path our clients are taking. We are here to help them
-                achieve their goals”
+                “Making people enjoy my music has always been my most joyous
+                hobbies. I and many other talented producers cannot wait to put
+                a smile on your face through music!”
               </p>
             </div>
           </div>
@@ -282,7 +285,7 @@ export default function AboutUs() {
         {/* Why Section */}
         <div id="why-section">
           <div id="why-box">
-            <img id="why-sofa-img" src={whySofa} alt=""/>
+            <img id="why-sofa-img" src={whySofa} alt="" />
             <div id="sofa-why">
               <h1 className="bg2-text">Why SOFA HOUSE?</h1>
               <h1 className="bg2-text skv-medium">ทำไมต้องเป็นโซฟาเฮ้าส์</h1>
