@@ -51,9 +51,9 @@ export default function AboutUs() {
 
   const activityImg = [
     // activity1,
+    activity4,
     activity2,
     activity3,
-    activity4,
     activity5,
     // activity6,
     activity7,
