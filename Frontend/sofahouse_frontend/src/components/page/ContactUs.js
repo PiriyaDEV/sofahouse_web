@@ -24,14 +24,24 @@ export default function AboutUs() {
   const initialContactFormState = {
     name: "",
     email: "",
-    work: "",
+    work: [],
     work_other: "",
-    service: "",
+    service: [],
     service_other: "",
-    top_up: "",
+    top_up: [],
     brief: "",
     reference: "",
   };
+
+  const textBoxFields = [
+    "name",
+    "email",
+    "work_other",
+    "service_other",
+    "brief",
+    "reference",
+  ];
+  const checkboxFields = ["work", "service", "top_up"];
 
   // contact form
   const [contactForm, setContactForm] = useState(initialContactFormState);
@@ -90,10 +100,24 @@ export default function AboutUs() {
   };
 
   const handleChangeContactForm = (event) => {
-    let value = event.target.value;
+    let { value, checked } = event.target;
     let name = event.target.name;
 
-    setContactForm({ ...contactForm, [name]: value });
+    if (textBoxFields.includes(name)) {
+      setContactForm({ ...contactForm, [name]: value });
+    } else if (checkboxFields.includes(name)) {
+      if (checked) {
+        setContactForm({
+          ...contactForm,
+          [name]: [...contactForm[name], value],
+        });
+      } else {
+        setContactForm({
+          ...contactForm,
+          [name]: contactForm[name].filter((item) => item !== value),
+        });
+      }
+    }
 
     if (name === "name") {
       setNameError(initialErrorState);
@@ -112,90 +136,95 @@ export default function AboutUs() {
 
   const validateForm = () => {
     let valid = true;
-    let form = { ...contactForm };
+
     // eslint-disable-next-line
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (form.work === "Others") {
-      form.work = form.work_other;
-    }
-    if (form.service === "Others") {
-      form.service = form.service_other;
-    }
-
-    if (!form.name) {
+    if (!contactForm.name) {
       valid = false;
       showNameError("Please fill your name!");
     }
-    if (!form.email) {
+    if (!contactForm.email) {
       valid = false;
       showEmailError("Please fill your email!");
-    } else if (!emailRegex.test(form.email)) {
+    } else if (!emailRegex.test(contactForm.email)) {
       valid = false;
       showEmailError("Please fill your email correctly!");
     }
-    if (!form.work) {
+    if (!contactForm.work.length) {
       valid = false;
-      showWorkError("Please select your work type!");
+      showWorkError("Please select at least one work type!");
+    } else if (contactForm.work.includes("Others") && !contactForm.work_other) {
+      valid = false;
+      showWorkError("Please specify other work type!");
     }
-    if (!form.service) {
+    if (!contactForm.service.length) {
       valid = false;
-      showServiceError("Please select your service type!");
-    }
-    if (!form.top_up) {
+      showServiceError("Please select at least one service type!");
+    } else if (
+      contactForm.service.includes("Others") &&
+      !contactForm.service_other
+    ) {
       valid = false;
-      showTopUpError("Please select your top up service!");
-    }
-    if (!form.brief) {
-      valid = false;
-      showBriefError("Please write your brief!");
+      showServiceError("Please specify other service type!");
     }
 
     return valid;
   };
 
   const sendEmail = () => {
-    Object.keys(contactForm).forEach(
+    textBoxFields.forEach(
       (key) => (contactForm[key] = contactForm[key].trim())
     );
+
+    let form = { ...contactForm };
 
     if (!validateForm()) return;
 
     const mailData = {
-      ...contactForm,
-      work:
-        contactForm.work === "Others"
-          ? (contactForm.work = contactForm.work_other)
-          : contactForm.work,
-      service:
-        contactForm.service === "Others"
-          ? (contactForm.service = contactForm.service_other)
-          : contactForm.service,
-      reference: !contactForm.reference ? "-" : contactForm.reference,
+      name: form.name,
+      email: form.email.toLowerCase(),
+      work: [...form.work],
+      service: [...form.service],
+      top_up: !form.top_up.length ? "-" : form.top_up.join(", "),
+      brief: !form.brief ? "-" : form.brief,
+      reference: !form.reference ? "-" : form.reference,
     };
 
-    delete mailData.work_other;
-    delete mailData.service_other;
+    if (mailData.work.includes("Others")) {
+      mailData.work = mailData.work.filter((work) => work !== "Others");
+      mailData.work.push(form.work_other);
+    }
+
+    if (mailData.service.includes("Others")) {
+      mailData.service = mailData.service.filter(
+        (service) => service !== "Others"
+      );
+      mailData.service.push(form.service_other);
+    }
+
+    mailData.work = mailData.work.join(", ");
+    mailData.service = mailData.service.join(", ");
 
     const emailjs_key = process.env.REACT_APP_EMAILJS_KEY;
 
-    emailjs
-      .send(
-        "service_gmail_sofahouse",
-        "template_contact",
-        mailData,
-        emailjs_key
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setIsSummited(true);
-          setContactForm(initialContactFormState);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      emailjs
+        .send(
+          "service_gmail_sofahouse",
+          "template_contact",
+          mailData,
+          emailjs_key
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            setIsSummited(true);
+            setContactForm(initialContactFormState);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
   };
 
   return (
@@ -325,7 +354,8 @@ export default function AboutUs() {
               </div>
 
               <p className="sm-text avn-bold tow-text">
-              If you are not certain about the brief, don't worry! Sofa House will reach you out for more information.
+                If you are not certain about the brief, don't worry! Sofa House
+                will reach you out for more information.
               </p>
 
               <div>
@@ -505,7 +535,7 @@ export default function AboutUs() {
                 </div>
               </div>
               <div>
-                <h1 className="avn-bold md-text">Top up service</h1>
+                <h1 className="avn-bold md-text">Top up service (Optional)</h1>
 
                 <div className="contact-radio">
                   <input
@@ -571,7 +601,7 @@ export default function AboutUs() {
               <div>
                 <h1 className="avn-bold md-text">
                   Song's objective, mood & tone and other things you want us to
-                  know more
+                  know more (Optional)
                 </h1>
                 <input
                   className="contact-input sm-text"
@@ -590,7 +620,7 @@ export default function AboutUs() {
               </div>
 
               <div>
-                <h1 className="avn-bold md-text">Reference:</h1>
+                <h1 className="avn-bold md-text">Reference (Optional):</h1>
                 <input
                   className="contact-input sm-text"
                   name="reference"

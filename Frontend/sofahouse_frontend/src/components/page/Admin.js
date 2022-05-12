@@ -78,7 +78,7 @@ export default function Admin() {
     pri_homepage: 0,
   };
 
-  const checkboxField = [
+  const checkboxFields = [
     "cat_lyrics_song",
     "cat_music_prod",
     "cat_vocal_rec",
@@ -117,7 +117,7 @@ export default function Admin() {
     let value = event.target.value;
     let name = event.target.name;
 
-    if (checkboxField.includes(name)) {
+    if (checkboxFields.includes(name)) {
       value = event.target.checked;
       if (!value) updatedMusic[name.replace(/cat|show/, "pri")] = 0;
     }
@@ -132,7 +132,7 @@ export default function Admin() {
     let value = event.target.value;
     let name = event.target.name;
 
-    if (checkboxField.includes(name)) {
+    if (checkboxFields.includes(name)) {
       value = event.target.checked;
       if (!value) updatedMusic[name.replace(/cat|show/, "pri")] = 0;
     }
