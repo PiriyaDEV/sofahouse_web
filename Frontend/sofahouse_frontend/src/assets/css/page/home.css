@@ -65,6 +65,12 @@
   z-index: 3;
 }
 
+#about-description > div{
+  border-radius: 27px;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -377,6 +383,10 @@
 
 .ig-iframe {
     height: 560px;
+}
+
+#about-description > div{
+  margin-bottom: 15px;
 }
 } 
 

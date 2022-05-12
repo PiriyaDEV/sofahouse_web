@@ -239,9 +239,24 @@ export default function Home() {
             </div>
             <div id="desc-abs">
               <div id="banner-flex-section">
-                <img className="banner-disc" src={desc1} alt="" onClick={() => setUnderStand(!underStand)}/>
-                <img className="banner-disc" src={desc2} alt="" onClick={() => setFlexible(!flexible)}/>
-                <img className="banner-disc" src={desc3} alt="" onClick={() => setProfessional(!professional)}/>
+                <img
+                  className="banner-disc"
+                  src={desc1}
+                  alt=""
+                  onClick={() => setUnderStand(!underStand)}
+                />
+                <img
+                  className="banner-disc"
+                  src={desc2}
+                  alt=""
+                  onClick={() => setFlexible(!flexible)}
+                />
+                <img
+                  className="banner-disc"
+                  src={desc3}
+                  alt=""
+                  onClick={() => setProfessional(!professional)}
+                />
               </div>
             </div>
           </div>
@@ -258,31 +273,74 @@ export default function Home() {
           </div> */}
 
           <div id="about-description">
-            <div>
-            { underStand === true && (
-                <h1 className={underStand? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
+            {underStand === true ? (
+              <div>
+                <h1
+                  className={
+                    underStand
+                      ? "answer active xm-text skv-bold"
+                      : "answer xm-text skv-bold"
+                  }
+                >
                   {/* <span className='skv-bold'></span> */}
                   พวกเรา 'เข้าใจ'
-                  <span className="skv-medium"> ว่าการสร้างสรรค์ผลงานทุกชิ้น ต้องมีจุดประสงค์ร่วมของแบรนด์และผู้ฟัง เราจึงพร้อมเป็นพาร์ทเนอร์ให้คำแนะนำคุณตลอดทุกขั้นตอน เพื่อให้คุณสบายใจ เเม้คุณจะไม่มีประสบการณ์มาก่อน</span>
+                  <span className="skv-medium">
+                    {" "}
+                    ว่าการสร้างสรรค์ผลงานทุกชิ้น
+                    ต้องมีจุดประสงค์ร่วมของแบรนด์และผู้ฟัง
+                    เราจึงพร้อมเป็นพาร์ทเนอร์ให้คำแนะนำคุณตลอดทุกขั้นตอน
+                    เพื่อให้คุณสบายใจ เเม้คุณจะไม่มีประสบการณ์มาก่อน
+                  </span>
                 </h1>
+              </div>
+            ) : (
+              <span></span>
             )}
-            </div>
-            <div>
-              { flexible === true && (
-                <h1 className={flexible? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
-                พวกเรา “ยืดหยุ่นและเร็ว”
-                <span className="skv-medium"> ต่อการทำงานและสไตล์ดนตรีที่หลากหลาย ในโปรเจค หนึ่งเราจะทำงานและพร้อมปรับเปลี่ยนไปกับคุณ โดยไม่จำกัดจำนวนครั้งในการแก้ เพื่อให้ผลงานออกมาตอบโจทย์ที่สุด</span>
-              </h1>
-              )}
-            </div>
-            <div>
-              { professional === true && (
-                <h1 className={professional? 'answer active xm-text skv-bold' : 'answer xm-text skv-bold'}>
-                พวกเราทำงานอย่าง “มืออาชีพ”
-                <span className="skv-medium"> ด้วยทีมงานที่มีประสบการณ์และเชี่ยวชาญในแต่ละขั้นตอนของการทำเพลงตั้งแต่การรับบรีฟ แต่งเนื้อ ทำดนตรี mix & master อัดเสียง ทำscore และบริการด้านเพลงอื่นๆ ไปจนถึงการเผยแพร่เพลงสู่ตลาด</span>
+
+            {flexible === true ? (
+              <div>
+                <h1
+                  className={
+                    flexible
+                      ? "answer active xm-text skv-bold"
+                      : "answer xm-text skv-bold"
+                  }
+                >
+                  พวกเรา “ยืดหยุ่นและเร็ว”
+                  <span className="skv-medium">
+                    {" "}
+                    ต่อการทำงานและสไตล์ดนตรีที่หลากหลาย ในโปรเจค
+                    หนึ่งเราจะทำงานและพร้อมปรับเปลี่ยนไปกับคุณ
+                    โดยไม่จำกัดจำนวนครั้งในการแก้
+                    เพื่อให้ผลงานออกมาตอบโจทย์ที่สุด
+                  </span>
                 </h1>
-              )}
-            </div>
+              </div>
+            ) : (
+              <span></span>
+            )}
+            
+            {professional === true ? (
+              <div>
+                <h1
+                  className={
+                    professional
+                      ? "answer active xm-text skv-bold"
+                      : "answer xm-text skv-bold"
+                  }
+                >
+                  พวกเราทำงานอย่าง “มืออาชีพ”
+                  <span className="skv-medium">
+                    {" "}
+                    ด้วยทีมงานที่มีประสบการณ์และเชี่ยวชาญในแต่ละขั้นตอนของการทำเพลงตั้งแต่การรับบรีฟ
+                    แต่งเนื้อ ทำดนตรี mix & master อัดเสียง ทำscore
+                    และบริการด้านเพลงอื่นๆ ไปจนถึงการเผยแพร่เพลงสู่ตลาด
+                  </span>
+                </h1>
+              </div>
+            ) : (
+              <span></span>
+            )}
           </div>
 
           <p className="skv-bold">
