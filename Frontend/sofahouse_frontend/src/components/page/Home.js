@@ -197,7 +197,11 @@ export default function Home() {
     corporate.push(
       <SwiperSlide key={`slide-${i}`} tag="li">
         <div className="carousal-tmn">
-          <img className="home-carousal-img" src={CorporateList[i].picture} alt="" />
+          <img
+            className="home-carousal-img"
+            src={CorporateList[i].picture}
+            alt=""
+          />
           <h1 className="xm2-text">{CorporateList[i].name}</h1>
           {/* <p className="xm2-text skv-medium grey-text">
             {CorporateList[i].review}
@@ -255,7 +259,11 @@ export default function Home() {
     artist_slide.push(
       <SwiperSlide key={`slide-${i}`} tag="li">
         <div className="carousal-tmn">
-          <img className="home-carousal-img" src={ArtistList[i].picture} alt="" />
+          <img
+            className="home-carousal-img"
+            src={ArtistList[i].picture}
+            alt=""
+          />
           <h1 className="xm2-text">{ArtistList[i].name}</h1>
           {/* <p className="xm2-text skv-medium grey-text">
             {CorporateList[i].review}
@@ -356,12 +364,16 @@ export default function Home() {
 
         {/* CorporateList Section */}
         <div id="home-slide">
-          <h1 className="bg4-text text-center">OUR Client</h1>
+          <h1 className="bg4-text text-center our-client">OUR Client</h1>
           <p className="skv-medium bg-text text-center">
-            SOFA HOUSE has composed and produced over 50+ musical pieces and{" "}
+            SOFA HOUSE has composed and produced{" "}
+            <span className="skv-bold">over 50+ musical pieces and</span>
             <br />
-            arrangements for independent artist, corporate agencies, and <br />
-            organizations
+            <span className="skv-bold">arrangements</span> for{" "}
+            <span className="skv-bold">
+              independent artist, corporate agencies, and <br />
+              organizations
+            </span>
           </p>
 
           <div className="tmn-carousal-section home-carousal">
