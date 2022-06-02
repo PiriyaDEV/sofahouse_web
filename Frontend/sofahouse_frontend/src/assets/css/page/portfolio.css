@@ -205,6 +205,10 @@ li {
   text-align: center;
 }
 
+.home-carousal{
+  flex-direction: column !important;
+}
+
 #tmn-carousal > section > .swiper-wrapper {
   align-items: flex-start !important;
 }

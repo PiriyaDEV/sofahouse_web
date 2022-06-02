@@ -218,9 +218,21 @@
 }
 
 /* Description Section */
+#home-slide{
+  margin-top: 60px;
+}
+
 #desc-section {
   margin-top: 40px;
   text-align: center;
+}
+
+.home-carousal{
+  margin-top: 60px;
+}
+
+.home-carousal-img{
+  object-fit: contain !important;
 }
 
 #desc-logo {

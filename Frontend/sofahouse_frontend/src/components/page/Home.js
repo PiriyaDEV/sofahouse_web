@@ -29,6 +29,29 @@ import temp1 from "../../assets/images/temp/insecure.png";
 import Studio1 from "../../assets/images/IMG_3745.JPG";
 // import Studio2 from "../../assets/images/IMG_3746.JPG"
 
+import corporate1 from "../../assets/images/Corporate/1) GMM Grammy.svg";
+import corporate2 from "../../assets/images/Corporate/2) VIBIE Entertainment.png";
+import corporate3 from "../../assets/images/Corporate/3) BRANDi and Companies.png";
+import corporate4 from "../../assets/images/Corporate/4) That Mad Podcast.png";
+import corporate5 from "../../assets/images/Corporate/5) Chula Expo 2022.jpg";
+import corporate6 from "../../assets/images/Corporate/6) Hirusoft Thailand.jpg";
+import corporate7 from "../../assets/images/Corporate/7) TOG Thailand.jpg";
+import corporate8 from "../../assets/images/Corporate/8) Lighthouse Workshop Studio.png";
+import corporate9 from "../../assets/images/Corporate/9) Lily house_.jpg";
+import corporate10 from "../../assets/images/Corporate/10) Chula Business Talk Podcast.jpg";
+import corporate11 from "../../assets/images/Corporate/11) Adult-To-Be hotline.jpg";
+
+import artistSlide1 from "../../assets/images/Artists/1) Magesta.jpg";
+import artistSlide2 from "../../assets/images/Artists/2) Pangina Heals.jpg";
+import artistSlide3 from "../../assets/images/Artists/3) Icepadie.jpg";
+import artistSlide4 from "../../assets/images/Artists/4) Mercury Goldfish.jpg";
+import artistSlide5 from "../../assets/images/Artists/5) Mira Mir.jpg";
+import artistSlide6 from "../../assets/images/Artists/6) WHITE YOU.jpg";
+import artistSlide7 from "../../assets/images/Artists/7) proudsiraya.jpg";
+import artistSlide8 from "../../assets/images/Artists/8) Pepper P_.jpg";
+import artistSlide9 from "../../assets/images/Artists/9) 6go.jpg";
+import artistSlide10 from "../../assets/images/Artists/10) Nicé.jpg";
+
 //Js
 import PlayConsole from "../element/PlayConsole";
 
@@ -122,6 +145,126 @@ export default function Home() {
     }
   }
 
+  const CorporateList = [
+    {
+      name: "GMM Grammy",
+      picture: corporate1,
+    },
+    {
+      name: "VIBIE Entertainment",
+      picture: corporate2,
+    },
+    {
+      name: "BRANDi and Companies",
+      picture: corporate3,
+    },
+    {
+      name: "That Mad Podcast",
+      picture: corporate4,
+    },
+    {
+      name: "Chula Expo 2022",
+      picture: corporate5,
+    },
+    {
+      name: "Hirusoft Thailand",
+      picture: corporate6,
+    },
+    {
+      name: "TOG Thailand",
+      picture: corporate7,
+    },
+    {
+      name: "Lighthouse Workshop Studio",
+      picture: corporate8,
+    },
+    {
+      name: "Lily house",
+      picture: corporate9,
+    },
+    {
+      name: "Chula Business Talk Podcast",
+      picture: corporate10,
+    },
+    {
+      name: "Adult-to-Be Hotline",
+      picture: corporate11,
+    },
+  ];
+
+  const corporate = [];
+  for (let i = 0; i < CorporateList.length; i += 1) {
+    corporate.push(
+      <SwiperSlide key={`slide-${i}`} tag="li">
+        <div className="carousal-tmn">
+          <img className="home-carousal-img" src={CorporateList[i].picture} alt="" />
+          <h1 className="xm2-text">{CorporateList[i].name}</h1>
+          {/* <p className="xm2-text skv-medium grey-text">
+            {CorporateList[i].review}
+          </p> */}
+        </div>
+      </SwiperSlide>
+    );
+  }
+
+  const ArtistList = [
+    {
+      name: "Magesta",
+      picture: artistSlide1,
+    },
+    {
+      name: "Pangina Heals",
+      picture: artistSlide2,
+    },
+    {
+      name: "Icepadia",
+      picture: artistSlide3,
+    },
+    {
+      name: "Mercury Goldfish",
+      picture: artistSlide4,
+    },
+    {
+      name: "Mira Mir",
+      picture: artistSlide5,
+    },
+    {
+      name: "WHITE YOU",
+      picture: artistSlide6,
+    },
+    {
+      name: "proudsiraya",
+      picture: artistSlide7,
+    },
+    {
+      name: "Pepper P",
+      picture: artistSlide8,
+    },
+    {
+      name: "6go",
+      picture: artistSlide9,
+    },
+    {
+      name: "Nicé",
+      picture: artistSlide10,
+    },
+  ];
+
+  const artist_slide = [];
+  for (let i = 0; i < ArtistList.length; i += 1) {
+    artist_slide.push(
+      <SwiperSlide key={`slide-${i}`} tag="li">
+        <div className="carousal-tmn">
+          <img className="home-carousal-img" src={ArtistList[i].picture} alt="" />
+          <h1 className="xm2-text">{ArtistList[i].name}</h1>
+          {/* <p className="xm2-text skv-medium grey-text">
+            {CorporateList[i].review}
+          </p> */}
+        </div>
+      </SwiperSlide>
+    );
+  }
+
   return (
     <div id="home" className="section">
       <div className="page-container">
@@ -210,6 +353,88 @@ export default function Home() {
         </div>
         {/* Play Section */}
         <PlayConsole youtubePlay={youtubePlay} />
+
+        {/* CorporateList Section */}
+        <div id="home-slide">
+          <h1 className="bg4-text text-center">OUR Client</h1>
+          <p className="skv-medium bg-text text-center">
+            SOFA HOUSE has composed and produced over 50+ musical pieces and{" "}
+            <br />
+            arrangements for independent artist, corporate agencies, and <br />
+            organizations
+          </p>
+
+          <div className="tmn-carousal-section home-carousal">
+            <h1 className="bg-text">Corporates</h1>
+            <div id="tmn-carousal" className="section">
+              <Swiper
+                id="main1"
+                tag="section"
+                wrapperTag="ul"
+                navigation={{
+                  prevEl: ".home1-prev",
+                  nextEl: ".home1-next",
+                }}
+                slidesPerView={1}
+                spaceBetween={30}
+                loop
+                autoplay={{
+                  delay: 3500,
+                }}
+                loopAdditionalSlides={100}
+                breakpoints={{
+                  // when window width is >= 700px
+                  1200: {
+                    slidesPerView: 5,
+                  },
+                  500: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
+                {corporate}
+              </Swiper>
+              <div className="swiper-button-prev grey-pag person-prev home1-prev"></div>
+              <div className="swiper-button-next grey-pag person-next home1-next"></div>
+            </div>
+          </div>
+
+          <div className="tmn-carousal-section home-carousal">
+            <h1 className="bg-text">Independent Artists</h1>
+            <div id="tmn-carousal" className="section">
+              <Swiper
+                id="main1"
+                tag="section"
+                wrapperTag="ul"
+                navigation={{
+                  prevEl: ".home2-prev",
+                  nextEl: ".home2-next",
+                }}
+                slidesPerView={1}
+                spaceBetween={30}
+                loop
+                autoplay={{
+                  delay: 3500,
+                }}
+                loopAdditionalSlides={100}
+                breakpoints={{
+                  // when window width is >= 700px
+                  1200: {
+                    slidesPerView: 5,
+                  },
+                  500: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
+                {artist_slide}
+              </Swiper>
+              <div className="swiper-button-prev grey-pag person-prev home2-prev"></div>
+              <div className="swiper-button-next grey-pag person-next home2-next"></div>
+            </div>
+          </div>
+        </div>
+
         {/* Description Section */}
         <div id="desc-section">
           <div>
@@ -319,7 +544,7 @@ export default function Home() {
             ) : (
               <span></span>
             )}
-            
+
             {professional === true ? (
               <div>
                 <h1
