@@ -216,7 +216,7 @@ export default function AboutUs() {
               </h1>
               <div className="about-spacing text-center" />
               <h1 className="bg-text avn-bold text-center">
-                CEO & Song writer : Sofa House
+                CEO & Song writer : SOFA HOUSE
               </h1>
               <p className="sm-text avn-medium p-aboutus">
                 “I love how our team is so strong and passionate on producing
@@ -253,11 +253,11 @@ export default function AboutUs() {
               </h1>
               <div className="about-spacing text-center" />
               <h1 className="bg-text avn-bold text-center">
-                Song writer : Sofa House
+                Song writer : SOFA HOUSE
               </h1>
               <p className="sm-text avn-medium p-aboutus">
                 “Cannot wait to contribute for the Thai music industry. We hope
-                that Sofa House team are a part to drive this growth together in
+                that SOFA HOUSE team are a part to drive this growth together in
                 the next 5 to 10 to 20 years!”
               </p>
             </div>
@@ -271,7 +271,7 @@ export default function AboutUs() {
               </h1>
               <div className="about-spacing text-center" />
               <h1 className="bg-text avn-bold text-center">
-                Producer : Sofa House
+                Producer : SOFA HOUSE
               </h1>
               <p className="sm-text avn-medium p-aboutus">
                 “Making people enjoy my music has always been my most joyous

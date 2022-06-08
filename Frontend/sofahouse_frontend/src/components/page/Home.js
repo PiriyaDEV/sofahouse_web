@@ -221,7 +221,7 @@ export default function Home() {
       picture: artistSlide2,
     },
     {
-      name: "Icepadia",
+      name: "Icepadie",
       picture: artistSlide3,
     },
     {
@@ -466,7 +466,7 @@ export default function Home() {
             <br />
             เพื่อให้ผลงานออกมาดีที่สุด
             <span className="home-link" onClick={() => linkPath("/contact")}>
-              ปรึกษา Sofahouse ตอนนี้ (Click!)
+              ปรึกษา SOFA HOUSE ตอนนี้ (Click!)
             </span>
           </p>
 

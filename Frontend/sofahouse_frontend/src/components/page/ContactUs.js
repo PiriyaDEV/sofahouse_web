@@ -354,7 +354,7 @@ export default function AboutUs() {
               </div>
 
               <p className="sm-text avn-bold tow-text">
-                If you are not certain about the brief, don't worry! Sofa House
+                If you are not certain about the brief, don't worry! SOFA HOUSE
                 will reach you out for more information.
               </p>
 
