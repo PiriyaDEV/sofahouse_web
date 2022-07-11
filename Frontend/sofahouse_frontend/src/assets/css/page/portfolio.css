@@ -509,7 +509,7 @@ li {
   } */
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 413px) {
   .swiper-slide-active > .carousal-music > img,
   .carousal-music > img,
   .swiper-slide-prev > .carousal-music > img,
